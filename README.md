@@ -1,1 +1,1 @@
-# mealify-front-end
+# Mealify (front-end)
