@@ -10,18 +10,41 @@ const client = axios.create({
 const Login = ({ navigation }) => {
     const [loggedIn, setLoggedIn] = useState(false);
 
+    const [formFields, setFormFields] = useState({
+        email: '',
+        password: ''
+    })
+
+    const handleChange = (e, name) => {
+        setFormFields({...formFields, [name]: e.target.value})
+    }
+
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     addNewBoardCallback(formFields);
+
+    //     setFormFields({
+    //         owner: '', 
+    //         title: ''
+    //     });
+    // };
+
     function submitLogin(e) {
         e.preventDefault();
         client.post(
         '/user_api/login/',
         {
-            email:'test@example.com',
-            password:'testing123'
+            email: formFields.email,
+            password: formFields.password
         }
         ).then(function(res) {
             console.log(res.data);
+            setFormFields({
+                email: '',
+                password: ''
+            })
             navigation.navigate('Main');
-        // setCurrentUser(true);
+            // setCurrentUser(true);
         }).catch(error => {
             console.log(error);
         });
@@ -31,10 +54,18 @@ const Login = ({ navigation }) => {
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text>Login</Text>
             <View>
-                <TextInput placeholder="email"/>
                 <TextInput 
+                    autoCapitalize='none'
+                    placeholder="email" 
+                    value={formFields.email} 
+                    onChangeText={() => handleChange("email")}
+                />
+                <TextInput 
+                    autoCapitalize='none'
                     secureTextEntry={true}
-                    placeholder="Password"
+                    placeholder="password"
+                    value={formFields.password}
+                    onChangeText={() => handleChange("password")}
                 />
             </View>
             <Button
