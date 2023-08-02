@@ -30,15 +30,15 @@ export default function App() {
   // const [username, setUsername] = useState('');
   // const [password, setPassword] = useState('');
 
-  // useEffect(()=> {
-  //   client.get('/user_api/user/')
-  //   .then(function(res) {
-  //     setCurrentUser(true);
-  //   })
-  //   .catch(function(error) {
-  //     setCurrentUser(false);
-  //   })
-  // }, [])
+  useEffect(()=> {
+    client.get('/user_api/user/')
+    .then(function(res) {
+      setCurrentUser(true);
+    })
+    .catch(function(error) {
+      setCurrentUser(false);
+    })
+  }, [])
 
   // function update_for_btn() {
   //   if (registrationToggle) {

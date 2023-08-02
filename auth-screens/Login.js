@@ -3,21 +3,27 @@ import { View, Text, TextInput, Form, Button } from 'react-native';
 import { useState } from 'react';
 import axios from 'axios';
 import Main from '../screens/MainNavigation';
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = true;
+
 const client = axios.create({
     baseURL: 'http://127.0.0.1:8000'
   })
   
 const Login = ({ navigation }) => {
     const [loggedIn, setLoggedIn] = useState(false);
+    const [email, onChangeEmail] = React.useState('');
+    const [password, onChangePassword] = React.useState('');
 
-    const [formFields, setFormFields] = useState({
-        email: '',
-        password: ''
-    })
+    // const [formFields, setFormFields] = useState({
+    //     email: '',
+    //     password: ''
+    // })
 
-    const handleChange = (e, name) => {
-        setFormFields({...formFields, [name]: e.target.value})
-    }
+    // const handleChange = (e, name) => {
+    //     setFormFields({...formFields, [name]: e.target.value})
+    // }
 
     // const handleSubmit = (event) => {
     //     event.preventDefault();
@@ -30,23 +36,25 @@ const Login = ({ navigation }) => {
     // };
 
     function submitLogin(e) {
+        console.log(email, password);
         e.preventDefault();
         client.post(
         '/user_api/login/',
         {
-            email: formFields.email,
-            password: formFields.password
+            email: email,
+            password: password
         }
         ).then(function(res) {
             console.log(res.data);
-            setFormFields({
-                email: '',
-                password: ''
-            })
+            // setFormFields({
+            //     email: '',
+            //     password: ''
+            // })
             navigation.navigate('Main');
             // setCurrentUser(true);
         }).catch(error => {
             console.log(error);
+            console.log(error.request.xsrfHeaderName)
         });
     }
 
@@ -57,15 +65,18 @@ const Login = ({ navigation }) => {
                 <TextInput 
                     autoCapitalize='none'
                     placeholder="email" 
-                    value={formFields.email} 
-                    onChangeText={() => handleChange("email")}
+                    value={email} 
+                    onChangeText={onChangeEmail}
+
+                    // onChange={(e) => handleChange(e, "email")}
                 />
                 <TextInput 
                     autoCapitalize='none'
                     secureTextEntry={true}
                     placeholder="password"
-                    value={formFields.password}
-                    onChangeText={() => handleChange("password")}
+                    value={password}
+                    onChangeText={onChangePassword}
+                    // onChange={(e) => handleChange(e, "password")}
                 />
             </View>
             <Button
