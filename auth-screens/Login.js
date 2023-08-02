@@ -3,10 +3,18 @@ import { View, Text, TextInput, Form, Button } from 'react-native';
 import { useState } from 'react';
 import axios from 'axios';
 import Main from '../screens/MainNavigation';
+
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
-
+let csfr_token = document.querySelector('meta[name="csrf-token"]')
+console.log(csfr_token)
+// console.log('Csrf Toakn: ', csfr_token)
+// const {data} = await axios.post('/user', document.querySelector('#my-form'), {
+//     headers: {
+//       'X-CSRFToken': csfr_token
+//     }
+//   })
 const client = axios.create({
     baseURL: 'http://127.0.0.1:8000'
   })
@@ -39,6 +47,9 @@ const Login = ({ navigation }) => {
         console.log(email, password);
         e.preventDefault();
         client.post(
+            '/user_api/logout'
+        )
+        client.post(
         '/user_api/login/',
         {
             email: email,
@@ -46,15 +57,10 @@ const Login = ({ navigation }) => {
         }
         ).then(function(res) {
             console.log(res.data);
-            // setFormFields({
-            //     email: '',
-            //     password: ''
-            // })
             navigation.navigate('Main');
-            // setCurrentUser(true);
         }).catch(error => {
             console.log(error);
-            console.log(error.request.xsrfHeaderName)
+            console.log(error.request)
         });
     }
 
