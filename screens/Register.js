@@ -5,12 +5,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
-function AuthScreens() {
+function Register() {
     return (
-        <View>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text>Login/Register</Text>
         </View>
     )
 }
 
-export default AuthScreens;
+export default Register;
