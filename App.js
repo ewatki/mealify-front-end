@@ -24,11 +24,7 @@ const client = axios.create({
 })
 
 export default function App() {
-  // const [currentUser, setCurrentUser] = useState();
-  // const [registrationToggle, setRegistrationToggle] = useState(false)
-  // const [email, setEmail] = useState('');
-  // const [username, setUsername] = useState('');
-  // const [password, setPassword] = useState('');
+  const [currentUser, setCurrentUser] = useState();
 
   useEffect(()=> {
     client.get('/user_api/user/')
@@ -39,82 +35,6 @@ export default function App() {
       setCurrentUser(false);
     })
   }, [])
-
-  // function update_for_btn() {
-  //   if (registrationToggle) {
-  //     document.getElementsByClassName("form_btn").innerHTML = 'Register';
-  //     setRegistrationToggle(false);
-  //   } else {
-  //     document.getElementsByClassName("form_btn").innerHTML = 'Log In';
-  //     setRegistrationToggle(true);
-  //   }
-  // }
-
-  // function submitRegistration(e) {
-  //   e.preventDefault();
-  //   client.post(
-  //     '/user_api/register/',
-  //     {
-  //       email: email,
-  //       username: username,
-  //       password: password
-  //     }
-  //   ).then(function(res) {
-  //     client.post(
-  //       '/user_api/login/',
-  //       {
-  //         email: email,
-  //         password: password
-  //       }
-  //     ).then(function(res) {
-  //       setCurrentUser(true);
-  //     });
-  //   });
-  // }
-
-  // function submitLogin(e) {
-  //   e.preventDefault();
-  //   client.post(
-  //     '/user_api/login/',
-  //     {
-  //       email:email,
-  //       password:password
-  //     }
-  //   ).then(function(res) {
-  //     setCurrentUser(true);
-  //   });
-  // }
-
-  // function submitLogin(e) {
-  //   e.preventDefault();
-  //   client.post(
-  //     '/user_api/logout/',
-  //     {withCredentials:true}
-  //   ).then(function(res) {
-  //     setCurrentUser(false);
-  //   });
-  // }
-
-  // if (currentUser) {
-  //   return (
-  //     <View>
-  //       <Text>Your Logged In!</Text>
-  //       <Button onPress={e => submitLogout(e)} title='logout-btn'>LogOut</Button>
-  //     </View>
-  //   )
-  // }
-  // return (
-  //   <View>
-  //     <Button className='form_btn' onPress={update_for_btn} title='register-btn'>Register</Button>
-  //     {
-  //       registrationToggle ? (
-  //         <Button onPress={submitRegistration} title='reg_form_btn'>REGISTRATION FORM</Button>
-  //       ) : (
-  //         <Button onPress={submitLogin} title='login-form-btn'>LOGIN FORM</Button>
-  //       )
-  //     }
-  //   </View>
-  // )
 
   return (
     <NavigationContainer style={styles.container}>

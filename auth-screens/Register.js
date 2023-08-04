@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, Button, TextInput, Modal, Pressable } from 'react-native';
-
+import axios from 'axios';
 import Main from '../screens/MainNavigation';
 
+
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = true;
+const client = axios.create({
+    baseURL: 'http://127.0.0.1:8000/',
+})
+
 const Register = ({ navigation }) => {
-    const [modalVisible, setModalVisible] = React.useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [email, onChangeEmail] = useState('');
+    const [password, onChangePassword] = useState('');
+    const [username, onChangeUsername] = useState('');
+    const [invalidLogin, setInvalidLogin] = useState(false)
+
+    const submitRegister = (event) => {
+        navigation.navigate('Main')
+    }
+    
     return (
         <View style={{ flex: 1, alignItems: 'left', justifyContent: 'center' }}>
             {/* LOGO */}
@@ -30,15 +47,28 @@ const Register = ({ navigation }) => {
                         >
                             <Text>Close</Text>
                         </Pressable>
-                        <TextInput placeholder="Username" />
-                        <TextInput placeholder="Email" />
+                        <TextInput 
+                            autoCapitalize='none'
+                            placeholder="Username" 
+                            value={username} 
+                            onChangeText={onChangeUsername}
+                        />
+                        <TextInput 
+                            autoCapitalize='none'
+                            placeholder="Email" 
+                            value={email} 
+                            onChangeText={onChangeEmail}
+                        />
                         <TextInput 
                             secureTextEntry={true}
-                            placeholder="Password"
+                            autoCapitalize='none'
+                            placeholder="Password" 
+                            value={password} 
+                            onChangeText={onChangePassword}
                         />
                     </View>
 
-                    <Button title="Create account" onPress={() => navigation.navigate('Main')}
+                    <Button title="Create account" onPress={(event) => submitRegister(event)}
                     />
                     </View>
             </Modal>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, Form, Button } from 'react-native';
+import { View, Text, TextInput, Form, Button, StyleSheet, Modal } from 'react-native';
 import { useState } from 'react';
 import axios from 'axios';
 import Main from '../screens/MainNavigation';
@@ -7,63 +7,36 @@ import Main from '../screens/MainNavigation';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
-let csfr_token = document.querySelector('meta[name="csrf-token"]')
-console.log(csfr_token)
-// console.log('Csrf Toakn: ', csfr_token)
-// const {data} = await axios.post('/user', document.querySelector('#my-form'), {
-//     headers: {
-//       'X-CSRFToken': csfr_token
-//     }
-//   })
 const client = axios.create({
-    baseURL: 'http://127.0.0.1:8000'
-  })
-  
+    baseURL: 'http://127.0.0.1:8000/',
+})
+
 const Login = ({ navigation }) => {
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [email, onChangeEmail] = React.useState('');
-    const [password, onChangePassword] = React.useState('');
+    const [email, onChangeEmail] = useState('');
+    const [password, onChangePassword] = useState('');
+    const [invalidLogin, setInvalidLogin] = useState(false)
 
-    // const [formFields, setFormFields] = useState({
-    //     email: '',
-    //     password: ''
-    // })
-
-    // const handleChange = (e, name) => {
-    //     setFormFields({...formFields, [name]: e.target.value})
-    // }
-
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     addNewBoardCallback(formFields);
-
-    //     setFormFields({
-    //         owner: '', 
-    //         title: ''
-    //     });
-    // };
-
-    function submitLogin(e) {
-        console.log(email, password);
-        e.preventDefault();
-        client.post(
-            '/user_api/logout'
-        )
+    function submitLogin(event, email, password) {
+        event.preventDefault();
         client.post(
         '/user_api/login/',
         {
             email: email,
-            password: password
-        }
-        ).then(function(res) {
-            console.log(res.data);
-            navigation.navigate('Main');
+            password: password,
+        })
+        .then(function(response) {
+            const sessionId = response.headers['set-cookie'][0].split(';')[0]
+            const userId = response.data['pk']
+            navigation.navigate('Main', params={
+                sessionId: sessionId, 
+                userId: userId
+            });
         }).catch(error => {
-            console.log(error);
-            console.log(error.request)
+            console.log(error); 
+            setInvalidLogin(true);
+            
         });
     }
-
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Text>Login</Text>
@@ -73,8 +46,6 @@ const Login = ({ navigation }) => {
                     placeholder="email" 
                     value={email} 
                     onChangeText={onChangeEmail}
-
-                    // onChange={(e) => handleChange(e, "email")}
                 />
                 <TextInput 
                     autoCapitalize='none'
@@ -82,15 +53,30 @@ const Login = ({ navigation }) => {
                     placeholder="password"
                     value={password}
                     onChangeText={onChangePassword}
-                    // onChange={(e) => handleChange(e, "password")}
                 />
             </View>
             <Button
             title="Login"
-            onPress={submitLogin}
+            onPress={(event) => submitLogin(event, email, password)}
             />
+            {invalidLogin ? <Text style={{color:'red'}}>Invalid Username or Password</Text> : null}
         </View>
     );
 }
 
 export default Login;
+
+const styles = StyleSheet.create({
+    container: {
+      marginTop: 50,
+    },
+    bigBlue: {
+      color: 'blue',
+      fontWeight: 'bold',
+      fontSize: 30,
+    },
+    red: {
+      color: 'red',
+    },
+  });
+  
