@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
 import Navigator from './navigation/navigator.js'
+import { Context, Provider } from "./globalContext/globalContext.js";
 
 import axios from 'axios';
 
@@ -46,13 +47,13 @@ import axios from 'axios';
 function App(props) {
 
   return(
-    // <Provider>
+    <Provider>
       <View style={{flex:1}}>
         <NavigationContainer>
           <Navigator />
         </NavigationContainer>
       </View>
-    // </Provider>
+    </Provider>
 
     )
 
