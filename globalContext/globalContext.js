@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, createContext} from "react";
-// import * as SecureStore from 'expo-secure-store';
+import * as SecureStore from 'expo-secure-store';
 
 const Context = createContext()
 
@@ -14,6 +14,7 @@ const [ appSettings, setAppSettings ] = useState({})
 const setToken = async (token) => {
     await SecureStore.setItemAsync('token', token);
   }
+// const setToken = '1234567'
 
   function initAppSettings() {
     fetch(`${domain}/api/app/settings`, {
@@ -51,7 +52,7 @@ const setToken = async (token) => {
     setToken,
   }
 
-  return <Context.Provider value={globalContext}>{children}</Context.Provider>
+return <Context.Provider value={globalContext}>{children}</Context.Provider>
 
 };
 
