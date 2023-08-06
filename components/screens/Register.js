@@ -1,25 +1,28 @@
-import React from 'react';
+import React, {useContext, createContext } from 'react';
 import { StyleSheet, View, Text, Button, TextInput, Pressable } from 'react-native';
 import axios from 'axios';
 
 import Main from './Main';
 import Login from './Login';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
 
 const Register = ({ navigation }) => {
-    const [currentUser, setCurrentUser] = React.useState(); // user dict
-    const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-
     const [formFields, setFormFields ] = React.useState({
         username: '',
         password: ''
-        
     });
 
+    console.log(formFields);
+
     const onRegisterHandler = () => {
-        // setCurrentUser to new user id
+        // setCurrentUser to new user obj
         // setIsLoggedIn to true
+
+        // Modals: Fill Pantry, Add Preferences
+
         // When new user is registered, passed their name down to Main component
-        navigation.navigate(Main, {name: 'Jean'})
+        navigation.navigate(Main, {name: userObj})
     }
 
     const onLoginHandler = () => {
@@ -36,7 +39,8 @@ const Register = ({ navigation }) => {
                     <Text>Create a username : </Text>
                     <TextInput 
                         value={formFields.username} 
-                        onChangeText={text => setFormFields.username(text)} textContentType="username" autoCompleteType="username" 
+                        onChangeText={text => setFormFields.username(text)} textContentType="username" 
+                        autoCompleteType="username" 
                         style={styles.textbox}
                     />   
 
@@ -53,9 +57,9 @@ const Register = ({ navigation }) => {
 
                     <View>
                         <Text>Already have an account?</Text>
-                        <Pressable onPress={ onLoginHandler }>
-                            <Text>Sign In</Text>
-                        </Pressable>
+                        <TouchableOpacity onPress={ () => navigation.navigate(Login) }>
+                            <Text>Login</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>

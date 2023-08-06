@@ -13,15 +13,14 @@ const Drawer = createDrawerNavigator();
 const Main = ({ route, navigation }) => {
     // const {id, username, pantry, savedRecipes, preferences} = route.params;
     // console.log(route.params)
-    console.log(route)
+    // console.log("Main Route", route.params.user)
 
     return (
         <Drawer.Navigator>
             <Drawer.Screen 
-            name="Dashboard" 
+            name={`Hello, ${route.params.user.username}!`}
             component={Dashboard} 
-            // initialParams={{name: "Jean"}}
-            initialParams={{}}
+            initialParams={{user: route.params.user}}
 
             />
             <Drawer.Screen 

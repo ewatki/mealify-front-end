@@ -1,52 +1,31 @@
-import React, { useContext, createContext  } from 'react';
+import React, { useContext, createContext } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import Register from './Register';
 
+const Login = ({ route, navigation }) => {
 
-let users = [
-    {
-        id: 1,
-        username: "walla12",
-        password: "testwalla",
-        pantry: ["oranges", "apples", "spinach", "eggs"],
-        savedRecipes: ["fruit salad"],
-        preferences: ["vegetarian"]
-    },
-    {
-        id: 2,
-        username: "janet4",
-        password: "testjanet",
-        pantry: ["pineapple", "chicken", "iceburg", "onion"],
-        savedRecipes: ["chicken pineapple kabobs"],
-        preferences: []
-
-    },
-    {
-        id: 3,
-        username: "curry",
-        password: "testurry",
+    const [formFields, setFormFields ] = React.useState({
+        username: 'curry',
+        password: 'texturry',
         pantry: ["ground beef", "cabbage", "green onion", "eggs"],
-        saveRecipes: [],
+        saveRecipes: ["cereal, fishsteak, eggplant curry"],
         preferences: ["carnivore"]
-    }
-];
 
+    });
 
-const Login = ({ navigation }) => {
-    readableUser = JSON.stringify(users[1])
-    console.log(readableUser)
-
-    const { setUser } = useContext(UserContext);
+    const UserContext = createContext(formFields);
+    const user = useContext(UserContext)  
 
     // Verify user input fn - if either inputs aren't a match, show an alert of invalid login
     const handleUserLogin = () => {
-        const user = useContext(readableUser)    
-        navigation.navigate('Main', {user: user})
-
         // axios.post('http://127.0.0.1:8000/user_api/login/')
         // .then(resp => {
-        //     // If inputs are valid and if username and password matches database, login user and pass their object down
-        //     navigation.navigate('Main', {user: users[1]})
+        // If inputs are valid and if username and password matches database, login user and pass their object down
         // })
+
+        // Pass down user object
+        navigation.navigate('Main', {user: user})
     }
 
     return (
@@ -68,8 +47,14 @@ const Login = ({ navigation }) => {
                     />   
                     <Button 
                     title="Login" 
-                    onPress= { handleUserLogin } 
+                    onPress={ handleUserLogin } 
                     />
+                </View>
+                <View>
+                    <Text>Don't have an account? </Text>
+                    <TouchableOpacity onPress={ () => navigation.navigate(Register) }> 
+                        <Text>Register</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>
