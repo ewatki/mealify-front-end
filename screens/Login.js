@@ -17,13 +17,14 @@ function Login({ navigation, route, props }){
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState("")
+  const [username, setUsername] = useState("")
 
   function handleLogin() {
 
     setError("")
 
     let body = JSON.stringify({
-      'username': email.toLowerCase(),
+      'username': username.toLowerCase(),
       'password': password
     })
 
@@ -35,6 +36,9 @@ function Login({ navigation, route, props }){
       body:body
       })
       .then(res => {
+        console.log(username)
+        console.log(password)
+        
         if (res.ok) {
           return res.json()
         } else {
@@ -52,7 +56,7 @@ function Login({ navigation, route, props }){
       })
 
   }
-
+  
 
 
   return(
@@ -63,7 +67,7 @@ function Login({ navigation, route, props }){
         <Text style={fonts(appSettings).errorLabel}>{error}</Text>
 
         <Text style={[fonts(appSettings).inputLabel, margins.topTenPercent]}>Email Address</Text>
-        <TextInput value={email} onChangeText={text => setEmail(text)} textContentType="username" autoCompleteType="email" style={inputs(appSettings).textInput} placeholder='Email'/>
+        <TextInput value={username} onChangeText={text => setUsername(text)} textContentType="username" autoCompleteType="username" style={inputs(appSettings).textInput} placeholder='Username'/>
 
         <Text style={[fonts(appSettings).inputLabel, margins.topTenPercent]}>Password</Text>
         <TextInput value={password} onChangeText={text => setPassword(text)} secureTextEntry={securePassword} textContentType="password" autoCompleteType="password" style={inputs(appSettings).textInput} placeholder='Password'/>
