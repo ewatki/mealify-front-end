@@ -14,9 +14,9 @@ const Dashboard = ({ route, navigation }) => {
   const { username, pantry, saveRecipes, preferences} = route.params.user;
 
   // ScrollView List - Horizontal
-  let items = saveRecipes.map((item) => {
-    console.log(item)
-  })
+  // let items = saveRecipes.map((item) => {
+  //   console.log(item)
+  // })
 
   return (
     <View>

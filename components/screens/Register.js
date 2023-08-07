@@ -10,23 +10,47 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 const Register = ({ navigation }) => {
     const [formFields, setFormFields ] = React.useState({
         username: '',
-        password: ''
+        password: '',
+        email: ''
     });
 
-    console.log(formFields);
-
-    const onRegisterHandler = () => {
-        // setCurrentUser to new user obj
-        // setIsLoggedIn to true
-
-        // Modals: Fill Pantry, Add Preferences
-
-        // When new user is registered, passed their name down to Main component
-        navigation.navigate(Main, {name: userObj})
+    const handleChange = (text, field) => {
+        if (field === 'email') {
+            setFormFields({
+                ...formFields,
+                email: text
+            })
+        } else if (field === 'password') {
+            setFormFields({
+                ...formFields,
+                password: text
+            })
+        } else if (field === 'username') {
+            setFormFields({
+                ...formFields,
+                username: text
+            })
+        }
     }
 
-    const onLoginHandler = () => {
-        navigation.navigate(Login)
+    const onRegisterHandler = () => {
+        console.log(formFields)
+        axios.post('https://mealify-zclw.onrender.com/users/register', formFields)
+        .then(response => {
+            console.log('response.data:', response.data)
+            const user = response.data
+            console.log('Successful Registration!')
+            // navigation.navigate('Main', {user: user})
+        })
+        .catch(error => {
+            if (error.response.data === 'Invalid password' || error.response.data === 'That email is invalid') {
+                setErrorMessage(error.response.data)
+                console.log(error.response.data)
+            } else {
+                console.log('error: ', error)
+                setErrorMessage('An error has occured.  Please try again or try another user email and password<br>Also, if at first you dont succeed, try, try again')
+            }
+        })
     }
 
     return (
@@ -36,29 +60,40 @@ const Register = ({ navigation }) => {
                     <Text>LOGO IMAGE HERE</Text>
                 </View>
                 <View style={styles.modalView}>
-                    <Text>Create a username : </Text>
                     <TextInput 
                         value={formFields.username} 
-                        onChangeText={text => setFormFields.username(text)} textContentType="username" 
+                        onChangeText={text => handleChange(text, 'username')} 
                         autoCompleteType="username" 
-                        style={styles.textbox}
+                        autoCapitalize='none'
+                        placeholder='Username'
+                        style={styles.input}
                     />   
-
-                    <Text>Create a password :</Text>
+                    <TextInput 
+                        value={formFields.email} 
+                        onChangeText={text => handleChange(text, 'email')} 
+                        // textContentType="email" 
+                        autoCompleteType="email" 
+                        autoCapitalize='none'
+                        placeholder='Email'
+                        style={styles.input}
+                    />   
                     <TextInput 
                         value={formFields.password} 
-                        onChangeText={text => setFormFields.password(text)} textContentType="password"
-                        style={styles.textbox}
+                        onChangeText={text => handleChange(text, 'password')} 
+                        autoCompleteType="password" 
+                        autoCapitalize='none'
+                        placeholder='Password'
+                        style={styles.input}
                     />   
                     <Button 
-                    title = "Register" 
-                    onPress = { onRegisterHandler }
+                    title="Register" 
+                    onPress={ onRegisterHandler }
                     />
 
-                    <View>
+                    <View style={styles.loginContainer}>
                         <Text>Already have an account?</Text>
                         <TouchableOpacity onPress={ () => navigation.navigate(Login) }>
-                            <Text>Login</Text>
+                            <Text style={styles.loginButton}>Login</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -72,17 +107,39 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
     },
+    input: {
+        height: 40,
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
+        borderRadius: 10,
+        width: '50%',
+        // justifyContent: 'center',
+        // alignItems: 'center'
+    },
     modalView: {
         width: 350,
         height: 400,
         margin: 5,
         padding: 35,
-        backgroundColor: 'white',
-        alignItems: 'left',
+        // backgroundColor: 'white',
+        alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'lightgray',
+        // backgroundColor: 'lightgray',
         borderRadius: 10,
     },
+    loginButton: {
+        borderWidth: 1,
+        marginTop: 3,
+        padding: 5,
+        paddingLeft: 7,
+        borderRadius: 10,
+    },
+    loginContainer: {
+        flex: 1, 
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+    },  
     logo: {
         alignContent: 'stretch',
         justifyContent: 'top',
