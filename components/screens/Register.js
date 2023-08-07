@@ -40,7 +40,7 @@ const Register = ({ navigation }) => {
             console.log('response.data:', response.data)
             const user = response.data
             console.log('Successful Registration!')
-            // navigation.navigate('Main', {user: user})
+            navigation.navigate('Main', {user: user})
         })
         .catch(error => {
             if (error.response.data === 'Invalid password' || error.response.data === 'That email is invalid') {
@@ -86,7 +86,7 @@ const Register = ({ navigation }) => {
                         style={styles.input}
                     />   
                     <Button 
-                    title="Register" 
+                    title="Create New Account" 
                     onPress={ onRegisterHandler }
                     />
 

@@ -30,6 +30,7 @@ const Login = ({ route, navigation }) => {
     }
     // Verify user input fn - if either inputs aren't a match, show an alert of invalid login
     const handleUserLogin = () => {
+        console.log('in handler')
         axios.post('https://mealify-zclw.onrender.com/users/login', formFields)
         .then(response => {
             console.log('response.data:', response.data)
@@ -43,7 +44,7 @@ const Login = ({ route, navigation }) => {
                 console.log(error.response.data)
             } else {
                 console.log('error: ', error)
-                setErrorMessage('An error has occured.  Please try again or try another user email and password<br>Also, if at first you dont succeed, try, try again')
+                setErrorMessage('An error has occured.  Please try again or try another user email and password\nAlso, if at first you dont succeed, try, try again')
             }
         })
     }
@@ -69,11 +70,14 @@ const Login = ({ route, navigation }) => {
                         autoCapitalize='none'
                         placeholder='Password'
                         style={styles.input}
-                    />  
-                    <Button 
-                    title="Login" 
-                    onPress={ handleUserLogin } 
-                    />
+                    /> 
+                    <TouchableOpacity 
+                        style={styles.loginButton} 
+                        onPress={ handleUserLogin }
+                        // hitSlop={{ bottom: 30, left: 30, right: 30 }}
+                    > 
+                        <Text style={{ color: '#007AFF', fontSize: 25 }} >Login</Text>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.errorContainer}>
                     <Text style={styles.errorMessage}>{errorMessage}</Text>
@@ -119,17 +123,32 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     input: {
+        // flex: 1,
         height: 40,
         margin: 12,
         borderWidth: 1,
         padding: 10,
         borderRadius: 10,
-        // width: '50%',
+        // width: '100%',
+        width: 300,
         // justifyContent: 'center',
         // alignItems: 'center'
     },
     inputContainer: {
-        flex:1,
+        flex:2,
+    },
+    loginButton: {
+        // backgroundColor: 'blue',
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        // flex:1, 
+        alignSelf: 'center',
+        borderWidth: 1,
+        marginTop: 3,
+        marginBottom: 5,
+        padding: 5,
+        paddingLeft: 7,
+        borderRadius: 10,
     },
     registerButton: {
         borderWidth: 1,
@@ -140,7 +159,7 @@ const styles = StyleSheet.create({
     },
     registerContainer: {
         flex: 1,
-        paddingBottom: 50,
+        paddingBottom: 100,
         justifyContent: 'flex-end',
         alignItems: 'center'
     }
