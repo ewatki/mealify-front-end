@@ -26,6 +26,7 @@ const Dashboard = ({ route, navigation }) => {
           {/* Images of Recipes - Circles */}
           <Text>
             Saved Recipes
+            This is a test
           </Text>
         </View>
       </View>
