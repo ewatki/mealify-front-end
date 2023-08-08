@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Image, SafeAreaView, TextInput, FlatList } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import axios from 'axios';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Pantry from './Pantry';
@@ -19,8 +19,7 @@ const Dashboard = ({ route, navigation }) => {
   // })
 
   return (
-    <SafeAreaView>
-      
+    <View>
       <View style={[styles.row, styles.recipes]}>
         {/* ScrollView Horizonal Container */}
         <View>
@@ -32,7 +31,7 @@ const Dashboard = ({ route, navigation }) => {
         </View>
       </View>
 
-      {/* <View style={[styles.row, styles.circleBtn]}>
+      <View style={[styles.row, styles.circleBtn]}>
         <TouchableOpacity onPress={() => navigation.navigate(Pantry)}>
           <Text>Go to Pantry</Text>
         </TouchableOpacity>
@@ -40,14 +39,11 @@ const Dashboard = ({ route, navigation }) => {
 
         <Text>
           Get a Recipe
-        </Text> */}
-      <View style={styles.container}>
+        </Text>
         <Text>
           Recommended Staples:
         </Text>
-
-      </View>
-    </SafeAreaView>
+    </View>
   )
 };
 

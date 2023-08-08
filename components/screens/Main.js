@@ -4,10 +4,8 @@ import Dashboard from './Dashboard'
 import Pantry from './Pantry'
 import Preferences from './Preferences'
 import Logout from './Logout';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-// const Drawer = createDrawerNavigator();
-const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 // Get user id, name from route params
 // Get user's name, pantry, preferences
@@ -18,56 +16,30 @@ const Main = ({ route, navigation }) => {
     // console.log("Main Route", route.params.user)
 
     return (
-        <Tab.Navigator>
-            <Tab.Screen 
-            name={"Dashboard"}
+        <Drawer.Navigator>
+            <Drawer.Screen 
+            name={`Hello, ${route.params.user.username}!`}
             component={Dashboard} 
             initialParams={{user: route.params.user}}
-            
+
             />
-            <Tab.Screen 
+            <Drawer.Screen 
             name="Pantry" 
             component={Pantry} 
             />
 
-            <Tab.Screen
+            <Drawer.Screen
             name="Preferences" 
             component={Preferences} 
             />
 
-            <Tab.Screen 
+            <Drawer.Screen 
             name="Logout" 
             component={Logout}  
             />
-        </Tab.Navigator>
+        </Drawer.Navigator>
     )
 }
-
-//     return (
-//         <Drawer.Navigator>
-//             <Drawer.Screen 
-//             name={`Hello, ${route.params.user.username}!`}
-//             component={Dashboard} 
-//             initialParams={{user: route.params.user}}
-
-//             />
-//             <Drawer.Screen 
-//             name="Pantry" 
-//             component={Pantry} 
-//             />
-
-//             <Drawer.Screen
-//             name="Preferences" 
-//             component={Preferences} 
-//             />
-
-//             <Drawer.Screen 
-//             name="Logout" 
-//             component={Logout}  
-//             />
-//         </Drawer.Navigator>
-//     )
-// }
 
 
 export default Main;
