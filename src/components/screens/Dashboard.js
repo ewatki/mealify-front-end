@@ -1,52 +1,31 @@
 import React, { useState, useEffect } from 'react';
-<<<<<<< HEAD
 import { StyleSheet, View, Text, Image, SafeAreaView, TextInput, FlatList, SectionList } from 'react-native';
-=======
-import { StyleSheet, View, Text } from 'react-native';
->>>>>>> be41544a9aa0088498cc009a0fad58b3e8242e87
 import axios from 'axios';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Pantry from './Pantry';
 
-<<<<<<< HEAD
 import Preferences from './Preferences';
 import Login from './Login';
 
-=======
->>>>>>> be41544a9aa0088498cc009a0fad58b3e8242e87
 // Sections: 
 // List all recipes (horizontal scrollview)
   // Recipe Routes - GET All, POST Recipe, DELETE Recipe
 // Get a Recipe Button
 // (Static) List of Staples
 
-<<<<<<< HEAD
-
-
-
-
-const Dashboard = ({ route, navigation }) => {
-  // const { username, pantry, savedRecipes, preferences } = route.params.user;
-  
-=======
 const Dashboard = ({ route, navigation }) => {
   const { username, pantry, saveRecipes, preferences} = route.params.user;
 
->>>>>>> be41544a9aa0088498cc009a0fad58b3e8242e87
   // ScrollView List - Horizontal
   // let items = saveRecipes.map((item) => {
   //   console.log(item)
   // })
 
   return (
-<<<<<<< HEAD
     
     <SafeAreaView>
       
       
-=======
-    <View>
->>>>>>> be41544a9aa0088498cc009a0fad58b3e8242e87
       <View style={[styles.row, styles.recipes]}>
         {/* ScrollView Horizonal Container */}
         <View>
@@ -58,11 +37,7 @@ const Dashboard = ({ route, navigation }) => {
         </View>
       </View>
 
-<<<<<<< HEAD
-      {/* <View style={[styles.row, styles.circleBtn]}>
-=======
       <View style={[styles.row, styles.circleBtn]}>
->>>>>>> be41544a9aa0088498cc009a0fad58b3e8242e87
         <TouchableOpacity onPress={() => navigation.navigate(Pantry)}>
           <Text>Go to Pantry</Text>
         </TouchableOpacity>
@@ -70,8 +45,8 @@ const Dashboard = ({ route, navigation }) => {
 
         <Text>
           Get a Recipe
-<<<<<<< HEAD
-        </Text> */}
+        </Text> 
+
       <View style={styles.container}>
         <Text>
           Recommended Staples:
@@ -121,13 +96,6 @@ const Dashboard = ({ route, navigation }) => {
       
 
     </SafeAreaView>
-=======
-        </Text>
-        <Text>
-          Recommended Staples:
-        </Text>
-    </View>
->>>>>>> be41544a9aa0088498cc009a0fad58b3e8242e87
   )
 };
 
@@ -140,7 +108,6 @@ const styles = StyleSheet.create({
     // height: 50,
     // borderRadius: 50,
     // backgroundColor: 'green',
-<<<<<<< HEAD
   },
   // container: {
   //   flex: 1,
@@ -160,8 +127,5 @@ const styles = StyleSheet.create({
     fontSize: 18,
     height: 44,
   },
-=======
-  }
->>>>>>> be41544a9aa0088498cc009a0fad58b3e8242e87
 })
 export default Dashboard;
