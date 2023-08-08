@@ -17,12 +17,12 @@ const Main = ({ route, navigation }) => {
 
     return (
         <Drawer.Navigator>
-            <Drawer.Screen 
+            {/* <Drawer.Screen 
             name={`Hello, ${route.params.user.username}!`}
             component={Dashboard} 
             initialParams={{user: route.params.user}}
 
-            />
+            /> */}
             <Drawer.Screen 
             name="Pantry" 
             component={Pantry} 

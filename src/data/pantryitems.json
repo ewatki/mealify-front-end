@@ -1,0 +1,50 @@
+{
+    "pantryItems" : [
+        {
+            "section": "Oils and vinegars",
+            "items": [
+                {
+                    "id": 1,
+                    "name": "extra-virgin olive oil"
+                },
+                {
+                    "id": 2,
+                    "name": "neutral cooking oil (e.g canola or grapeseed)"
+                },
+                {
+                    "id": 3,
+                    "name": "red-wine vinegar"
+                },
+                {
+                    "id": 4,
+                    "name": "white vinegar/white-wine vinegar"
+                }
+            ]
+        },
+        {
+            "section": "Cans and jars",
+            "items": [
+                {
+                    "id": 5,
+                    "name": "tuna in olive oil"
+                },
+                {
+                    "id": 6,
+                    "name": "tomato paste"
+                },
+                {
+                    "id": 7,
+                    "name": "diced tomatoes"
+                },
+                {
+                    "id": 8,
+                    "name": "tomato sauce"
+                },
+                {
+                    "id": 9,
+                    "name": "chicken stock/vegetable stock"
+                }
+            ]
+        }
+    ]
+}

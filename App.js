@@ -3,20 +3,21 @@ import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
-import { UserContext, Provider } from "./components/globalContext/globalContext.js";
 
-import Navigator from './components/navigation/navigator.js';
+// import { UserContext, Provider } from "./components/globalContext/globalContext.js";
+
+import Navigator from './src/components/navigation/navigator.js'
 
 const App = () => {
   return (
-    <Provider>
+    // <Provider>
       <SafeAreaView style={{flex: 1}}>
           <NavigationContainer style={styles.container}>
             <Navigator /> 
           </NavigationContainer>
           <StatusBar hidden={true} />
       </SafeAreaView>
-    </Provider>
+    // </Provider>
   );
 }
 
