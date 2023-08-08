@@ -1,5 +1,5 @@
 import React, {useContext, createContext } from 'react';
-import { StyleSheet, View, Text, Button, TextInput, Pressable } from 'react-native';
+import { StyleSheet, View, Text, Button, TextInput, Pressable, ActivityIndicator } from 'react-native';
 import axios from 'axios';
 
 import Main from './Main';
@@ -8,6 +8,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 const Register = ({ navigation }) => {
+    const [loading, setLoading] = React.useState('false')
+    const [errorMessage, setErrorMessage] = React.useState('')
     const [formFields, setFormFields ] = React.useState({
         username: '',
         password: '',
@@ -34,15 +36,16 @@ const Register = ({ navigation }) => {
     }
 
     const onRegisterHandler = () => {
-        console.log(formFields)
+        setLoading('true')
         axios.post('https://mealify-zclw.onrender.com/users/register', formFields)
         .then(response => {
-            console.log('response.data:', response.data)
             const user = response.data
+            setLoading('false')
             console.log('Successful Registration!')
             navigation.navigate('Main', {user: user})
         })
         .catch(error => {
+            setLoading('false')
             if (error.response.data === 'Invalid password' || error.response.data === 'That email is invalid') {
                 setErrorMessage(error.response.data)
                 console.log(error.response.data)
@@ -56,6 +59,7 @@ const Register = ({ navigation }) => {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <View style={styles.centeredView}>
+                <ActivityIndicator animating={loading} size='small' />
                 <View style={styles.logo}>
                     <Text>LOGO IMAGE HERE</Text>
                 </View>

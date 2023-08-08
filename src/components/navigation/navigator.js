@@ -19,6 +19,7 @@ const Navigator = () => {
 
     return (
         <Stack.Navigator initialRouteName="Login" screenOptions={
+        // <Stack.Navigator initialRouteName="Main" screenOptions={
             { 
                 headerTitle: '', 
                 headerStyle: { 
