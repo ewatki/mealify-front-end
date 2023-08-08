@@ -1,5 +1,5 @@
 import React, { useContext, createContext } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, ActivityIndicator } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import axios from 'axios';
 import Register from './Register';
@@ -12,6 +12,7 @@ const Login = ({ route, navigation }) => {
         password: '',
     });
     const [errorMessage, setErrorMessage] = React.useState('')
+    const [loading, setLoading] = React.useState('false')
     // const UserContext = createContext(formFields);
     // const user = useContext(UserContext)  
 
@@ -30,15 +31,17 @@ const Login = ({ route, navigation }) => {
     }
     // Verify user input fn - if either inputs aren't a match, show an alert of invalid login
     const handleUserLogin = () => {
-        console.log('in handler')
+        setLoading('true')
         axios.post('https://mealify-zclw.onrender.com/users/login', formFields)
         .then(response => {
+            setLoading('false')
             console.log('response.data:', response.data)
             const user = response.data
             console.log('Successful login!')
             navigation.navigate('Main', {user: user})
         })
         .catch(error => {
+            setLoading('false')
             if (error.response.data === 'Invalid password' || error.response.data === 'That email is invalid') {
                 setErrorMessage(error.response.data)
                 console.log(error.response.data)
@@ -53,6 +56,7 @@ const Login = ({ route, navigation }) => {
         <View style={styles.container}>
             <View style={styles.centeredView}>
                 <Text style={styles.header}>Login</Text>
+                <ActivityIndicator animating={loading} size='small' />
                 <View style={styles.inputContainer}>
                     <TextInput 
                         value={formFields.email} 
@@ -143,7 +147,7 @@ const styles = StyleSheet.create({
         // alignItems: 'center',
         // flex:1, 
         alignSelf: 'center',
-        borderWidth: 1,
+        // borderWidth: 1,
         marginTop: 3,
         marginBottom: 5,
         padding: 5,

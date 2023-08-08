@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import Dashboard from './Dashboard'
-import Pantry from './Pantry'
-import Preferences from './Preferences'
+import Dashboard from './Dashboard';
+import Pantry from './Pantry';
+import Preferences from './Preferences';
 import Logout from './Logout';
+import GetRecipes from './GetRecipes';
 
 const Drawer = createDrawerNavigator();
 
@@ -26,11 +27,18 @@ const Main = ({ route, navigation }) => {
             <Drawer.Screen 
             name="Pantry" 
             component={Pantry} 
+            initialParams={{user: route.params.user}}
             />
 
             <Drawer.Screen
             name="Preferences" 
             component={Preferences} 
+            />
+
+            <Drawer.Screen 
+            name="Recipes" 
+            component={GetRecipes}  
+            initialParams={{user: route.params.user}}
             />
 
             <Drawer.Screen 
