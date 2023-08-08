@@ -18,7 +18,11 @@ const Stack = createStackNavigator();
 const Navigator = () => {
 
     return (
+<<<<<<< HEAD
         <Stack.Navigator initialRouteName="Main" screenOptions={
+=======
+        <Stack.Navigator initialRouteName="Login" screenOptions={
+>>>>>>> be41544a9aa0088498cc009a0fad58b3e8242e87
             { 
                 headerTitle: '', 
                 headerStyle: { 

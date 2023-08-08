@@ -1,5 +1,9 @@
 import React, { useContext, createContext } from 'react';
+<<<<<<< HEAD
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+=======
+import { View, Text, TextInput, Button, StyleSheet, ActivityIndicator } from 'react-native';
+>>>>>>> be41544a9aa0088498cc009a0fad58b3e8242e87
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import axios from 'axios';
 import Register from './Register';
@@ -12,6 +16,10 @@ const Login = ({ route, navigation }) => {
         password: '',
     });
     const [errorMessage, setErrorMessage] = React.useState('')
+<<<<<<< HEAD
+=======
+    const [loading, setLoading] = React.useState('false')
+>>>>>>> be41544a9aa0088498cc009a0fad58b3e8242e87
     // const UserContext = createContext(formFields);
     // const user = useContext(UserContext)  
 
@@ -30,15 +38,26 @@ const Login = ({ route, navigation }) => {
     }
     // Verify user input fn - if either inputs aren't a match, show an alert of invalid login
     const handleUserLogin = () => {
+<<<<<<< HEAD
         console.log('in handler')
         axios.post('https://mealify-zclw.onrender.com/users/login', formFields)
         .then(response => {
+=======
+        setLoading('true')
+        axios.post('https://mealify-zclw.onrender.com/users/login', formFields)
+        .then(response => {
+            setLoading('false')
+>>>>>>> be41544a9aa0088498cc009a0fad58b3e8242e87
             console.log('response.data:', response.data)
             const user = response.data
             console.log('Successful login!')
             navigation.navigate('Main', {user: user})
         })
         .catch(error => {
+<<<<<<< HEAD
+=======
+            setLoading('false')
+>>>>>>> be41544a9aa0088498cc009a0fad58b3e8242e87
             if (error.response.data === 'Invalid password' || error.response.data === 'That email is invalid') {
                 setErrorMessage(error.response.data)
                 console.log(error.response.data)
@@ -53,6 +72,10 @@ const Login = ({ route, navigation }) => {
         <View style={styles.container}>
             <View style={styles.centeredView}>
                 <Text style={styles.header}>Login</Text>
+<<<<<<< HEAD
+=======
+                <ActivityIndicator animating={loading} size='small' />
+>>>>>>> be41544a9aa0088498cc009a0fad58b3e8242e87
                 <View style={styles.inputContainer}>
                     <TextInput 
                         value={formFields.email} 
@@ -143,7 +166,11 @@ const styles = StyleSheet.create({
         // alignItems: 'center',
         // flex:1, 
         alignSelf: 'center',
+<<<<<<< HEAD
         borderWidth: 1,
+=======
+        // borderWidth: 1,
+>>>>>>> be41544a9aa0088498cc009a0fad58b3e8242e87
         marginTop: 3,
         marginBottom: 5,
         padding: 5,
