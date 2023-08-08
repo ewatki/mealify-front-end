@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
-import Recipe from './Recipe';
+// import Recipe from './Recipe';
 import axios from 'axios';
 
 // GET a user's pantry - /users/user_id/pantry/
@@ -42,7 +42,8 @@ const GetRecipes = ({ route, navigation }) => {
       }
     })
     .then(response => {
-      spoon_id = respo.
+      spoon_id = response.data.results[0].id
+      url = 
       console.log(response.data.results[0])
     })
     .catch(error => {
