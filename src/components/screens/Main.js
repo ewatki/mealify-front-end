@@ -74,8 +74,8 @@ const Main = ({ route, navigation }) => {
             <Tab.Screen 
             name="Pantry" 
             component={Pantry} 
-            initialParams={{user: user}}
-            // initialParams={{user: route.params.user}}
+            // initialParams={{user: user}}
+            initialParams={{user: route.params.user}}
             />
 
             <Tab.Screen
