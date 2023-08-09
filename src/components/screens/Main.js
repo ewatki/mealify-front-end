@@ -72,7 +72,7 @@ const Main = ({ route, navigation }) => {
             component={Dashboard} 
             initialParams={{user: route.params.user}}
             /> 
-            <Drawer.Screen 
+            <Tab.Screen 
             name="Pantry" 
             component={Pantry} 
             initialParams={{user: user}}
@@ -86,7 +86,7 @@ const Main = ({ route, navigation }) => {
             // initialParams={{user: route.params.user}}
             />
 
-            <Drawer.Screen 
+            <Tab.Screen 
             name="Recipes" 
             component={GetRecipes}  
             initialParams={{user: user}}
@@ -94,7 +94,7 @@ const Main = ({ route, navigation }) => {
 
             />
 
-            <Drawer.Screen 
+            <Tab.Screen 
             name="Logout" 
             component={Logout}  
             />
