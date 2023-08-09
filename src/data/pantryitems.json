@@ -1,50 +1,93 @@
 {
-    "pantryItems" : [
-        {
-            "section": "Oils and vinegars",
-            "items": [
-                {
-                    "id": 1,
-                    "name": "extra-virgin olive oil"
-                },
-                {
-                    "id": 2,
-                    "name": "neutral cooking oil (e.g canola or grapeseed)"
-                },
-                {
-                    "id": 3,
-                    "name": "red-wine vinegar"
-                },
-                {
-                    "id": 4,
-                    "name": "white vinegar/white-wine vinegar"
-                }
-            ]
-        },
-        {
-            "section": "Cans and jars",
-            "items": [
-                {
-                    "id": 5,
-                    "name": "tuna in olive oil"
-                },
-                {
-                    "id": 6,
-                    "name": "tomato paste"
-                },
-                {
-                    "id": 7,
-                    "name": "diced tomatoes"
-                },
-                {
-                    "id": 8,
-                    "name": "tomato sauce"
-                },
-                {
-                    "id": 9,
-                    "name": "chicken stock/vegetable stock"
-                }
-            ]
-        }
+    "Oil & Vinegar" : [
+        {"key": 1, "value": "extra-virgin olive oil"},
+        {"key": 2, "value": "cooking oil (e.g. canola or grapeseed)"},
+        {"key": 3, "value": "red-wine vinegar"}
+    ],
+
+    "Cans & Jars" : [
+        {"key": 4, "value": "tuna in olive oil"},
+        {"key": 5, "value": "salmon"},
+        {"key": 6, "value": "tomato paste"},
+        {"key": 7, "value": "diced tomatoes"},
+        {"key": 8, "value": "tomato sauce"},
+        {"key": 9, "value": "chicken or vegetable stock"}
+    ],
+    "Spices & Herbs" : [
+        {"key": 10, "value": "kosher salt"},
+        {"key": 11, "value": "red-pepper flakes"},
+        {"key": 12, "value": "ground cayenne"},
+        {"key": 13, "value": "curry powder"},
+        {"key": 14, "value": "bay leaves"},
+        {"key": 15, "value": "black pepper"},
+        {"key": 16, "value": "sweet paprika"},
+        {"key": 17, "value": "ground cinnamon"},
+        {"key": 18, "value": "ground cumin"},
+        {"key": 19, "value": "garlic powder"},
+        {"key": 20, "value": "dried thyme"},
+        {"key": 21, "value": "dried oregano"}
+    ],
+    "Grains & Starches" : [
+        {"key": 22, "value": "long-grain brown rice"},
+        {"key": 23, "value": "quinoa"},
+        {"key": 24, "value": "dry (long) pasta"},
+        {"key": 25, "value": "dry (short) pasta"},
+        {"key": 26, "value": "bread crumbs"},
+        {"key": 27, "value": "crackers"},
+        {"key": 28, "value": "black beans"},
+        {"key": 29, "value": "chickpeas"},
+        {"key": 30, "value": "dry lentils"}
+    ],
+    "Nuts & Nut Butters" : [
+        {"key": 31, "value": "walnuts"},
+        {"key": 32, "value": "almonds"},
+        {"key": 33, "value": "peanuts"},
+        {"key": 34, "value": "peanut butter"},
+        {"key": 35, "value": "almond butter"}
+    ],
+    "Sweeteners" : [
+        {"key": 36, "value": "honey"},
+        {"key": 37, "value": "maple syrup"},
+        {"key": 38, "value": "sugar"}
+    ],
+    "Preserves & Pickles" : [
+        {"key": 39, "value": "fruit jam"},
+        {"key": 40, "value": "pickles"}
+    ],
+    "Produce" : [
+        {"key": 41, "value": "garlic"},
+        {"key": 42, "value": "onions"},
+        {"key": 43, "value": "potatoes"},
+        {"key": 44, "value": "lemon"},
+        {"key": 45, "value": "tofu"}
+    ],
+    "Dairy" : [
+        {"key": 46, "value": "eggs"},
+        {"key": 47, "value": "unsalted butter"},
+        {"key": 48, "value": "parmesan"},
+        {"key": 49, "value": "cheese"},
+        {"key": 50, "value": "milk"},
+        {"key": 51, "value": "cream"}
+    ],
+    "Meats" : [
+        {"key": 52, "value": "chicken"},
+        {"key": 53, "value": "pork"},
+        {"key": 54, "value": "beef"},
+        {"key": 55, "value": "fish fillets"},
+        {"key": 56, "value": "shrimp"}
+    ],
+    "Vegetables" : [
+        {"key": 57, "value": "corn"},
+        {"key": 58, "value": "peas"},
+        {"key": 59, "value": "broccoli"},
+        {"key": 60, "value": "brussel sprouts"},
+        {"key": 61, "value": "bell peppers"}
+    ],
+    "Baking" : [
+        {"key": 62, "value": "all-purpose flour"},
+        {"key": 63, "value": "rolled oats"},
+        {"key": 64, "value": "cornstarch"},
+        {"key": 65, "value": "baking soda"},
+        {"key": 66, "value": "baking power"}
     ]
 }

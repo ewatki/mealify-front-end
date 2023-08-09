@@ -3,15 +3,9 @@ import { Pressable, View, Text, TouchableOpacity, StyleSheet, ActivityIndicator,
 // import Recipe from './Recipe';
 import axios from 'axios';
 
-// GET a user's pantry - /users/user_id/pantry/
-// POST add to user's pantry - /users/user_id/pantry/
-// PATCH update a user's pantry (add new item) - /users/user_id/pantry/
-// DELETE remove an item from a user's pantry = /users/user_id/pantry/
-
 const GetRecipes = ({ route, navigation }) => {
   // console.log('USER: ', route.params.user)
   const user = route.params.user
-  // const { username, pantry, saveRecipes, ingredient_preferences, id, intolerances } = route.params.user;
   const [loading, setLoading] = React.useState('false');
   const [errorMessage, setErrorMessage] = React.useState('');
   const [formFields, setFormFields] = React.useState({
@@ -20,6 +14,8 @@ const GetRecipes = ({ route, navigation }) => {
     diet: '',
   });
   const [modalVisible, setModalVisible] = React.useState(false);
+  const apiKey = '5d5b6e0bcc9c4205b3cba5dc026a03ba'
+
   const handleChange = (text, field) => {
       if (field === 'diet') {
           setFormFields({
@@ -60,80 +56,111 @@ const GetRecipes = ({ route, navigation }) => {
     });
   };
 
+  const getRecipeDetails = (spoonId, title, image) => {
+    setLoading('true')
+    const url = `https://api.spoonacular.com/recipes/${spoonId}/information`
+    params = {
+      params: {
+        apiKey: apiKey,
+        includeNutrition: 'True'
+      }
+    }
+
+    // Call details of recipe to gather more needed data
+    axios.get(url, params)
+    .then(response => {
+      setErrorMessage('')
+      const instructions = response.data.instructions
+      const ingredients = []
+      for (ingredient of response.data.extendedIngredients) {
+        ingredients.push(ingredient.name)
+      }
+      const nutritionScore = Math.floor(response.data.nutrition.properties[2].amount)
+      const sourceUrl = response.data.sourceUrl
+
+      // Build dict to post to mealify_api
+      const newRecipeData = {
+        title: title, 
+        ingredients: ingredients, 
+        instructions: instructions, 
+        nutritional_data: nutritionScore, 
+        url: sourceUrl, 
+        image: image,
+        user_state: 0
+      }
+      console.log('NewRecipeData: ', newRecipeData.title)
+
+      // // Add newRecipe Data to a Recipe.js component adn if they click 'like', 'unlike' then send post to the backend with the data!
+      // Call mealify_api to save recipe for future use
+      // axios.post(`https://mealify-zclw.onrender.com/users/${user.id}/recipes`, newRecipeData)
+      // .then(response => {
+      //   setLoading('false')
+      // })
+      // .catch(error => {
+      //   console.log(error)
+      // })
+      setLoading('false')
+    })
+    .catch(error => {
+      setLoading('false')
+      setErrorMessage(error)
+    })
+  }
+
   const handleGetNewRecipes = () => {
-    // Set up axios parameters
+    // Set up axios parameters for random and not
+    setLoading('true')
     const includeIngredients = Object.keys(user.ingredient_preferences)
     includeIngredients.push(formFields.ingredients)
     const diet = Object.keys(user.diet_restrictions)
     diet.push(formFields.diet)
+    const tags = Object.keys(user.intolerances)
+    tags.push(diet)
+    tags.push(formFields.cuisine)
 
-    // Call initial recipe search
-    axios.get('https://api.spoonacular.com/recipes/complexSearch', {
-      params: {
-        apiKey: '5d5b6e0bcc9c4205b3cba5dc026a03ba',
-        intolerances: Object.keys(user.intolerances),
-        includeIngredients: includeIngredients,
-        diet: diet,
-        cuisine: formFields.cuisine,
-      }
-    })
-    .then(response => {
-      // Gather new data in variables
-      setLoading('true')
-      const spoonId = response.data.results[0].id
-      const url = `https://api.spoonacular.com/recipes/${spoonId}/information`
-      const title = response.data.results[0].title
-      const image = response.data.results[0].image
-      params = {
+    // Make random call if it doesnt include ingredients
+    if (includeIngredients.toString() === "") {
+      console.log('in random')
+      axios.get('https://api.spoonacular.com/recipes/random', {
+        params: {
+          apiKey: apiKey,
+          tags: tags.toString(),  
+        }
+      })
+      .then(response => {
+        // Gather new data in variables
+        const spoonId = response.data.recipes[0].id
+        const title = response.data.recipes[0].title
+        const image = response.data.recipes[0].image    
+        getRecipeDetails(spoonId, title, image)
+      })
+    } else {
+      // Call initial recipe search
+      axios.get('https://api.spoonacular.com/recipes/complexSearch', {
         params: {
           apiKey: '5d5b6e0bcc9c4205b3cba5dc026a03ba',
-          includeNutrition: 'True'
+          intolerances: Object.keys(user.intolerances).toString(),
+          includeIngredients: includeIngredients.toString(),
+          diet: diet.toString(),
+          cuisine: formFields.cuisine,
         }
-      }
-
-      // Call details of recipe to gather more needed data
-      axios.get(url, params)
+      })
       .then(response => {
-        setErrorMessage('')
-        const instructions = response.data.instructions
-        const ingredients = []
-        for (ingredient of response.data.extendedIngredients) {
-          ingredients.push(ingredient.name)
-        }
-        const nutritionScore = Math.floor(response.data.nutrition.properties[2].amount)
-        const sourceUrl = response.data.sourceUrl
-
-        // Build dict to post to mealify_api
-        const newRecipeData = {
-          title: title, 
-          ingredients: ingredients, 
-          instructions: instructions, 
-          nutritional_data: nutritionScore, 
-          url: sourceUrl, 
-          image: image,
-          user_state: 0
-        }
-        // console.log('NewRecipeData: ', newRecipeData)
-
-        // // Add newRecipe Data to a Recipe.js component adn if they click 'like', 'unlike' then send post to the backend with the data!
-        // Call mealify_api to save recipe for future use
-        // axios.post(`https://mealify-zclw.onrender.com/users/${user.id}/recipes`, newRecipeData)
-        // .then(response => {
-        //   setLoading('false')
-        // })
-        // .catch(error => {
-        //   console.log(error)
-        // })
-        setLoading('false')
+        // Gather new data in variables
+        if (response.data.results.length === 0) {
+          console.log('No recipes matching parameters')
+          return 
+        }    
+        const spoonId = response.data.results[0].id
+        const title = response.data.results[0].title
+        const image = response.data.results[0].image
+    
+        getRecipeDetails(spoonId, title, image)
       })
       .catch(error => {
-        setLoading('false')
-        setErrorMessage(error)
-      })
-    })
-    .catch(error => {
-      console.log(error);
-    });
+        console.log(error);
+      });
+    };
   };
 
   return (
@@ -157,7 +184,7 @@ const GetRecipes = ({ route, navigation }) => {
         </TouchableOpacity>
         <TouchableOpacity 
           style={styles.getRecipesButton}
-          onPress={ () => { handleGetRecipes({'ingredients': ['tomatoes']})} }
+          onPress={ () => { handleGetRecipes({'ingredients': []})} }
         > 
           <Text style={{ color: '#007AFF', fontSize: 25 }} >Ingredient Recipes</Text>
         </TouchableOpacity>
