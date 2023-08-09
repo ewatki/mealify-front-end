@@ -176,12 +176,21 @@ const GetRecipes = ({ route, navigation }) => {
       </View>
       <View style={styles.newRecipeContainer}>
         <Text>Find A New Recipe</Text>
-        <TouchableOpacity 
-          style={styles.getRecipesButton}
-          onPress={ () => { handleGetNewRecipes()} }
-        > 
-          <Text style={{ color: '#007AFF', fontSize: 25 }} >Random Recipe</Text>
-        </TouchableOpacity>
+        <View>
+          <TouchableOpacity 
+            style={styles.getRecipesButton}
+            onPress={ () => { handleGetNewRecipes()} }
+          > 
+            <Text style={{ color: '#007AFF', fontSize: 25 }} >Random Recipe</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={styles.getRecipesButton}
+            onPress={ () => { handleGetNewRecipes()} }
+            > 
+            <Text style={{ color: '#007AFF', fontSize: 25 }} >New Pantry Recipe</Text>
+          </TouchableOpacity>
+        </View>
         <GetRecipesConstraintsForm 
           formFields={formFields} 
           setFormFields={setFormFields}

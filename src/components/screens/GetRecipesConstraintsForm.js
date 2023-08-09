@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     flex: 3,
   },
   placeholderPressable: {
-    flex: 4,
+    flex: 5,
     backgroundColor: 'grey',
     opacity: '.8',
   },
