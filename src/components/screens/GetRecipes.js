@@ -115,8 +115,9 @@ const GetRecipes = ({ route, navigation }) => {
       })
       .then(response => {
         // Gather new data in variables
+        
         const data = response.data.recipes 
-        getRecipeDetails(data)
+        // getRecipeDetails(data)
       })
       .catch(error => {
         console.log(error);

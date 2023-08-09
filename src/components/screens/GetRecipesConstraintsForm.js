@@ -27,9 +27,6 @@ const GetRecipesConstraintsForm = ({ formFields, setFormFields, handleHideModal,
     }
   }
 
-  // const handleHideModal = () => {
-  //   setModalVisible(!modalVisible)
-  // }
   return (
 
     <Modal         
