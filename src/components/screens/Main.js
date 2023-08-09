@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import Dashboard from './Dashboard';
-import Pantry from './Pantry';
-import Preferences from './Preferences';
+import Dashboard from './Dashboard'
+import Pantry from './Pantry'
+import Preferences from './Preferences'
 import Logout from './Logout';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import GetRecipes from './GetRecipes';
 
-const Drawer = createDrawerNavigator();
+// const Drawer = createDrawerNavigator();
+const Tab = createBottomTabNavigator();
 
 // Get user id, name from route params
 // Get user's name, pantry, preferences
@@ -63,29 +65,27 @@ const Main = ({ route, navigation }) => {
     // console.log("Main Route", route.params.user)
 
     return (
-        <Drawer.Navigator>
-            <Drawer.Screen 
-                name={`Hello, ${route.params.user.username}!`}
-                // name={`Hello, ${user.username}!`}
-                component={Dashboard} 
-                // initialParams={{user: user}}
-                initialParams={{user: route.params.user}}
+        <Tab.Navigator>
+            <Tab.Screen 
+            name={"Dashboard"}
+            component={Dashboard} 
+            initialParams={{user: route.params.user}}
             /> 
-            <Drawer.Screen 
+            <Tab.Screen 
             name="Pantry" 
             component={Pantry} 
-            initialParams={{user: user}}
-            // initialParams={{user: route.params.user}}
+            // initialParams={{user: user}}
+            initialParams={{user: route.params.user}}
             />
 
-            <Drawer.Screen
+            <Tab.Screen
             name="Preferences" 
             component={Preferences} 
             initialParams={{user: user}}
             // initialParams={{user: route.params.user}}
             />
 
-            <Drawer.Screen 
+            <Tab.Screen 
             name="Recipes" 
             component={GetRecipes}  
             initialParams={{user: user}}
@@ -93,13 +93,39 @@ const Main = ({ route, navigation }) => {
 
             />
 
-            <Drawer.Screen 
+            <Tab.Screen 
             name="Logout" 
             component={Logout}  
             />
-        </Drawer.Navigator>
+        </Tab.Navigator>
     )
 }
+
+//     return (
+//         <Drawer.Navigator>
+//             <Drawer.Screen 
+//             name={`Hello, ${route.params.user.username}!`}
+//             component={Dashboard} 
+//             initialParams={{user: route.params.user}}
+
+//             />
+//             <Drawer.Screen 
+//             name="Pantry" 
+//             component={Pantry} 
+//             />
+
+//             <Drawer.Screen
+//             name="Preferences" 
+//             component={Preferences} 
+//             />
+
+//             <Drawer.Screen 
+//             name="Logout" 
+//             component={Logout}  
+//             />
+//         </Drawer.Navigator>
+//     )
+// }
 
 
 export default Main;
