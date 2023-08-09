@@ -1,59 +1,54 @@
-import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import React from 'react'
+import { View, ScrollView, Button, Text} from 'react-native';
+import {MultipleSelectList} from 'react-native-dropdown-select-list'
 import data from '../../data/pantryitems.json';
-import MultiSelect from 'react-native-multiple-select';
 
-const items = data.pantryItems;
+import { SafeAreaView } from 'react-native-safe-area-context';
+
+// IMPORT MULTISELECT ----> npm i react-native-dropdown-select-list
 
 // GET a user's pantry - /users/user_id/pantry/
-// POST add to user's pantry - /users/user_id/pantry/
 // PATCH update a user's pantry (add new item) - /users/user_id/pantry/
 // DELETE remove an item from a user's pantry = /users/user_id/pantry/
 
-const Pantry = () => {
-  const [selectedItems, setSelectedItems] = React.useState([]);
+let labels = Object.keys(data)
 
-  const onSelectedItemsChange = (selectedItems) => {
-    setSelectedItems(selectedItems);
-  };
-  
-  return (
-    <View>
-        {items.map(item => {
-          var content = item.items
-          content.map((c) => {
-            var contentId = c.id
-            var contentName = c.name
-          })
-          return (
-            <View>
-              <MultiSelect 
-                // hideTags
-                items={content}
-                uniqueKey="id"
-                onSelectedItemsChange={onSelectedItemsChange}
-                selectedItems={selectedItems}
-                selectText={item.section}
-                searchInputPlaceholderText="Search Items..."
-                // onChangeInput={ (text)=> console.log(text)}
-                altFontFamily="ProximaNova-Light"
-                tagRemoveIconColor="#CCC"
-                tagBorderColor="#CCC"
-                tagTextColor="#CCC"
-                selectedItemTextColor="#CCC"
-                selectedItemIconColor="#CCC"
-                itemTextColor="#000"
-                displayKey="name"
-                searchInputStyle={{ color: '#CCC' }}
-                submitButtonColor="#CCC"
-                submitButtonText="Submit"
-              />
-              <Text>{selectedItems}{content.id}</Text>
-            </View>
-          )
-        })}
-    </View>
-  )
+const Pantry = () => {
+    const [selected, setSelected] = React.useState([]);
+
+    const submitPantryUpdate = () => {
+      // POST add to user's pantry - /users/user_id/pantry/
+    }
+
+    return (
+        <SafeAreaView>
+            <ScrollView>
+                <View style={{flex:1, paddingHorizontal:20, paddingTop: 20}}>
+
+                {
+                    labels.map((each, index) => {
+                        return (
+                            <View key={index}>
+                                <MultipleSelectList
+                                    setSelected={(val) => setSelected(val)}
+                                    data={data[each]}
+                                    onSelect={() => console.log(selected)}
+                                    placeholder={each}
+                                    label={each}
+                                    save="value"
+                                    notFoundText="Sorry, we don't have that yet"
+                                    // labelStyles={{color: "pink"}}
+                                    // badgeStyles={{backgroundColor: "red"}}
+                                />
+                            </View>
+                        )
+                    })
+                }
+                </View>
+                <Button title="Save" onPress={() => { submitPantryUpdate }}/>
+            </ScrollView>
+        </SafeAreaView>
+    )
 }
 
 export default Pantry;

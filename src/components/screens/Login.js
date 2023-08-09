@@ -29,7 +29,7 @@ const Login = ({ route, navigation }) => {
             })
         }
     }
-    // Verify user input fn - if either inputs aren't a match, show an alert of invalid login
+
     const handleUserLogin = () => {
         setLoading('true')
         axios.post('https://mealify-zclw.onrender.com/users/login', formFields)
