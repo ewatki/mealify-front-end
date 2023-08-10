@@ -1,93 +1,93 @@
 {
     "Oil & Vinegar" : [
-        {"key": 1, "value": "extra-virgin olive oil"},
-        {"key": 2, "value": "cooking oil (e.g. canola or grapeseed)"},
+        {"key": 1, "value": "extra-virgin olive oil", "disabled": false},
+        {"key": 2, "value": "cooking oil (e.g. canola or grapeseed)", "disabled": false},
         {"key": 3, "value": "red-wine vinegar"}
     ],
 
     "Cans & Jars" : [
-        {"key": 4, "value": "tuna in olive oil"},
-        {"key": 5, "value": "salmon"},
-        {"key": 6, "value": "tomato paste"},
-        {"key": 7, "value": "diced tomatoes"},
-        {"key": 8, "value": "tomato sauce"},
+        {"key": 4, "value": "tuna in olive oil", "disabled": false},
+        {"key": 5, "value": "salmon", "disabled": false},
+        {"key": 6, "value": "tomato paste", "disabled": false},
+        {"key": 7, "value": "diced tomatoes", "disabled": false},
+        {"key": 8, "value": "tomato sauce", "disabled": false},
         {"key": 9, "value": "chicken or vegetable stock"}
     ],
     "Spices & Herbs" : [
-        {"key": 10, "value": "kosher salt"},
-        {"key": 11, "value": "red-pepper flakes"},
-        {"key": 12, "value": "ground cayenne"},
-        {"key": 13, "value": "curry powder"},
-        {"key": 14, "value": "bay leaves"},
-        {"key": 15, "value": "black pepper"},
-        {"key": 16, "value": "sweet paprika"},
-        {"key": 17, "value": "ground cinnamon"},
-        {"key": 18, "value": "ground cumin"},
-        {"key": 19, "value": "garlic powder"},
-        {"key": 20, "value": "dried thyme"},
+        {"key": 10, "value": "kosher salt", "disabled": false},
+        {"key": 11, "value": "red-pepper flakes", "disabled": false},
+        {"key": 12, "value": "ground cayenne", "disabled": false},
+        {"key": 13, "value": "curry powder", "disabled": false},
+        {"key": 14, "value": "bay leaves", "disabled": false},
+        {"key": 15, "value": "black pepper", "disabled": false},
+        {"key": 16, "value": "sweet paprika", "disabled": false},
+        {"key": 17, "value": "ground cinnamon", "disabled": false},
+        {"key": 18, "value": "ground cumin", "disabled": false},
+        {"key": 19, "value": "garlic powder", "disabled": false},
+        {"key": 20, "value": "dried thyme", "disabled": false},
         {"key": 21, "value": "dried oregano"}
     ],
     "Grains & Starches" : [
-        {"key": 22, "value": "long-grain brown rice"},
-        {"key": 23, "value": "quinoa"},
-        {"key": 24, "value": "dry (long) pasta"},
-        {"key": 25, "value": "dry (short) pasta"},
-        {"key": 26, "value": "bread crumbs"},
-        {"key": 27, "value": "crackers"},
-        {"key": 28, "value": "black beans"},
-        {"key": 29, "value": "chickpeas"},
+        {"key": 22, "value": "long-grain brown rice", "disabled": false},
+        {"key": 23, "value": "quinoa", "disabled": false},
+        {"key": 24, "value": "dry (long) pasta", "disabled": false},
+        {"key": 25, "value": "dry (short) pasta", "disabled": false},
+        {"key": 26, "value": "bread crumbs", "disabled": false},
+        {"key": 27, "value": "crackers", "disabled": false},
+        {"key": 28, "value": "black beans", "disabled": false},
+        {"key": 29, "value": "chickpeas", "disabled": false},
         {"key": 30, "value": "dry lentils"}
     ],
     "Nuts & Nut Butters" : [
-        {"key": 31, "value": "walnuts"},
-        {"key": 32, "value": "almonds"},
-        {"key": 33, "value": "peanuts"},
-        {"key": 34, "value": "peanut butter"},
+        {"key": 31, "value": "walnuts", "disabled": false},
+        {"key": 32, "value": "almonds", "disabled": false},
+        {"key": 33, "value": "peanuts", "disabled": false},
+        {"key": 34, "value": "peanut butter", "disabled": false},
         {"key": 35, "value": "almond butter"}
     ],
     "Sweeteners" : [
-        {"key": 36, "value": "honey"},
-        {"key": 37, "value": "maple syrup"},
+        {"key": 36, "value": "honey", "disabled": false},
+        {"key": 37, "value": "maple syrup", "disabled": false},
         {"key": 38, "value": "sugar"}
     ],
     "Preserves & Pickles" : [
-        {"key": 39, "value": "fruit jam"},
+        {"key": 39, "value": "fruit jam", "disabled": false},
         {"key": 40, "value": "pickles"}
     ],
     "Produce" : [
-        {"key": 41, "value": "garlic"},
-        {"key": 42, "value": "onions"},
-        {"key": 43, "value": "potatoes"},
-        {"key": 44, "value": "lemon"},
+        {"key": 41, "value": "garlic", "disabled": false},
+        {"key": 42, "value": "onions", "disabled": false},
+        {"key": 43, "value": "potatoes", "disabled": false},
+        {"key": 44, "value": "lemon", "disabled": false},
         {"key": 45, "value": "tofu"}
     ],
     "Dairy" : [
-        {"key": 46, "value": "eggs"},
-        {"key": 47, "value": "unsalted butter"},
-        {"key": 48, "value": "parmesan"},
-        {"key": 49, "value": "cheese"},
-        {"key": 50, "value": "milk"},
+        {"key": 46, "value": "eggs", "disabled": false},
+        {"key": 47, "value": "unsalted butter", "disabled": false},
+        {"key": 48, "value": "parmesan", "disabled": false},
+        {"key": 49, "value": "cheese", "disabled": false},
+        {"key": 50, "value": "milk", "disabled": false},
         {"key": 51, "value": "cream"}
     ],
     "Meats" : [
-        {"key": 52, "value": "chicken"},
-        {"key": 53, "value": "pork"},
-        {"key": 54, "value": "beef"},
-        {"key": 55, "value": "fish fillets"},
+        {"key": 52, "value": "chicken", "disabled": false},
+        {"key": 53, "value": "pork", "disabled": false},
+        {"key": 54, "value": "beef", "disabled": false},
+        {"key": 55, "value": "fish fillets", "disabled": false},
         {"key": 56, "value": "shrimp"}
     ],
     "Vegetables" : [
-        {"key": 57, "value": "corn"},
-        {"key": 58, "value": "peas"},
-        {"key": 59, "value": "broccoli"},
-        {"key": 60, "value": "brussel sprouts"},
+        {"key": 57, "value": "corn", "disabled": false},
+        {"key": 58, "value": "peas", "disabled": false},
+        {"key": 59, "value": "broccoli", "disabled": false},
+        {"key": 60, "value": "brussel sprouts", "disabled": false},
         {"key": 61, "value": "bell peppers"}
     ],
     "Baking" : [
-        {"key": 62, "value": "all-purpose flour"},
-        {"key": 63, "value": "rolled oats"},
-        {"key": 64, "value": "cornstarch"},
-        {"key": 65, "value": "baking soda"},
+        {"key": 62, "value": "all-purpose flour", "disabled": false},
+        {"key": 63, "value": "rolled oats", "disabled": false},
+        {"key": 64, "value": "cornstarch", "disabled": false},
+        {"key": 65, "value": "baking soda", "disabled": false},
         {"key": 66, "value": "baking power"}
     ]
 }
