@@ -5,10 +5,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 
+
 import Register from './src/components/screens/Register';
 import Login from './src/components/screens/Login';
 import Logout from './src/components/screens/Logout';
 import Main from './src/components/screens/Main';
+import RecipeList from './src/components/screens/RecipeList';
 
 const Stack = createStackNavigator();
 const App = () => {
@@ -29,6 +31,7 @@ const App = () => {
 
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Register" component={Register} />
+            <Stack.Screen name="RecipeList" component={RecipeList}  />
 
             <Stack.Screen 
               name="Main" 
