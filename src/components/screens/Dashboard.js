@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Image, SafeAreaView, TextInput, FlatList, Secti
 import axios from 'axios';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Pantry from './Pantry';
+import Recipe from './Recipe'
 
 import Preferences from './Preferences';
 import Login from './Login';
@@ -34,11 +35,12 @@ const Dashboard = ({ route, navigation }) => {
             Saved Recipes
             This is a test
           </Text>
+          {/* <Recipe /> */}
         </View>
       </View>
 
       <View style={[styles.row, styles.circleBtn]}>
-        <TouchableOpacity onPress={() => navigation.navigate(Pantry)}>
+        <TouchableOpacity onPress={() => navigation.navigate(Recipe)}>
           <Text>Go to Pantry</Text>
         </TouchableOpacity>
       </View>

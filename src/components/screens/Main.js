@@ -6,6 +6,7 @@ import Preferences from './Preferences'
 import Logout from './Logout';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import GetRecipes from './GetRecipes';
+import Recipe from './Recipe';
 
 // const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
@@ -89,6 +90,14 @@ const Main = ({ route, navigation }) => {
             name="Recipes" 
             component={GetRecipes}  
             initialParams={{user: user}}
+            // initialParams={{user: route.params.user}}
+
+            />
+
+            <Tab.Screen 
+            name="Recipe" 
+            component={Recipe}  
+            // initialParams={{user: route.params.user}}
             // initialParams={{user: route.params.user}}
 
             />

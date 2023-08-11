@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, View, Text, TouchableOpacity, StyleSheet, ActivityIndicator, TextInput, Modal } from 'react-native';
-// import Recipe from './Recipe';
+import Recipe from './Recipe';
 import axios from 'axios';
 
 const GetRecipes = ({ route, navigation }) => {
@@ -14,7 +14,7 @@ const GetRecipes = ({ route, navigation }) => {
     diet: '',
   });
   const [modalVisible, setModalVisible] = React.useState(false);
-  const apiKey = '5d5b6e0bcc9c4205b3cba5dc026a03ba'
+  const apiKey = 'a10d8b0165074f6a807217fe8ea8bd20'
 
   const handleChange = (text, field) => {
       if (field === 'diet') {
@@ -89,6 +89,9 @@ const GetRecipes = ({ route, navigation }) => {
         user_state: 0
       }
       console.log('NewRecipeData: ', newRecipeData.title)
+      console.log('NewRecipeData: ', newRecipeData.ingredients)
+      navigation.navigate('Recipe', {recipe: newRecipeData})
+
 
       // // Add newRecipe Data to a Recipe.js component adn if they click 'like', 'unlike' then send post to the backend with the data!
       // Call mealify_api to save recipe for future use
@@ -123,7 +126,7 @@ const GetRecipes = ({ route, navigation }) => {
       console.log('in random')
       axios.get('https://api.spoonacular.com/recipes/random', {
         params: {
-          apiKey: apiKey,
+          apiKey: 'a10d8b0165074f6a807217fe8ea8bd20',
           tags: tags.toString(),  
         }
       })
@@ -133,6 +136,7 @@ const GetRecipes = ({ route, navigation }) => {
         const title = response.data.recipes[0].title
         const image = response.data.recipes[0].image    
         getRecipeDetails(spoonId, title, image)
+       
       })
     } else {
       // Call initial recipe search
