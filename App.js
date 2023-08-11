@@ -16,8 +16,8 @@ const App = () => {
     <SafeAreaView style={{flex: 1}}>
         <NavigationContainer style={styles.container}>
 
-          {/* <Stack.Navigator initialRouteName="Login" screenOptions={ */}
-          <Stack.Navigator initialRouteName="Main" screenOptions={
+          <Stack.Navigator initialRouteName="Login" screenOptions={
+          // <Stack.Navigator initialRouteName="Main" screenOptions={
             { 
                 headerTitle: '', 
                 headerStyle: { 

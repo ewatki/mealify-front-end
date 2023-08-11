@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Image } from 'react-native';
+import { Image, Text } from 'react-native';
 import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
-// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+
 import CustomDrawer from '../CustomDrawer';
 import Dashboard from './Dashboard'
 import Pantry from './Pantry'
@@ -12,7 +12,6 @@ import GetRecipes from './GetRecipes';
 import Recipe from './Recipe';
 
 const Drawer = createDrawerNavigator();
-// const Tab = createBottomTabNavigator();
 
 const Main = ({ route, navigation }) => {
     // const user = route.params.user
@@ -62,45 +61,6 @@ const Main = ({ route, navigation }) => {
         diet_restrictions: {},
         username: "test1"
     }
-    // console.log("Main Route", route.params.user)
-
-//     return (
-//         <Tab.Navigator>
-//             <Tab.Screen 
-//             name={"Dashboard"}
-//             component={Dashboard} 
-//             initialParams={{user: user}}
-//             // initialParams={{user: route.params.user}}
-//             /> 
-//             <Tab.Screen 
-//             name="Pantry" 
-//             component={Pantry} 
-//             initialParams={{user: user}}
-//             // initialParams={{user: route.params.user}}
-//             />
-
-//             <Tab.Screen
-//             name="Preferences" 
-//             component={Preferences} 
-            // initialParams={{user: user}}
-//             // initialParams={{user: route.params.user}}
-//             />
-
-//             <Tab.Screen 
-//             name="Recipes" 
-//             component={GetRecipes}  
-//             initialParams={{user: user}}
-//             // initialParams={{user: route.params.user}}
-
-//             />
-
-//             <Tab.Screen 
-//             name="Logout" 
-//             component={Logout}  
-//             />
-//         </Tab.Navigator>
-//     )
-// }
 
     return (
         <Drawer.Navigator 
@@ -108,12 +68,11 @@ const Main = ({ route, navigation }) => {
         screenOptions={{
             headerShown: true,
             headerTitle: '',
-            headerRight: () => {<Image></Image>},
-            drawerActiveBackgroundColor: 'gray',
+            drawerActiveBackgroundColor: '#E2C274',
             drawerActiveTintColor: 'black',
             drawerInactiveTintColor: 'gray',
             drawerLabelStyle: {
-                // fontFamily: 
+                fontFamily: 'Avenir-Roman',
                 fontSize: 15,
             }
         }}>
@@ -121,28 +80,33 @@ const Main = ({ route, navigation }) => {
             name="Home"
             component={Dashboard} 
             initialParams={{user: user}}
+            options={{
+                headerStyle: {
+                    backgroundColor: 'white',
+                },
+            }}
             // initialParams={{user: route.params.user}}
             />
             <Drawer.Screen 
             name="Pantry" 
             component={Pantry} 
-            initialParams={{user: user}}
-            // initialParams={{user: route.params.user}}
+            // initialParams={{user: user}}
+            initialParams={{user: route.params.user}}
             />
 
             <Drawer.Screen
             name="Recipes" 
             component={GetRecipes} 
-            initialParams={{user: user}}
-            // initialParams={{user: route.params.user}}
+            // initialParams={{user: user}}
+            initialParams={{user: route.params.user}}
 
             />
 
             <Drawer.Screen
             name="Preferences" 
             component={Preferences} 
-            initialParams={{user: user}}
-            // initialParams={{user: route.params.user}}
+            // initialParams={{user: user}}
+            initialParams={{user: route.params.user}}
             />
         </Drawer.Navigator>
     )
