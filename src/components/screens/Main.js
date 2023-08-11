@@ -108,6 +108,13 @@ const Main = ({ route, navigation }) => {
             // initialParams={{user: user}}
             initialParams={{user: route.params.user}}
             />
+
+            <Drawer.Screen
+            name="TempRecipe" 
+            component={Recipe} 
+            // initialParams={{user: user}}
+            initialParams={{user: route.params.user}}
+            />
         </Drawer.Navigator>
     )
 }
