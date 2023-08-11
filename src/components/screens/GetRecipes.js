@@ -2,6 +2,7 @@ import React from 'react';
 import { Pressable, View, Text, TouchableOpacity, StyleSheet, ActivityIndicator, TextInput, Modal } from 'react-native';
 import Recipe from './Recipe';
 import axios from 'axios';
+import GetRecipesConstraintsForm from './GetRecipesConstraintsForm';
 
 const GetRecipes = ({ route, navigation }) => {
   // console.log('USER: ', route.params.user)
@@ -14,32 +15,13 @@ const GetRecipes = ({ route, navigation }) => {
     diet: '',
   });
   const [modalVisible, setModalVisible] = React.useState(false);
-  const apiKey = 'a10d8b0165074f6a807217fe8ea8bd20'
-
-  const handleChange = (text, field) => {
-      if (field === 'diet') {
-          setFormFields({
-              ...formFields,
-              diet: text
-          })
-      } else if (field === 'cuisine') {
-          setFormFields({
-              ...formFields,
-              cuisine: text
-          })
-      } else if (field === 'ingredients') {
-          setFormFields({
-              ...formFields,
-              ingredients: text
-          })
-      }
-  }
+  const apiKey = '5d5b6e0bcc9c4205b3cba5dc026a03ba'
 
   const handleHideModal = () => {
     setModalVisible(!modalVisible)
   }
 
-  const handleGetRecipes = (params) => {
+  const handleGetMealifyRecipes = (params) => {
     setLoading('true')
     axios.get(`https://mealify-zclw.onrender.com/users/${user.id}/recipes`)
     .then(response => {
@@ -56,8 +38,19 @@ const GetRecipes = ({ route, navigation }) => {
     });
   };
 
-  const getRecipeDetails = (spoonId, title, image) => {
+  const getRecipeDetails = (data) => {
     setLoading('true')
+    if (data.length === 0) {
+      console.log('No recipes matching parameters')
+      setErrorMessage('Ooops, we cannot find any recipes matching these requiremenst! Try searching for a new one!')
+      setLoading('false')
+
+      return 
+    }    
+    const spoonId = data[0].id
+    const title = data[0].title
+    const image = data[0].image
+
     const url = `https://api.spoonacular.com/recipes/${spoonId}/information`
     params = {
       params: {
@@ -109,6 +102,31 @@ const GetRecipes = ({ route, navigation }) => {
       setErrorMessage(error)
     })
   }
+  const handleGetNewPantryRecipes = () => {
+    setLoading('true')
+    // console.log(user.pan)
+    if (user.pantry.length === 0) {
+      return 'Nothing in pantry, Re-route to pantry to fill out (maybe throw up an alert...'
+    } else {
+      ingredients = Object.keys(user.pantry[0].food_dict)
+      console.log(ingredients)
+      axios.get('https://api.spoonacular.com/recipes/findByIngredients', {
+        params: {
+          apiKey: apiKey,
+          tags: tags.toString(),  
+        }
+      })
+      .then(response => {
+        // Gather new data in variables
+        
+        const data = response.data.recipes 
+        // getRecipeDetails(data)
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    };
+  };
 
   const handleGetNewRecipes = () => {
     // Set up axios parameters for random and not
@@ -117,13 +135,15 @@ const GetRecipes = ({ route, navigation }) => {
     includeIngredients.push(formFields.ingredients)
     const diet = Object.keys(user.diet_restrictions)
     diet.push(formFields.diet)
-    const tags = Object.keys(user.intolerances)
-    tags.push(diet)
+    let tags = Object.keys(user.intolerances)
+    tags.push(diet.toString())
     tags.push(formFields.cuisine)
-
     // Make random call if it doesnt include ingredients
     if (includeIngredients.toString() === "") {
       console.log('in random')
+      if (tags.toString() == ',') {
+        tags = ''
+      }
       axios.get('https://api.spoonacular.com/recipes/random', {
         params: {
           apiKey: 'a10d8b0165074f6a807217fe8ea8bd20',
@@ -132,14 +152,15 @@ const GetRecipes = ({ route, navigation }) => {
       })
       .then(response => {
         // Gather new data in variables
-        const spoonId = response.data.recipes[0].id
-        const title = response.data.recipes[0].title
-        const image = response.data.recipes[0].image    
-        getRecipeDetails(spoonId, title, image)
-       
+        const data = response.data.recipes 
+        getRecipeDetails(data)
       })
+      .catch(error => {
+        console.log(error);
+      });
     } else {
       // Call initial recipe search
+      console.log('in NOT random')
       axios.get('https://api.spoonacular.com/recipes/complexSearch', {
         params: {
           apiKey: '5d5b6e0bcc9c4205b3cba5dc026a03ba',
@@ -151,15 +172,8 @@ const GetRecipes = ({ route, navigation }) => {
       })
       .then(response => {
         // Gather new data in variables
-        if (response.data.results.length === 0) {
-          console.log('No recipes matching parameters')
-          return 
-        }    
-        const spoonId = response.data.results[0].id
-        const title = response.data.results[0].title
-        const image = response.data.results[0].image
-    
-        getRecipeDetails(spoonId, title, image)
+        const data = response.data.results
+        getRecipeDetails(data)
       })
       .catch(error => {
         console.log(error);
@@ -176,83 +190,52 @@ const GetRecipes = ({ route, navigation }) => {
         </Text>
         <TouchableOpacity 
           style={styles.getRecipesButton}
-          onPress={ () => { handleGetRecipes({})} }
+          onPress={ () => { handleGetMealifyRecipes({})} }
         > 
           <Text style={{ color: '#007AFF', fontSize: 25 }} >All my Recipes</Text>
         </TouchableOpacity>
         <TouchableOpacity 
           style={styles.getRecipesButton}
-          onPress={ () => { handleGetRecipes({'pantry': 'true'})} }
+          onPress={ () => { handleGetMealifyRecipes({'pantry': 'true'})} }
         > 
           <Text style={{ color: '#007AFF', fontSize: 25 }} >Pantry Recipes</Text>
         </TouchableOpacity>
         <TouchableOpacity 
           style={styles.getRecipesButton}
-          onPress={ () => { handleGetRecipes({'ingredients': []})} }
+          onPress={ () => { handleGetMealifyRecipes({'ingredients': []})} }
         > 
           <Text style={{ color: '#007AFF', fontSize: 25 }} >Ingredient Recipes</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.newRecipeContainer}>
         <Text>Find A New Recipe</Text>
-        <TouchableOpacity 
-          style={styles.getRecipesButton}
-          onPress={ () => { handleGetNewRecipes()} }
-        > 
-          <Text style={{ color: '#007AFF', fontSize: 25 }} >Get A New Recipe</Text>
-        </TouchableOpacity>
-        <Modal         
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-            setModalVisible(!modalVisible);
-          }}>
-          <View style={styles.placeholderView}></View>
-          <View style={styles.modalView}>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => handleHideModal()}>
-              <Text>- Never Mind, keep it broad -</Text>
-            </Pressable>
+        <View>
+          <TouchableOpacity 
+            style={styles.getRecipesButton}
+            onPress={ () => { handleGetNewRecipes()} }
+          > 
+            <Text style={{ color: '#007AFF', fontSize: 25 }} >Random Recipe</Text>
+          </TouchableOpacity>
 
-            <Text>Add Ingredients</Text>
-            <TextInput 
-              value={formFields.ingredients} 
-              onChangeText={text => handleChange(text, 'ingredients')} 
-              autoCompleteType="ingredients" 
-              autoCapitalize='none'
-              placeholder='Ingredients'
-              style={styles.input}
-            />   
-            <Text>Add Cuisine</Text>
-            <TextInput 
-              value={formFields.cuisine} 
-              onChangeText={text => handleChange(text, 'cuisine')} 
-              autoCompleteType="cuisine" 
-              autoCapitalize='none'
-              placeholder='Indian...'
-              style={styles.input}
-            />   
-            <Text>Add Diet Restriction</Text>
-            <TextInput 
-              value={formFields.diet} 
-              onChangeText={text => handleChange(text, 'diet')} 
-              autoCompleteType="diet" 
-              autoCapitalize='none'
-              placeholder='Cooking for a new person?'
-              style={styles.input}
-            />   
-          </View>
-        </Modal>
+          <TouchableOpacity 
+            style={styles.getRecipesButton}
+            onPress={ () => { handleGetNewPantryRecipes()} }
+            > 
+            <Text style={{ color: '#007AFF', fontSize: 25 }} >New Pantry Recipe</Text>
+          </TouchableOpacity>
+        </View>
+        <GetRecipesConstraintsForm 
+          formFields={formFields} 
+          setFormFields={setFormFields}
+          handleHideModal={handleHideModal}
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+        />
         <Pressable
           style={[styles.showModalButton]}
           onPress={() => setModalVisible(true)}>
           <Text style={styles.textStyle}>Get Specific</Text>
         </Pressable>
-
-
       </View>
       <View style={styles.errorContainer}>
           <Text style={styles.errorMessage}>{errorMessage}</Text>

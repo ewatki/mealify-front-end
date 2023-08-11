@@ -6,7 +6,7 @@ import Register from './Register';
 
 
 const Login = ({ route, navigation }) => {
-
+    
     const [formFields, setFormFields ] = React.useState({
         email: '',
         password: '',
@@ -37,7 +37,9 @@ const Login = ({ route, navigation }) => {
             setLoading('false')
             console.log('response.data:', response.data)
             const user = response.data
-            console.log('Successful login!')
+            setErrorMessage('')
+            console.log('Successful login!')                
+
             navigation.navigate('Main', {user: user})
         })
         .catch(error => {
