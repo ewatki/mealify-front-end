@@ -1,20 +1,19 @@
-import React, { useContext, createContext } from 'react';
+import React from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ActivityIndicator } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import axios from 'axios';
+
+import Main from './Main';
 import Register from './Register';
 
-
 const Login = ({ route, navigation }) => {
-    
+
     const [formFields, setFormFields ] = React.useState({
         email: '',
         password: '',
     });
     const [errorMessage, setErrorMessage] = React.useState('')
     const [loading, setLoading] = React.useState('false')
-    // const UserContext = createContext(formFields);
-    // const user = useContext(UserContext)  
 
     const handleChange = (text, field) => {
         if (field === 'email') {
@@ -39,7 +38,6 @@ const Login = ({ route, navigation }) => {
             const user = response.data
             setErrorMessage('')
             console.log('Successful login!')                
-
             navigation.navigate('Main', {user: user})
         })
         .catch(error => {

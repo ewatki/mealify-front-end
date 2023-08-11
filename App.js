@@ -1,23 +1,46 @@
-import React, { createContext, useContext } from 'react';
-import { StyleSheet } from 'react-native';
+import React from 'react';
+import { StyleSheet, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 
-// import { UserContext, Provider } from "./components/globalContext/globalContext.js";
+import Register from './src/components/screens/Register';
+import Login from './src/components/screens/Login';
+import Logout from './src/components/screens/Logout';
+import Main from './src/components/screens/Main';
 
-import Navigator from './src/components/navigation/navigator.js'
-
+const Stack = createStackNavigator();
 const App = () => {
   return (
-    // <Provider>
-      <SafeAreaView style={{flex: 1}}>
-          <NavigationContainer style={styles.container}>
-            <Navigator /> 
-          </NavigationContainer>
-          <StatusBar hidden={true} />
-      </SafeAreaView>
-    // </Provider>
+    <SafeAreaView style={{flex: 1}}>
+        <NavigationContainer style={styles.container}>
+
+          {/* <Stack.Navigator initialRouteName="Login" screenOptions={ */}
+          <Stack.Navigator initialRouteName="Main" screenOptions={
+            { 
+                headerTitle: '', 
+                headerStyle: { 
+                    backgroundColor: 'transparent',                 shadowOpacity: 0,
+                    elevation: 0,
+                },
+            }
+          }>
+
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Register" component={Register} />
+
+            <Stack.Screen 
+              name="Main" 
+              component={Main} 
+              options={{headerShown: false}}
+            />
+
+        </Stack.Navigator>
+        </NavigationContainer>
+
+        <StatusBar hidden={false}/>
+    </SafeAreaView>
   );
 }
 
