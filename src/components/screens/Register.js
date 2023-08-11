@@ -2,8 +2,6 @@ import React, {useContext, createContext } from 'react';
 import { StyleSheet, View, Text, Button, TextInput, Pressable, ActivityIndicator } from 'react-native';
 import axios from 'axios';
 
-import Main from './Main';
-import Login from './Login';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
