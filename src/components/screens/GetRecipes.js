@@ -30,12 +30,16 @@ const GetRecipes = ({ route, navigation }) => {
         if (Object.keys(response.data).length === 0) {
           setErrorMessage('Ooops, you dont have any recipes! Try searching for a new one!')
         }
+        else {
+          navigation.navigate('RecipeList', {user: route.params.user})
+        }
     })
     .catch(error => {
         setLoading('false')
         console.log('error: ', error.response)
         setErrorMessage(error.response.data)
     });
+    
   };
 
   const getRecipeDetails = (data) => {
@@ -79,7 +83,8 @@ const GetRecipes = ({ route, navigation }) => {
         nutritional_data: nutritionScore, 
         url: sourceUrl, 
         image: image,
-        user_state: 0
+        user_state: 0,
+        user_id: user.id
       }
       console.log('NewRecipeData: ', newRecipeData.title)
       console.log('NewRecipeData: ', newRecipeData.ingredients)

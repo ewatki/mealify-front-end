@@ -5,6 +5,7 @@ import Register from '../screens/Register';
 import Login from '../screens/Login';
 import Logout from '../screens/Logout';
 import Main from '../screens/Main';
+import RecipeList from '../screens/RecipeList';
 
 const Stack = createStackNavigator();
 
@@ -32,6 +33,7 @@ const Navigator = () => {
             <Stack.Screen name="Register" component={Register} />
 
             <Stack.Screen name="Main" component={Main} options={{ headerBackVisible:false }}/>
+            <Stack.Screen name="RecipeList" component={RecipeList}  />
 
         </Stack.Navigator>
     )
