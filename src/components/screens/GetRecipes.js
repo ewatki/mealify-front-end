@@ -94,7 +94,7 @@ const GetRecipes = ({ route, navigation }) => {
       <ActivityIndicator animating={loading} size='small' />
       <GetMealifyRecipes user={user} setLoading={setLoading} setErrorMessage={setErrorMessage}/>
       <View style={styles.newRecipeContainer}>
-        <Text>Find A New Recipe</Text>
+        <Text style={styles.getYourRecipesHeader}>Find A New Recipe</Text>
         <View>
           <GetNewPantryRecipes 
             user={user} 
@@ -128,11 +128,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center', 
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: '#E2C274'
   },
   errorContainer: {
     flex: 1,
   },
+  getYourRecipesHeader: {
+    backgroundColor: '#E2C274',
+    fontSize: 20, 
+    fontFamily: 'Avenir-Roman',
+    padding: 8,
+    alignSelf: 'center',
+  }, 
   newRecipeContainer: {
     flex: 3,
   },

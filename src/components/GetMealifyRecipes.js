@@ -36,18 +36,21 @@ const GetMealifyRecipes = ({ user, setLoading, setErrorMessage }) => {
           onPress={ () => { handleGetMealifyRecipes({})} }
         > 
           <Text style={styles.buttonText} >All my Recipes</Text>
+          <Text style={styles.buttonDescription}>All your saved recipes</Text>
         </TouchableOpacity>
         <TouchableOpacity 
           style={styles.getRecipesButton}
           onPress={ () => { handleGetMealifyRecipes({'pantry': 'true'})} }
         > 
           <Text style={styles.buttonText} >Pantry Recipes</Text>
+          <Text style={styles.buttonDescription}>Your saved recipes with ingredients in your pantry</Text>
         </TouchableOpacity>
         <TouchableOpacity 
           style={styles.getRecipesButton}
           onPress={ () => { handleGetMealifyRecipes({'ingredients': []})} }
         > 
           <Text style={styles.buttonText} >Ingredient Recipes</Text>
+          <Text style={styles.buttonDescription}>Your saved recipes with your ingredient preferences</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -57,13 +60,18 @@ const GetMealifyRecipes = ({ user, setLoading, setErrorMessage }) => {
 export default GetMealifyRecipes;
 
 const styles = StyleSheet.create({
+  buttonDescription: {
+    fontSize: 12, 
+    color: 'white',
+    fontFamily: 'Avenir-Roman'
+  },
   buttonText: {
     fontSize: 16, 
     color: 'white',
     fontFamily: 'Avenir-Roman'
   },
   getRecipesButton: {
-    padding: 10, 
+    padding: 5, 
     borderRadius: 10,
     textAlign: 'center', 
     backgroundColor: '#756382',
@@ -72,23 +80,18 @@ const styles = StyleSheet.create({
   },
   getYourRecipesContainer: {
     flex: 2, 
-    // flexDirection: 'column'
   },
   getYourRecipesButtonContainer: {
-    // flex: 6,
     flexDirection: 'row',
-    // justifyContent: 'center',
-    // flexWrap: 'wrap',
     margin: 3,
   },
   getYourRecipesHeader: {
-    // flex: 1,
     backgroundColor: '#E2C274',
     fontSize: 20, 
-    color: 'white',
+    // color: 'white',
     fontFamily: 'Avenir-Roman',
-    fontWeight: 'bold',
-    padding: 10
-
+    // fontWeight: 'bold',
+    padding: 8,
+    alignSelf: 'center',
   }, 
 })

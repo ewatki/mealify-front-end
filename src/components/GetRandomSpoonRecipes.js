@@ -74,7 +74,8 @@ const GetRandomSpoonRecipes = ({ user, setLoading, formFields, setFormFields, mo
         style={styles.getRecipesButton}
         onPress={ () => { handleGetNewRecipes()} }
       > 
-        <Text style={{ color: '#007AFF', fontSize: 25 }} >Random Recipe</Text>
+        <Text style={styles.buttonText} >Random Recipe</Text>
+        <Text style={styles.buttonDescription} >Get a new recipe and add some specifics</Text>
       </TouchableOpacity>
       <GetRecipesConstraintsForm 
           formFields={formFields} 
@@ -83,6 +84,7 @@ const GetRandomSpoonRecipes = ({ user, setLoading, formFields, setFormFields, mo
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
           setErrorMessage={setErrorMessage}
+          handleGetNewRecipes={handleGetNewRecipes}
         />
       <Pressable
         style={[styles.showModalButton]}
@@ -98,15 +100,34 @@ const GetRandomSpoonRecipes = ({ user, setLoading, formFields, setFormFields, mo
 export default GetRandomSpoonRecipes;
 
 const styles = StyleSheet.create({
+  buttonDescription: {
+    fontSize: 12, 
+    color: 'white',
+    fontFamily: 'Avenir-Roman'
+  },
+  buttonText: {
+    fontSize: 16, 
+    color: 'white',
+    fontFamily: 'Avenir-Roman'
+  },
   getRecipesButton: {
-    borderWidth: 1,
+    padding: 5, 
     borderRadius: 10,
-    padding: 5,
+    textAlign: 'center', 
+    backgroundColor: '#756382',
     alignItems: 'center',
     margin: 3,
   },
   showModalButton: {
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+    borderRadius: 10,
+    textAlign: 'center', 
+    backgroundColor: '#756382',
+    padding: 2,
+  },
+  textStyle: {
+    color: 'white',
+    fontFamily: 'Avenir-Roman'
+  },
 
 })
