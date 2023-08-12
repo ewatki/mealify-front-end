@@ -92,9 +92,12 @@ const GetRecipes = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <ActivityIndicator animating={loading} size='small' />
-      <GetMealifyRecipes user={user} setLoading={setLoading} setErrorMessage={setErrorMessage}/>
+      <View style={{flex: 2}}>
+        <Text style={styles.header}>Your Saved Recipes</Text>
+        <GetMealifyRecipes user={user} setLoading={setLoading} setErrorMessage={setErrorMessage}/>
+      </View>
       <View style={styles.newRecipeContainer}>
-        <Text style={styles.getYourRecipesHeader}>Find A New Recipe</Text>
+        <Text style={styles.header}>Find A New Recipe</Text>
         <View>
           <GetNewPantryRecipes 
             user={user} 
@@ -134,12 +137,13 @@ const styles = StyleSheet.create({
   errorContainer: {
     flex: 1,
   },
-  getYourRecipesHeader: {
-    backgroundColor: '#E2C274',
-    fontSize: 20, 
+  header: {
+    fontSize: 26, 
     fontFamily: 'Avenir-Roman',
     padding: 8,
-    alignSelf: 'center',
+    color: '#756382',
+    // fontWeight: 'bold'
+    // alignSelf: 'center',
   }, 
   newRecipeContainer: {
     flex: 3,

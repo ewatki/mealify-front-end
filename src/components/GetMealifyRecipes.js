@@ -29,7 +29,7 @@ const GetMealifyRecipes = ({ user, setLoading, setErrorMessage }) => {
 
   return (
     <View style={styles.getYourRecipesContainer}>
-      <Text style={styles.getYourRecipesHeader}>Your Saved Recipes</Text>
+      {/* <Text style={styles.getYourRecipesHeader}>Your Saved Recipes</Text> */}
       <View styles={styles.getYourRecipesButtonContainer}>
         <TouchableOpacity 
           style={styles.getRecipesButton}
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
   getRecipesButton: {
     padding: 5, 
-    borderRadius: 10,
+    borderRadius: 5,
     textAlign: 'center', 
     backgroundColor: '#756382',
     alignItems: 'center',

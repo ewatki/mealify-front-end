@@ -111,23 +111,23 @@ const styles = StyleSheet.create({
     fontFamily: 'Avenir-Roman'
   },
   getRecipesButton: {
-    padding: 5, 
-    borderRadius: 10,
+    borderRadius: 5,
     textAlign: 'center', 
     backgroundColor: '#756382',
     alignItems: 'center',
-    margin: 3,
+    marginTop: 3,
+    marginBottom: 3,
   },
   showModalButton: {
     alignItems: 'center',
-    borderRadius: 10,
-    textAlign: 'center', 
+    borderRadius: 5,
+    justifyContent: 'center', 
     backgroundColor: '#756382',
     padding: 2,
+    marginTop: 2,
   },
   textStyle: {
     color: 'white',
     fontFamily: 'Avenir-Roman'
   },
-
 })

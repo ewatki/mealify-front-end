@@ -99,7 +99,20 @@ const Main = ({ route, navigation }) => {
             component={GetRecipes} 
             // initialParams={{user: user}}
             initialParams={{user: route.params.user}}
-
+            title={'Recipes'}
+            options={{
+                headerTitle: 'Recipes',
+                headerStyle: {
+                    backgroundColor: '#E2C274',
+                },
+                headerTintColor: '#756382',
+                headerTitleStyle: {
+                    fontWeight: 'normal',
+                    color: '#756382',
+                    fontSize: 26, 
+                    fontFamily: 'Avenir-Roman',                
+                },
+            }}
             />
 
             <Drawer.Screen

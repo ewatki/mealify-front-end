@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
   getRecipesButton: {
     padding: 5, 
-    borderRadius: 10,
+    borderRadius: 5,
     textAlign: 'center', 
     backgroundColor: '#756382',
     alignItems: 'center',
