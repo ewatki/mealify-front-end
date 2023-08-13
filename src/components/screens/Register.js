@@ -55,93 +55,113 @@ const Register = ({ navigation }) => {
     }
 
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <View style={styles.centeredView}>
-                <ActivityIndicator animating={loading} size='small' />
-                <View style={styles.logo}>
-                    <Text>LOGO IMAGE HERE</Text>
-                </View>
-                <View style={styles.modalView}>
-                    <TextInput 
-                        value={formFields.username} 
-                        onChangeText={text => handleChange(text, 'username')} 
-                        autoCompleteType="username" 
-                        autoCapitalize='none'
-                        placeholder='Username'
-                        style={styles.input}
-                    />   
-                    <TextInput 
-                        value={formFields.email} 
-                        onChangeText={text => handleChange(text, 'email')} 
-                        // textContentType="email" 
-                        autoCompleteType="email" 
-                        autoCapitalize='none'
-                        placeholder='Email'
-                        style={styles.input}
-                    />   
-                    <TextInput 
-                        value={formFields.password} 
-                        onChangeText={text => handleChange(text, 'password')} 
-                        autoCompleteType="password" 
-                        autoCapitalize='none'
-                        placeholder='Password'
-                        style={styles.input}
-                    />   
-                    <Button 
-                    title="Create New Account" 
+        <View style={styles.container}>
+            <Text style={styles.header}>Mealify</Text>
+            <View style={styles.activityIndicator}>
+                <ActivityIndicator animating={loading} size='large' color='#756382' />
+            </View>
+            <View style={styles.inputContainer}>
+                <TextInput 
+                    value={formFields.username} 
+                    onChangeText={text => handleChange(text, 'username')} 
+                    autoCompleteType="username" 
+                    autoCapitalize='none'
+                    placeholder='Username'
+                    placeholderTextColor="lightgrey" 
+                    style={styles.input}
+                />   
+                <TextInput 
+                    value={formFields.email} 
+                    onChangeText={text => handleChange(text, 'email')} 
+                    // textContentType="email" 
+                    autoCompleteType="email" 
+                    autoCapitalize='none'
+                    placeholder='Email'
+                    placeholderTextColor="lightgrey" 
+                    style={styles.input}
+                />   
+                <TextInput 
+                    value={formFields.password} 
+                    onChangeText={text => handleChange(text, 'password')} 
+                    autoCompleteType="password" 
+                    autoCapitalize='none'
+                    placeholder='Password'
+                    placeholderTextColor="lightgrey" 
+                    style={styles.input}
+                />   
+                <TouchableOpacity 
+                    style={styles.registerButton} 
                     onPress={ onRegisterHandler }
-                    />
-
-                    <View style={styles.loginContainer}>
-                        <Text>Already have an account?</Text>
-                        <TouchableOpacity onPress={ () => navigation.navigate(Login) }>
-                            <Text style={styles.loginButton}>Login</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
+                    // hitSlop={{ bottom: 30, left: 30, right: 30 }}
+                > 
+                    <Text style={styles.registerButtonText} >Register</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={styles.loginContainer}>
+                <Text style={styles.loginTitle}>Already have an account?</Text>
+                <TouchableOpacity 
+                    onPress={ () => navigation.navigate('Login') }
+                    style={styles.loginButton}>
+                    <Text style={styles.loginButtonText}>Login</Text>
+                </TouchableOpacity>
             </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    centeredView: {
+    activityIndicator: {
+        flex: 1,
+    },
+    container: {
         flex: 1,
         alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#E2C274',
+    },
+    header: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        fontSize: 40,
+        color: '#756382',
     },
     input: {
         height: 40,
-        margin: 12,
-        borderWidth: 1,
+        margin: 7,
+        // borderWidth: 1,
         padding: 10,
         borderRadius: 10,
-        width: '50%',
-        // justifyContent: 'center',
-        // alignItems: 'center'
+        width: 300,
+        backgroundColor: '#756382',
+        color: '#fffdd0',
     },
-    modalView: {
+    inputContainer: {
+        flex: 4, 
         width: 350,
         height: 400,
         margin: 5,
         padding: 35,
-        // backgroundColor: 'white',
         alignItems: 'center',
-        justifyContent: 'center',
-        // backgroundColor: 'lightgray',
         borderRadius: 10,
     },
-    loginButton: {
-        borderWidth: 1,
+   loginButton: {
         marginTop: 3,
-        padding: 5,
-        paddingLeft: 7,
+        padding: 6,
         borderRadius: 10,
+        backgroundColor: '#756382',
+    },
+    loginButtonText: {
+        color: '#fffdd0',
     },
     loginContainer: {
-        flex: 1, 
+        flex: 1,
+        paddingBottom: 100,
         justifyContent: 'flex-end',
         alignItems: 'center',
-    },  
+    },
+    loginTitle: {
+        color: '#756382'
+    },
     logo: {
         alignContent: 'stretch',
         justifyContent: 'top',
@@ -149,6 +169,14 @@ const styles = StyleSheet.create({
         height: 250,
         borderRadius: 5,
         borderWidth: 2,
+    },
+    registerButton: {
+        alignSelf: 'center',
+        borderRadius: 10,
+    },
+    registerButtonText: {
+        fontSize: 24,
+        color: '#756382',
     },
     textbox: {
         borderRadius: 5,

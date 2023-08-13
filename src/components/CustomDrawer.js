@@ -1,10 +1,11 @@
 import React from 'react'
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 const CustomDrawer = (props) => {
+    const navigation = props.navigation
     return (
         <View style={{flex:1}}>
             <DrawerContentScrollView 
@@ -20,8 +21,8 @@ const CustomDrawer = (props) => {
 
             </DrawerContentScrollView>
             <View style={{padding:20, borderTopWidth:1, borderTopColor: '#ccc'}}>
-                <TouchableOpacity onPress={() =>{}} style={{paddingVertical:10}}>
-                    <Text style={{fontSize: 15, marginLeft: 5}}>Sign Out</Text>
+                <TouchableOpacity onPress={() =>{navigation.navigate('Login')}} style={{paddingVertical:10}}>
+                    <Text style={styles.signOutText}>Sign Out</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -29,3 +30,12 @@ const CustomDrawer = (props) => {
 }
 
 export default CustomDrawer;
+
+const styles = StyleSheet.create({
+    signOutText: {
+        fontFamily: 'Avenir-Roman',
+        fontSize: 15, 
+        color: 'grey',
+        fontWeight: '500',
+    },
+})

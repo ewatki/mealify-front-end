@@ -21,11 +21,14 @@ const App = () => {
           <Stack.Navigator initialRouteName="Login" screenOptions={
           // <Stack.Navigator initialRouteName="Main" screenOptions={
             { 
-                headerTitle: '', 
+                headerTitle: '',
+                headerTintColor: '#756382', 
                 headerStyle: { 
-                    backgroundColor: 'transparent',                 shadowOpacity: 0,
+                    backgroundColor: '#E2C274',
+                    shadowOpacity: 0,
                     elevation: 0,
                 },
+                
             }
           }>
 
