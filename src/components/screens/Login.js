@@ -12,49 +12,48 @@ const Login = ({ route, navigation }) => {
         email: '',
         password: '',
     });
-    const [errorMessage, setErrorMessage] = React.useState('')
-    const [showErrorMessage, setShowErrorMessage] = React.useState(false)
-    const [loading, setLoading] = React.useState('false')
+    const [errorMessage, setErrorMessage] = React.useState('');
+    const [showErrorMessage, setShowErrorMessage] = React.useState(false);
+    const [loading, setLoading] = React.useState(false);
 
     const handleChange = (text, field) => {
         if (field === 'email') {
             setFormFields({
                 ...formFields,
                 email: text
-            })
+            });
         } else if (field === 'password') {
             setFormFields({
                 ...formFields,
                 password: text
-            })
-        }
-    }
+            });
+        };
+    };
 
     const handleUserLogin = () => {
         setLoading('true')
         axios.post('https://mealify-zclw.onrender.com/users/login', formFields)
         .then(response => {
-            setLoading('false')
-            console.log('response.data:', response.data)
-            const user = response.data
-            setShowErrorMessage(false)
-            setErrorMessage('')
-            console.log('Successful login!')                
-            navigation.navigate('Main', {user: user})
+            setLoading(false);
+            const user = response.data;
+            setShowErrorMessage(false);
+            setErrorMessage('');
+            console.log('Successful login!');    
+            navigation.navigate('Main', {user: user});
         })
         .catch(error => {
-            setLoading('false')
+            setLoading('false');
             if (error.response.data === 'Invalid password' || error.response.data === 'That email is invalid') {
-                setErrorMessage(error.response.data)
-                setShowErrorMessage(true)
-                console.log(error.response.data)
+                setErrorMessage(error.response.data);
+                setShowErrorMessage(true);
+                console.log(error.response.data);
             } else {
-                console.log('error: ', error)
-                setErrorMessage('An error has occured.  Please try again or try another user email and password\nAlso, if at first you dont succeed, try, try again')
-                setShowErrorMessage(true)
-            }
-        })
-    }
+                console.log('error: ', error);
+                setErrorMessage('An error has occured.  Please try again or try another user email and password\nAlso, if at first you dont succeed, try, try again');
+                setShowErrorMessage(true);
+            };
+        });
+    };
 
     return (
         <View style={[styles.container, styles.center]}>
@@ -106,7 +105,7 @@ const Login = ({ route, navigation }) => {
             </View>
         </View>
     );
-}
+};
 
 export default Login;
 

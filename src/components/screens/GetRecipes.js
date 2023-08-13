@@ -10,11 +10,11 @@ const GetRecipes = ({ route, navigation }) => {
   const user = route.params.user
   const [loading, setLoading] = React.useState('false');
   const [errorMessage, setErrorMessage] = React.useState('');
-  const [formFields, setFormFields] = React.useState({
-    ingredients: '',
-    cuisine: '',
-    diet: '',
-  });
+  // const [formFields, setFormFields] = React.useState({
+  //   ingredients: '',
+  //   cuisine: '',
+  //   diet: '',
+  // });
   const [modalVisible, setModalVisible] = React.useState(false);
   const apiKey = '5d5b6e0bcc9c4205b3cba5dc026a03ba'
   
@@ -108,8 +108,8 @@ const GetRecipes = ({ route, navigation }) => {
             <GetRandomSpoonRecipes 
               user={user}
               setLoading={setLoading}
-              formFields={formFields}
-              setFormFields={setFormFields}
+              // formFields={formFields}
+              // setFormFields={setFormFields}
               modalVisible={modalVisible}
               setModalVisible={setModalVisible}
               getRecipeDetails={getRecipeDetails}

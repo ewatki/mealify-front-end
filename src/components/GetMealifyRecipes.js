@@ -15,7 +15,8 @@ const GetMealifyRecipes = ({ user, setLoading, setErrorMessage }) => {
           setErrorMessage('Ooops, you dont have any recipes! Try searching for a new one!')
         }
         else {
-          navigation.navigate('RecipeList', {user: route.params.user})
+          console.log('NewRecipeData: ', response.data)
+          // navigation.navigate('RecipeList', {user: route.params.user})
         }
     })
     .catch(error => {

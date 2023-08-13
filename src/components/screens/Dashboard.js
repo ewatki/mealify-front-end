@@ -72,7 +72,7 @@ const Home = ({route}) => {
               <Text style={{fontSize: 16, fontFamily: 'Avenir-Roman', color: 'white', textAlign: 'center'}}>Submit</Text>
             </TouchableOpacity>
 
-            <View style={{flex:1, width: 350, height: '600', alignSelf: 'center', color: 'black', bottom: 0}}>
+            <View style={{flex:1, width: 350, height: 600, alignSelf: 'center', color: 'black', bottom: 0}}>
               <Text style={{fontSize: 20, fontFamily: 'Avenir-Roman', fontWeight: 'bold'}}>Ingredients</Text>
               <FlatList
                 numColumns={2}

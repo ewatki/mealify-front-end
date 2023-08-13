@@ -4,7 +4,13 @@ import axios from 'axios';
 import Recipe from './screens/Recipe';
 import GetRecipesConstraintsForm from './GetRecipesConstraintsForm';
 
-const GetRandomSpoonRecipes = ({ user, setLoading, formFields, setFormFields, modalVisible, setModalVisible, getRecipeDetails, setErrorMessage }) => {
+const GetRandomSpoonRecipes = ({ user, setLoading, modalVisible, setModalVisible, getRecipeDetails, setErrorMessage }) => {
+  // const GetRandomSpoonRecipes = ({ user, setLoading, formFields, setFormFields, modalVisible, setModalVisible, getRecipeDetails, setErrorMessage }) => {
+    const [formFields, setFormFields] = React.useState({
+    ingredients: '',
+    cuisine: '',
+    diet: '',
+  });
   const apiKey = '5d5b6e0bcc9c4205b3cba5dc026a03ba'
   // const apiKey = 'a10d8b0165074f6a807217fe8ea8bd20'
 
