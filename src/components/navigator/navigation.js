@@ -23,7 +23,7 @@ const Navigator = () => {
 
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Register" component={Register} />
-            {/* <Stack.Screen name="RecipeList" component={RecipeList}  /> */}
+            <Stack.Screen name="RecipeList" component={RecipeList}  />
 
             <Stack.Screen 
                 name="Main" 
