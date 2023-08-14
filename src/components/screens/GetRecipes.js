@@ -91,10 +91,13 @@ const GetRecipes = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ActivityIndicator animating={loading} size='small' />
-      <View style={{flex: 2}}>
+      <ActivityIndicator style={styles.activityIndicator} animating={loading} size='small' />
+      <View style={styles.yourSavedRecipesContainer}>
         <Text style={styles.header}>Your Saved Recipes</Text>
-        <GetMealifyRecipes user={user} setLoading={setLoading} setErrorMessage={setErrorMessage}/>
+        <GetMealifyRecipes 
+          user={user} 
+          setLoading={setLoading} 
+          setErrorMessage={setErrorMessage}/>
       </View>
       <View style={styles.newRecipeContainer}>
         <Text style={styles.header}>Find A New Recipe</Text>
@@ -128,14 +131,23 @@ const GetRecipes = ({ route, navigation }) => {
 export default GetRecipes;
 
 const styles = StyleSheet.create({
+  activityIndicator: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     alignItems: 'center', 
     justifyContent: 'center',
     backgroundColor: '#E2C274'
   },
+  yourSavedRecipesContainer: {
+    flex: 3
+  },
   errorContainer: {
     flex: 1,
+    borderWidth: 1,
+    width: 300,
+    marginBottom: 50,
   },
   header: {
     fontSize: 26, 
@@ -146,6 +158,7 @@ const styles = StyleSheet.create({
     // alignSelf: 'center',
   }, 
   newRecipeContainer: {
-    flex: 3,
+    flex: 2,
+
   },
 })

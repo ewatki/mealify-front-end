@@ -11,7 +11,6 @@ const RecipeList = ({route, navigation}) => {
     const [user, setUser] = React.useState(route.params.user)
     // const [recipes, setRecipes] = React.useState([]);
 
-   
     axios.get(`https://mealify-zclw.onrender.com/users/6/recipes`)
     .then(response => {
         // setLoading('false')
@@ -28,9 +27,8 @@ const RecipeList = ({route, navigation}) => {
                     <Image style={styles.tinyLogo} source={{uri: recipe.image}}/>
                     <Text >{recipe.url}</Text>
                 </ScrollView>
-           
-        );
-      })}
+            );
+        })}
         </SafeAreaView>
     )
 }

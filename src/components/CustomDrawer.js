@@ -20,6 +20,7 @@ const CustomDrawer = (props) => {
                 <DrawerItemList {...props} />
 
             </DrawerContentScrollView>
+
             <View style={{padding:20, borderTopWidth:1, borderTopColor: '#ccc'}}>
                 <TouchableOpacity onPress={() =>{navigation.navigate('Login')}} style={{paddingVertical:10}}>
                     <Text style={styles.signOutText}>Sign Out</Text>

@@ -9,12 +9,14 @@ const GetMealifyRecipes = ({ user, setLoading, setErrorMessage }) => {
     setLoading('true')
     axios.get(`https://mealify-zclw.onrender.com/users/${user.id}/recipes`)
     .then(response => {
+        console.log('in get recipes')
+        console.log('NewRecipeData: ', response.data)
         setLoading('false')
         setErrorMessage('')
         if (Object.keys(response.data).length === 0) {
+          console.log('in if')
           setErrorMessage('Ooops, you dont have any recipes! Try searching for a new one!')
-        }
-        else {
+        } else {
           console.log('NewRecipeData: ', response.data)
           // navigation.navigate('RecipeList', {user: route.params.user})
         }

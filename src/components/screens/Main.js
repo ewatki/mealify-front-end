@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image, Text } from 'react-native';
+import { Image, Text, Button, View } from 'react-native';
 import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -7,7 +7,6 @@ import CustomDrawer from '../CustomDrawer';
 import Dashboard from './Dashboard'
 import Pantry from './Pantry'
 import Preferences from './Preferences'
-import Logout from './Logout';
 import GetRecipes from './GetRecipes';
 import Recipe from './Recipe';
 
@@ -72,7 +71,7 @@ const Main = ({ route, navigation }) => {
             drawerActiveTintColor: 'black',
             drawerInactiveTintColor: 'gray',
             drawerLabelStyle: {
-                fontFamily: 'Avenir-Roman',
+                // fontFamily: 'Avenir-Roman',
                 fontSize: 15,
             }
         }}>
@@ -90,13 +89,19 @@ const Main = ({ route, navigation }) => {
             <Drawer.Screen 
             name="Pantry" 
             component={Pantry} 
-            // initialParams={{user: user}}
-            initialParams={{user: route.params.user}}
+            initialParams={{user: user}}
+            options={{headerTitle: "Pantry"}
+                // headerStyle: {
+                //     opacity: 0
+                // }
+            }
+            // initialParams={{user: route.params.user}}
             />
 
             <Drawer.Screen
             name="Recipes" 
             component={GetRecipes} 
+<<<<<<< HEAD
             // initialParams={{user: user}}
             initialParams={{user: route.params.user}}
             title={'Recipes'}
@@ -113,20 +118,30 @@ const Main = ({ route, navigation }) => {
                     fontFamily: 'Avenir-Roman',                
                 },
             }}
+=======
+            initialParams={{user: user}}
+            // initialParams={{user: route.params.user}}
+
+>>>>>>> 62a73853525c7d3607f3c1f7bc714f9702c0996d
             />
 
             <Drawer.Screen
             name="Preferences" 
             component={Preferences} 
-            // initialParams={{user: user}}
-            initialParams={{user: route.params.user}}
+            initialParams={{user: user}}
+            // options={{
+            //     headerStyle: {
+            //         opacity: 0
+            //     }
+            // }}
+            // initialParams={{user: route.params.user}}
             />
 
             <Drawer.Screen
             name="TempRecipe" 
             component={Recipe} 
-            // initialParams={{user: user}}
-            initialParams={{user: route.params.user}}
+            initialParams={{user: user}}
+            // initialParams={{user: route.params.user}}
             />
         </Drawer.Navigator>
     )
