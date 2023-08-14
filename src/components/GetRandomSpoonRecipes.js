@@ -4,8 +4,8 @@ import axios from 'axios';
 import Recipe from './screens/Recipe';
 import GetRecipesConstraintsForm from './GetRecipesConstraintsForm';
 
-const GetRandomSpoonRecipes = ({ user, setLoading, modalVisible, setModalVisible, getRecipeDetails, setErrorMessage }) => {
-  // const GetRandomSpoonRecipes = ({ user, setLoading, formFields, setFormFields, modalVisible, setModalVisible, getRecipeDetails, setErrorMessage }) => {
+const GetRandomSpoonRecipes = ({ user, setLoading, modalVisible, setModalVisible, getRecipeDetails }) => {
+  // const GetRandomSpoonRecipes = ({ user, setLoading, formFields, setFormFields, modalVisible, setModalVisible, getRecipeDetails }) => {
     const [formFields, setFormFields] = React.useState({
     ingredients: '',
     cuisine: '',
@@ -17,8 +17,6 @@ const GetRandomSpoonRecipes = ({ user, setLoading, modalVisible, setModalVisible
   const handleHideModal = () => {
     setModalVisible(!modalVisible)
   };
-
-
 
   const handleGetNewRecipes = () => {
     // Set up axios parameters for random and not
@@ -89,7 +87,6 @@ const GetRandomSpoonRecipes = ({ user, setLoading, modalVisible, setModalVisible
           handleHideModal={handleHideModal}
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
-          setErrorMessage={setErrorMessage}
           handleGetNewRecipes={handleGetNewRecipes}
         />
       <Pressable

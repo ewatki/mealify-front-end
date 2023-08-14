@@ -1,44 +1,83 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator, Alert } from 'react-native';
 import axios from 'axios';
 import GetMealifyRecipes from '../GetMealifyRecipes';
 import GetRandomSpoonRecipes from '../GetRandomSpoonRecipes'
 import GetNewPantryRecipes from '../GetNewPantryRecipes';
 import RecipeList from './RecipeList';
+import Recipe from './Recipe';
+
 
 const GetRecipes = ({ route, navigation }) => {
-  // console.log('USER: ', route.params.user)
   const user = route.params.user
   const [loading, setLoading] = React.useState('false');
-  const [errorMessage, setErrorMessage] = React.useState('');
+  const [displayedRecipes, setDisplayedRecipes] = React.useState(user.recipes)
   // const [formFields, setFormFields] = React.useState({
   //   ingredients: '',
   //   cuisine: '',
   //   diet: '',
   // });
-  const [modalVisible, setModalVisible] = React.useState(false);
-  const apiKey = '5d5b6e0bcc9c4205b3cba5dc026a03ba'
-  
   const createAlert = (errorMessage) =>
     Alert.alert('Error', errorMessage, [
       {text: 'OK', onPress: () => console.log('OK Pressed')},
   ]);
 
+  React.useEffect(() => {
+    const reload = navigation.addListener('focus', () => {
+      axios.get(`https://mealify-zclw.onrender.com/users/${user.id}`)
+      .then(response => {
+        setDisplayedRecipes(response.data.recipes)
+      })
+      .catch(error => {
+        createAlert(error.response.data)
+      })
+    });
+  }, [navigation]);
+
+  const [modalVisible, setModalVisible] = React.useState(false);
+  const apiKey = '5d5b6e0bcc9c4205b3cba5dc026a03ba'  
+  
+
+  const handleGetMealifyRecipes = (params) => {
+    setLoading('true')
+    axios.get(`https://mealify-zclw.onrender.com/users/${user.id}/recipes`, {
+      params: params
+    })
+    .then(response => {
+        setLoading('false')
+        if (Object.keys(response.data).length === 0) {
+          createAlert('Ooops, you dont have any recipes! Try searching for a new one!');
+        } else {
+          setDisplayedRecipes(response.data);
+        };
+    })
+    .catch((error) => {
+        setLoading('false')
+        console.log('error: ', error.response)
+        createAlert(error.response.data)
+    });
+    
+  };
+
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
+
   const getRecipeDetails = (data) => {
     setLoading('true')
     if (data.length === 0) {
-      console.log('No recipes matching parameters')
       createAlert('Ooops, we cannot find any recipes matching these requiremenst! Try searching for a new one!')
       setLoading('false')
 
       return 
     }    
-    const spoonId = data[0].id
-    const title = data[0].title
-    const image = data[0].image
+
+    console.log(data.length)
+    const randomIndex = getRandomInt(data.length)
+    console.log('randomIndex: ', randomIndex)
+    const spoonId = data[randomIndex].id
+    const title = data[randomIndex].title
+    const image = data[randomIndex].image
 
     const url = `https://api.spoonacular.com/recipes/${spoonId}/information`
     params = {
@@ -51,7 +90,6 @@ const GetRecipes = ({ route, navigation }) => {
     // Call details of recipe to gather more needed data
     axios.get(url, params)
     .then(response => {
-      setErrorMessage('')
       const instructions = response.data.instructions
       const ingredients = []
       for (ingredient of response.data.extendedIngredients) {
@@ -71,90 +109,18 @@ const GetRecipes = ({ route, navigation }) => {
         user_state: 0,
         user_id: user.id
       }
-      console.log('NewRecipeData: ', newRecipeData.title)
-      console.log('NewRecipeData: ', newRecipeData.ingredients)
+      // setDisplayedRecipes(newRecipeData)
+      // console.log('NewRecipeData: ', newRecipeData.title)
+      // console.log('NewRecipeData: ', newRecipeData.ingredients)
+      // navigation.navigate(TempRecipe, )
+      // navigation.navigate('Recipe', {recipe: newRecipeData})
       navigation.navigate('TempRecipe', {recipe: newRecipeData})
-
-
-      // // Add newRecipe Data to a Recipe.js component adn if they click 'like', 'unlike' then send post to the backend with the data!
-      // Call mealify_api to save recipe for future use
-      // axios.post(`https://mealify-zclw.onrender.com/users/${user.id}/recipes`, newRecipeData)
-      // .then(response => {
-      //   setLoading('false')
-      // })
-      // .catch(error => {
-      //   console.log(error)
-      // })
       setLoading('false')
     })
     .catch(error => {
       setLoading('false')
-
-      setErrorMessage(error)
-    })
-  }
-  const handleGetNewPantryRecipes = () => {
-    setLoading('true')
-    // console.log(user.pan)
-    if (user.pantry.length === 0) {
-      return 'Nothing in pantry, Re-route to pantry to fill out (maybe throw up an alert...'
-    } else {
-      const recipeIndex = getRandomInt(data.length)
-      const spoonId = data[recipeIndex].id
-      const title = data[recipeIndex].title
-      const image = data[recipeIndex].image
-      const url = `https://api.spoonacular.com/recipes/${spoonId}/information`
-      params = {
-        params: {
-          apiKey: apiKey,
-          includeNutrition: 'True'
-        }
-      }
-  
-      // Call details of recipe to gather more needed data
-      axios.get(url, params)
-      .then(response => {
-        setErrorMessage('')
-        const instructions = response.data.instructions
-        const ingredients = []
-        for (ingredient of response.data.extendedIngredients) {
-          ingredients.push(ingredient.name)
-        }
-        const nutritionScore = Math.floor(response.data.nutrition.properties[2].amount)
-        const sourceUrl = response.data.sourceUrl
-  
-        // Build dict to post to mealify_api
-        const newRecipeData = {
-          title: title, 
-          ingredients: ingredients, 
-          instructions: instructions, 
-          nutritional_data: nutritionScore, 
-          url: sourceUrl, 
-          image: image,
-          user_state: 0,
-          user_id: user.id
-        }
-        console.log('NewRecipeData: ', newRecipeData.title)
-        // console.log('NewRecipeData: ', newRecipeData.ingredients)
-        // navigation.navigate('Recipe', {recipe: newRecipeData})
-  
-  
-        // // Add newRecipe Data to a Recipe.js component adn if they click 'like', 'unlike' then send post to the backend with the data!
-        // Call mealify_api to save recipe for future use
-        // axios.post(`https://mealify-zclw.onrender.com/users/${user.id}/recipes`, newRecipeData)
-        // .then(response => {
-        //   setLoading('false')
-        // })
-        // .catch(error => {
-        //   console.log(error)
-        // })
-        setLoading('false')
-      })
-      .catch(error => {
-        setLoading('false')
-        setErrorMessage(error)
-      });
-    };
+      createAlert(error)
+    });
   };
 
 
@@ -162,14 +128,14 @@ const GetRecipes = ({ route, navigation }) => {
     <View style={styles.container}>
       <ActivityIndicator style={styles.activityIndicator} animating={loading} size='small' />
       <View style={styles.recipeListContainer}>
-        <RecipeList user={user}/>
+        <RecipeList recipes={displayedRecipes}/>
       </View>
       <View style={styles.yourSavedRecipesContainer}>
         <Text style={styles.header}>Your Saved Recipes</Text>
         <GetMealifyRecipes 
           user={user} 
-          setLoading={setLoading} 
-          createAlert={createAlert}/>
+          setLoading={setLoading}
+          handleGetMealifyRecipes={handleGetMealifyRecipes}/>
       </View>
       <View style={styles.newRecipeContainer}>
         <Text style={styles.header}>Find A New Recipe</Text>
@@ -188,7 +154,6 @@ const GetRecipes = ({ route, navigation }) => {
               modalVisible={modalVisible}
               setModalVisible={setModalVisible}
               getRecipeDetails={getRecipeDetails}
-              setErrorMessage={setErrorMessage}
             />
           </View>
         </View>

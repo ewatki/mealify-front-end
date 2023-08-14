@@ -1,49 +1,15 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
+// import { BottomSheetSlideInSpec } from '@react-navigation/stack/lib/typescript/src/TransitionConfigs/TransitionSpecs';
 
-const GetMealifyRecipes = ({ user, setLoading, createAlert }) => {
+const GetMealifyRecipes = ({ user, handleGetMealifyRecipes }) => {
   // console.log('USER: ', user)
   const ingredient_preferences = Object.keys(user.ingredient_preferences).toString()
 
-  const handleGetMealifyRecipes = (params) => {
-    setLoading('true')
-    console.log('params: ', params)
-    axios.get(`https://mealify-zclw.onrender.com/users/${user.id}/recipes`, {
-      params: params
-    })
-    .then(response => {
-        console.log('in get recipes')
-        setLoading('false')
-        if (Object.keys(response.data).length === 0) {
-          console.log('in if')
-          createAlert('Ooops, you dont have any recipes! Try searching for a new one!')
-        } else {
-          console.log('NewRecipeData: ', response.data)
-          console.log('NewRecipeData.len: ', response.data.length)
-          // navigation.navigate('RecipeList', {user: route.params.user})
-        }
-    })
-    .catch(error => {
-        setLoading('false')
-        console.log('error: ', error.response)
-        createAlert(error.response.data)
-    });
-    
-  };
-
-
   return (
     <View style={styles.getYourRecipesContainer}>
-      {/* <Text style={styles.getYourRecipesHeader}>Your Saved Recipes</Text> */}
       <View styles={styles.getYourRecipesButtonContainer}>
-        {/* <TouchableOpacity 
-          style={styles.getRecipesButton}
-          onPress={ () => { handleGetMealifyRecipes({})} }
-        > 
-          <Text style={styles.buttonText} >All my Recipes</Text>
-          <Text style={styles.buttonDescription}>All your saved recipes</Text>
-        </TouchableOpacity> */}
         <TouchableOpacity 
           style={styles.getRecipesButton}
           onPress={ () => { handleGetMealifyRecipes({'pantry': 'true'})} }

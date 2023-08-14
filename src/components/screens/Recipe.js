@@ -7,25 +7,20 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import axios from 'axios';
 
 const Recipe = ({route, navigation}) => {
-    // const [user, setUser] = React.useState(route.params.user)
-    console.log("test:", route.params.recipe)
-    const [recipe,setRecipe] = React.useState(route.params.recipe)
-    // console.log(recipe)
+    const recipe = route.params.recipe
     
     const handleSave = () => {
-        // console.log(recipe)
-        
         axios.post(`https://mealify-zclw.onrender.com/users/${recipe.user_id}/recipes`, recipe)
         .then(response => {
-            setRecipe(recipe => {
-                return {
-                    ...recipe,
-                    id: response.data.id,
-                    user_state: response.data.user_state
-                };
+            // setRecipe(recipe => {
+            //     return {
+            //         ...recipe,
+            //         id: response.data.id,
+            //         user_state: response.data.user_state
+            //     };
                 
-            })
-            console.log('response.data:', response.data)
+            // })
+            // console.log('response.data:', response.data)
             console.log('saved successfully')
         })
         
@@ -34,17 +29,17 @@ const Recipe = ({route, navigation}) => {
         console.log(recipe.id)
         axios.patch(`https://mealify-zclw.onrender.com/recipes/${recipe.id}/favorite`)
         .then(response => {
-            setRecipe(recipe => {
-                return {
-                    ...recipe,
-                    id: response.data.id,
-                    user_state: response.data.user_state
-                };
+        //     setRecipe(recipe => {
+        //         return {
+        //             ...recipe,
+        //             id: response.data.id,
+        //             user_state: response.data.user_state
+        //         };
                 
-            })
+        //     })
             
-        console.log('response.data:', response.data)
-        // console.log(recipe)
+        // console.log('response.data:', response.data)
+        console.log('Successful Like')
     })
 }
     
@@ -61,8 +56,8 @@ const Recipe = ({route, navigation}) => {
                 
             })
             
-        console.log('response.data:', response.data)
-        // console.log(recipe)
+        // console.log('response.data:', response.data)
+        console.log('Successful dislike')
         })
     };
 
