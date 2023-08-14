@@ -88,7 +88,7 @@ const GetRecipes = ({ route, navigation }) => {
       }
       console.log('NewRecipeData: ', newRecipeData.title)
       console.log('NewRecipeData: ', newRecipeData.ingredients)
-      navigation.navigate('Recipe', {recipe: newRecipeData})
+      navigation.navigate('TempRecipe', {recipe: newRecipeData})
 
 
       // // Add newRecipe Data to a Recipe.js component adn if they click 'like', 'unlike' then send post to the backend with the data!

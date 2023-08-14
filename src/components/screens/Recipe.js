@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Button } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Button, Linking } from 'react-native';
 import newRecipeData from './GetRecipes';
 import handleGetNewRecipes from './GetRecipes'
 import GetRecipes from './GetRecipes';
@@ -70,15 +70,18 @@ const Recipe = ({route, navigation}) => {
       };
 
     return (
-        <SafeAreaView> 
+        <SafeAreaView style={{flex:1}}> 
          <ScrollView>
-            <Image style={styles.tinyLogo} source={{uri: recipe.image}}/>
+            <Text style={{fontSize: 40, fontFamily: 'Avenir-Roman', fontWeight: 'bold', paddingHorizontal: 20, width: 400, textAlign:'center'}}>{ recipe.title }</Text> 
+            <Image style={{width: 300, height: 300, borderRadius: 20, marginLeft: 10, marginRight: 10, }} source={{uri: recipe.image}} resizeMode={'cover'}/>
             <View style={styles.recipeContainer}>
                 {/* <Header style={styles.recipeHeader}> */}
-                    <Text>{ recipe.title }</Text> 
-                    <Text>Ingredients: {recipe.ingredients}</Text>
-                    <Text>Nutritional Data Score: {recipe.nutritional_data}</Text>
-                    <Text>{recipe.url}</Text> 
+                    
+                    <Text style={{fontSize: 20, fontFamily: 'Avenir-Roman', fontWeight: 'bold'}}>Ingredients: {recipe.ingredients}</Text>
+                    <Text style={{fontSize: 20, fontFamily: 'Avenir-Roman', fontWeight: 'bold'}}>Nutritional Data Score: {recipe.nutritional_data}</Text>
+                    <Text style={{color:'blue', fontSize: 20, fontFamily: 'Avenir-Roman', fontWeight: 'bold'}}onPress={() => {
+              Linking.openURL(recipe.url);
+            }}>Click for Full Recipe</Text> 
                 
             </View>
             {/* <Button title="likeRecipe" onPress={() => { handleLikeRecipe }}/> */}
