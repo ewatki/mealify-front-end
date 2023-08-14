@@ -89,7 +89,7 @@ const Main = ({ route, navigation }) => {
             <Drawer.Screen 
             name="Pantry" 
             component={Pantry} 
-            initialParams={{user: user}}
+            // initialParams={{user: user}}
             options={{headerTitle: "Pantry"}
                 // headerStyle: {
                 //     opacity: 0

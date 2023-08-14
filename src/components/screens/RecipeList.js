@@ -6,6 +6,7 @@ import GetRecipes from './GetRecipes';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import axios from 'axios';
 import handleGetMealifyRecipes from './GetRecipes'
+import getRecipeDetails from './GetRecipes'
 
 const RecipeList = ({route, navigation}) => {
     const [user, setUser] = React.useState(route.params.user)
@@ -38,8 +39,10 @@ const RecipeList = ({route, navigation}) => {
                             </TouchableOpacity>
                         </View>
                     <View>
+                        <TouchableOpacity onPress={ () => { getRecipeDetails(recipe)} } >
                     <Image style={styles.recipeImg}
                      source={{uri: recipe.image}}/>
+                        </TouchableOpacity>
                      </View>
                     </View>
             
