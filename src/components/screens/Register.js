@@ -1,5 +1,5 @@
 import React, {useContext, createContext } from 'react';
-import { StyleSheet, View, Text, Button, TextInput, Pressable, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, Text, Image, TextInput, ActivityIndicator } from 'react-native';
 import axios from 'axios';
 
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -56,7 +56,9 @@ const Register = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.header}>Mealify</Text>
+            <Image 
+                style={styles.header}
+                source={require('../../../assets/images/Mealify-logo.png')} />
             <View style={styles.activityIndicator}>
                 <ActivityIndicator animating={loading} size='large' color='#756382' />
             </View>
@@ -112,6 +114,7 @@ const Register = ({ navigation }) => {
 const styles = StyleSheet.create({
     activityIndicator: {
         flex: 1,
+        marginTop: -30,
     },
     container: {
         flex: 1,
@@ -120,15 +123,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#E2C274',
     },
     header: {
-        flex: 1,
-        justifyContent: 'flex-start',
-        fontSize: 40,
-        color: '#756382',
+        flex: 4,
+        justifyContent: 'center',
     },
     input: {
         height: 40,
         margin: 7,
-        // borderWidth: 1,
         padding: 10,
         borderRadius: 10,
         width: 300,
@@ -136,11 +136,12 @@ const styles = StyleSheet.create({
         color: '#fffdd0',
     },
     inputContainer: {
-        flex: 4, 
+        flex: 5, 
         width: 350,
         height: 400,
         margin: 5,
         padding: 35,
+        paddingTop: 0,
         alignItems: 'center',
         borderRadius: 10,
     },

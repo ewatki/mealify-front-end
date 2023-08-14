@@ -3,12 +3,6 @@ import { View, Text, StyleSheet, TextInput, Modal, TouchableOpacity, Pressable }
 
 // const GetRecipesConstraintsForm = ({ formFields, setFormFields, handleHideModal, modalVisible, setModalVisible, setErrorMessage, handleGetNewRecipes }) => {
 const GetRecipesConstraintsForm = ({ handleHideModal, modalVisible, setModalVisible, setErrorMessage, handleGetNewRecipes }) => {
-    const [formFields, setFormFields] = React.useState({
-      ingredients: '',
-      cuisine: '',
-      diet: '',
-    });
-
 
   setErrorMessage('')
   const handleChange = (text, field) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput, Image, StyleSheet, ActivityIndicator } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import axios from 'axios';
 
@@ -57,7 +57,9 @@ const Login = ({ route, navigation }) => {
 
     return (
         <View style={[styles.container, styles.center]}>
-            <Text style={styles.header}>Mealify</Text>
+            <Image 
+                style={styles.header}
+                source={require('../../../assets/images/Mealify-logo.png')} />
             <View style={styles.activityIndicator}>
                 <ActivityIndicator animating={loading} size='large' color='#756382' />
             </View>
@@ -112,20 +114,19 @@ export default Login;
 const styles = StyleSheet.create({
     activityIndicator: {
         flex: 1,
+        paddingTop: 20,
+        marginBottom: -30,
     },
     center: {
         justifyContent: 'center',
         alignItems: 'center'
     },
     container: {
-        // marginTop: 50,
         flex: 1, 
         backgroundColor: '#E2C274',
     },
     errorContainer: {
-        // flex: 1, 
         alignItems: 'center',
-        // borderWidth: 1,
         borderRadius: 5,
         backgroundColor: 'lightsalmon',
         alignSelf: 'center',
@@ -135,17 +136,13 @@ const styles = StyleSheet.create({
         color: '#8B0000',
     },
     header:{
-        flex: 1, 
-        justifyContent: 'flex-start',
-        fontSize: 40,
-        color: '#756382',
-        // fontWeight: 'bold'
+        flex: 3, 
+        justifyContent: 'center',
+        marginBottom: -50,
     },
     input: {
-        // flex: 1,
         height: 40,
         margin: 7,
-        // borderWidth: 1,
         padding: 10,
         borderRadius: 10,
         width: 300,
@@ -154,7 +151,7 @@ const styles = StyleSheet.create({
         
     },
     inputContainer: {
-        flex: 4,
+        flex: 5,
     },
     loginButton: {
         alignSelf: 'center',
