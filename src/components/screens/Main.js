@@ -13,7 +13,7 @@ import Recipe from './Recipe';
 const Drawer = createDrawerNavigator();
 
 const Main = ({ route, navigation }) => {
-    // const user = route.params.user
+    const user = route.params.user
 
     // const user = {
     //     intolerances: {
@@ -89,19 +89,18 @@ const Main = ({ route, navigation }) => {
             <Drawer.Screen 
             name="Pantry" 
             component={Pantry} 
-            initialParams={{user: user}}
+            // initialParams={{user: user}}
             options={{headerTitle: "Pantry"}
                 // headerStyle: {
                 //     opacity: 0
                 // }
             }
-            // initialParams={{user: route.params.user}}
+            initialParams={{user: route.params.user}}
             />
 
             <Drawer.Screen
             name="Recipes" 
             component={GetRecipes} 
-<<<<<<< HEAD
             // initialParams={{user: user}}
             initialParams={{user: route.params.user}}
             title={'Recipes'}
@@ -118,11 +117,6 @@ const Main = ({ route, navigation }) => {
                     fontFamily: 'Avenir-Roman',                
                 },
             }}
-=======
-            initialParams={{user: user}}
-            // initialParams={{user: route.params.user}}
-
->>>>>>> 62a73853525c7d3607f3c1f7bc714f9702c0996d
             />
 
             <Drawer.Screen

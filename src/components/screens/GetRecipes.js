@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
   },
   errorContainer: {
     flex: 1,
-    borderWidth: 1,
+    // borderWidth: 1,
     width: 300,
     marginBottom: 50,
   },
@@ -154,8 +154,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Avenir-Roman',
     padding: 8,
     color: '#756382',
-    // fontWeight: 'bold'
-    // alignSelf: 'center',
   }, 
   newRecipeContainer: {
     flex: 2,

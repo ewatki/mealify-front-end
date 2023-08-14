@@ -9,8 +9,8 @@ import RecipeList from '../screens/RecipeList';
 const Stack = createStackNavigator();
 const Navigator = () => {
     return (
-        // <Stack.Navigator initialRouteName="Login" screenOptions={
-        <Stack.Navigator initialRouteName="Main" screenOptions={
+        <Stack.Navigator initialRouteName="Login" screenOptions={
+        // <Stack.Navigator initialRouteName="Main" screenOptions={
         { 
             headerTitle: '', 
             headerStyle: { 
@@ -21,8 +21,26 @@ const Navigator = () => {
         }
         }>
 
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Register" component={Register} />
+            <Stack.Screen 
+                name="Login" 
+                component={Login} 
+                options={{
+                    headerStyle: {
+                        backgroundColor: '#E2C274',
+                    },
+                    headerTintColor: '#756382',
+                }}
+            />
+            <Stack.Screen 
+                name="Register" 
+                component={Register} 
+                options={{
+                    headerStyle: {
+                        backgroundColor: '#E2C274',
+                    },
+                    headerTintColor: '#756382',
+                }}
+            />
             <Stack.Screen name="RecipeList" component={RecipeList}  />
 
             <Stack.Screen 
