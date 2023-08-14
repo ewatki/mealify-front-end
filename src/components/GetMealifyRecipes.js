@@ -1,30 +1,33 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
 
-const GetMealifyRecipes = ({ user, setLoading, setErrorMessage }) => {
+const GetMealifyRecipes = ({ user, setLoading, createAlert }) => {
   // console.log('USER: ', user)
+  const ingredient_preferences = Object.keys(user.ingredient_preferences).toString()
 
   const handleGetMealifyRecipes = (params) => {
     setLoading('true')
-    axios.get(`https://mealify-zclw.onrender.com/users/${user.id}/recipes`)
+    console.log('params: ', params)
+    axios.get(`https://mealify-zclw.onrender.com/users/${user.id}/recipes`, {
+      params: params
+    })
     .then(response => {
         console.log('in get recipes')
-        console.log('NewRecipeData: ', response.data)
         setLoading('false')
-        setErrorMessage('')
         if (Object.keys(response.data).length === 0) {
           console.log('in if')
-          setErrorMessage('Ooops, you dont have any recipes! Try searching for a new one!')
+          createAlert('Ooops, you dont have any recipes! Try searching for a new one!')
         } else {
           console.log('NewRecipeData: ', response.data)
+          console.log('NewRecipeData.len: ', response.data.length)
           // navigation.navigate('RecipeList', {user: route.params.user})
         }
     })
     .catch(error => {
         setLoading('false')
         console.log('error: ', error.response)
-        setErrorMessage(error.response.data)
+        createAlert(error.response.data)
     });
     
   };
@@ -34,13 +37,13 @@ const GetMealifyRecipes = ({ user, setLoading, setErrorMessage }) => {
     <View style={styles.getYourRecipesContainer}>
       {/* <Text style={styles.getYourRecipesHeader}>Your Saved Recipes</Text> */}
       <View styles={styles.getYourRecipesButtonContainer}>
-        <TouchableOpacity 
+        {/* <TouchableOpacity 
           style={styles.getRecipesButton}
           onPress={ () => { handleGetMealifyRecipes({})} }
         > 
           <Text style={styles.buttonText} >All my Recipes</Text>
           <Text style={styles.buttonDescription}>All your saved recipes</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity 
           style={styles.getRecipesButton}
           onPress={ () => { handleGetMealifyRecipes({'pantry': 'true'})} }
@@ -50,7 +53,7 @@ const GetMealifyRecipes = ({ user, setLoading, setErrorMessage }) => {
         </TouchableOpacity>
         <TouchableOpacity 
           style={styles.getRecipesButton}
-          onPress={ () => { handleGetMealifyRecipes({'ingredients': []})} }
+          onPress={ () => { handleGetMealifyRecipes({'ingredients': ingredient_preferences})} }
         > 
           <Text style={styles.buttonText} >Ingredient Recipes</Text>
           <Text style={styles.buttonDescription}>Your saved recipes with your ingredient preferences</Text>

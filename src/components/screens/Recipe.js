@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Button } from 'react-native';
-// import newRecipeData from './GetRecipes';
-// import handleGetNewRecipes from './GetRecipes'
-// import GetRecipes from './GetRecipes';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Button, Linking } from 'react-native';
+import newRecipeData from './GetRecipes';
+import handleGetNewRecipes from './GetRecipes'
+import GetRecipes from './GetRecipes';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import axios from 'axios';
 
@@ -67,22 +67,25 @@ const Recipe = ({route, navigation}) => {
     };
 
     return (
-        <SafeAreaView> 
-            <ScrollView>
-                <Image style={styles.tinyLogo} source={{uri: recipe.image}}/>
-                <View style={styles.recipeContainer}>
-                        {/* <Header style={styles.recipeHeader}> */}
-                        <Text>{recipe.title}</Text> 
-                        <Text>Ingredients: {recipe.ingredients}</Text>
-                        <Text>Nutritional Data Score: {recipe.nutritional_data}</Text>
-                        <Text>{recipe.url}</Text> 
+        <SafeAreaView style={{flex:1}}> 
+         <ScrollView>
+            <Text style={{fontSize: 40, fontFamily: 'Avenir-Roman', fontWeight: 'bold', paddingHorizontal: 20, width: 400, textAlign:'center'}}>{ recipe.title }</Text> 
+            <Image style={{width: 300, height: 300, borderRadius: 20, marginLeft: 10, marginRight: 10, }} source={{uri: recipe.image}} resizeMode={'cover'}/>
+            <View style={styles.recipeContainer}>
+                {/* <Header style={styles.recipeHeader}> */}
                     
-                </View>
-                {/* <Button title="likeRecipe" onPress={() => { handleLikeRecipe }}/> */}
-                <Button title="Save for later" onPress={() => { handleSave({}) }} />
-                <Button title="Like" onPress={() => { handleLikeRecipe({}) }} />
-                <Button title="Dislike" onPress={() => { handleDislikeRecipe({}) }} />
-            </ScrollView>
+                    <Text style={{fontSize: 20, fontFamily: 'Avenir-Roman', fontWeight: 'bold'}}>Ingredients: {recipe.ingredients}</Text>
+                    <Text style={{fontSize: 20, fontFamily: 'Avenir-Roman', fontWeight: 'bold'}}>Nutritional Data Score: {recipe.nutritional_data}</Text>
+                    <Text style={{color:'blue', fontSize: 20, fontFamily: 'Avenir-Roman', fontWeight: 'bold'}}onPress={() => {
+              Linking.openURL(recipe.url);
+            }}>Click for Full Recipe</Text> 
+                
+            </View>
+            {/* <Button title="likeRecipe" onPress={() => { handleLikeRecipe }}/> */}
+            <Button title="Save for later" onPress={() => { handleSave({}) }} />
+            <Button title="Like" onPress={() => { handleLikeRecipe({}) }} />
+            <Button title="Dislike" onPress={() => { handleDislikeRecipe({}) }} />
+         </ScrollView>
         </SafeAreaView>
         );
     };

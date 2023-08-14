@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Button } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Button, Linking } from 'react-native';
 import newRecipeData from './GetRecipes';
 import handleGetNewRecipes from './GetRecipes'
 import GetRecipes from './GetRecipes';
@@ -7,11 +7,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import axios from 'axios';
 import handleGetMealifyRecipes from './GetRecipes'
 
-const RecipeList = ({route, navigation}) => {
-    const [user, setUser] = React.useState(route.params.user)
+const RecipeList = ({ user }) => {
+    // const [user, setUser] = React.useState(route.params.user)
+    // const [user, setUser] = React.useState(user)
     // const [recipes, setRecipes] = React.useState([]);
 
-    axios.get(`https://mealify-zclw.onrender.com/users/6/recipes`)
+   
+    axios.get(`https://mealify-zclw.onrender.com/users/${user.id}/recipes`)
     .then(response => {
         // setLoading('false')
         // console.log('response.data:', response.data)
@@ -19,16 +21,32 @@ const RecipeList = ({route, navigation}) => {
     })
     console.log(user.recipes)
     return (
-        <SafeAreaView>
-            
+        <SafeAreaView style={styles.container}>           
+            <ScrollView 
+                nestedScrollEnabled={true} 
+                // style={styles.scrollContainer} 
+                horizontal={true}>
             {user.recipes.map((recipe) => {
                 return (
-                <ScrollView>
-                    <Image style={styles.tinyLogo} source={{uri: recipe.image}}/>
-                    <Text >{recipe.url}</Text>
+                    <View style={styles.recipeContainer}>
+                        <View style={styles.recipeTitleContainer}>
+                            <TouchableOpacity onPress={() => {
+                            Linking.openURL(recipe.url);
+                            }}>
+
+                                <Text style={styles.recipeTitleText}
+                                >{recipe.title}</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View>
+                            <Image style={styles.recipeImg}
+                            source={{uri: recipe.image}}
+                            />
+                        </View>
+                    </View>
+                    );
+                })}
                 </ScrollView>
-            );
-        })}
         </SafeAreaView>
     )
 }
@@ -36,16 +54,48 @@ const RecipeList = ({route, navigation}) => {
 export default RecipeList;
 
 const styles = StyleSheet.create({
+    container: {
+        flex:1,
+        // borderWidth: 1,
+        padding: -50,
+
+    // backgroundColor: '#E2C274'
+    },
+    scrollContainer: {
+        flex:1,
+        // borderWidth: 1,
+        // justifyContent: 'space-evenly'  
+        paddingHorizontal: 10, 
+        // flexDirection: 'row', 
+    },
     recipeContainer: {
-    width: '100%',
-    padding: 10,
+        // flex: 1,
+        // paddingBottom: -30,
+        // borderWidth: 1,
+        paddingLeft: 10,
+        paddingRight: 10,
     },
-    recipeHeader: {
-    fontSize: 20,
-    fontWeight: 'bold',
-},
-tinyLogo: {
-    width: 100,
-    height: 100,
+    recipeTitleContainer: {
+        width:200, 
+        height:40, 
+        // marginLeft: 10, 
+        // marginRight: 10, 
+        // flexDirection:'row', 
+        // flexWrap:'wrap', 
+        // alignItems: 'flex-start'
     },
-    });
+    recipeTitleText: {
+        fontFamily: 'Avenir-Roman',
+        fontWeight: 'bold'
+    },
+    recipeImg: {
+        width:175,
+        height: 195,
+        borderRadius: 10, 
+        // marginLeft: 10, 
+        // marginRight: 10, 
+        // flexDirection:'row'
+    }
+    
+    
+ });
