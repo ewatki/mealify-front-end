@@ -83,19 +83,14 @@ const Main = ({ route, navigation }) => {
                     backgroundColor: 'white',
                 },
             }}
-            // initialParams={{user: user}}
-            initialParams={{user: route.params.user}}
+            initialParams={{user: user}}
+            // initialParams={{user: route.params.user}}
             />
             <Drawer.Screen 
             name="Pantry" 
             component={Pantry} 
-            // initialParams={{user: user}}
-            options={{headerTitle: "Pantry"}
-                // headerStyle: {
-                //     opacity: 0
-                // }
-            }
-            initialParams={{user: route.params.user}}
+            initialParams={{user: user}}
+            // initialParams={{user: route.params.user}}
             />
 
             <Drawer.Screen

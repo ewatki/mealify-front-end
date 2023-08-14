@@ -205,17 +205,17 @@ const Preferences = ({ route, navigation }) => {
 
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{backgroundColor: 'white'}}>
             <View style={styles.showModalButtonsContainer}>
                 <Pressable
-                    style={[styles.showModalButton]}
+                    style={[styles.showModalButtonLeft]}
                     onPress={() => handleOpenAddModal()}>
-                    <Text style={styles.textStyle}>Add Preferences</Text>
+                    <Text style={styles.textStyle}>Add </Text>
                 </Pressable>
                 <Pressable
-                    style={[styles.showModalButton]}
+                    style={[styles.showModalButtonRight]}
                     onPress={() => handleOpenRemoveModal()}>
-                    <Text style={styles.textStyle}>Remove Preferences</Text>
+                    <Text style={styles.textStyle}>Remove </Text>
                 </Pressable>
             </View>
             {/* Display Preferences */}
@@ -259,7 +259,7 @@ const Preferences = ({ route, navigation }) => {
                                             save="value"
                                             notFoundText="Sorry, we don't have that yet"
                                             // labelStyles={{color: "pink"}}
-                                            // badgeStyles={{backgroundColor: "red"}}
+                                            badgeStyles={{backgroundColor: "#756382"}}
                                         />
                                     </View>
                                 )
@@ -302,7 +302,7 @@ const Preferences = ({ route, navigation }) => {
                                             save="value"
                                             notFoundText="Nothing stored here"
                                             // labelStyles={{color: "pink"}}
-                                            // badgeStyles={{backgroundColor: "red"}}
+                                            badgeStyles={{backgroundColor: "#756382"}}
                                         />
                                     </View>
                                 )
@@ -347,8 +347,10 @@ const styles = StyleSheet.create({
     },
     item: {
         padding: 10,
-        fontSize: 18,
-        height: 44,
+        fontSize: 15,
+        height: 35,
+        marginBottom: 5,
+        backgroundColor: '#dee2e7'
     },
     modalView: {
         paddingBottom: 50,
@@ -359,6 +361,11 @@ const styles = StyleSheet.create({
     },
     prefView: {
         paddingBottom: 50,
+        top: 10,
+        minHeight: '100%',
+        paddingBottom: 50,
+        textAlign: 'left',
+        paddingHorizontal: 25,
     },
     placeholderPressable: {
         flex: 5,
@@ -372,33 +379,68 @@ const styles = StyleSheet.create({
     // justifyContent: 'center'
     },
     sectionHeader: {
-        paddingTop: 2,
-        paddingLeft: 10,
-        paddingRight: 10,
-        paddingBottom: 2,
+        // paddingTop: 2,
+        // paddingLeft: 10,
+        // paddingRight: 10,
+        // paddingBottom: 2,
+        // fontSize: 20,
+        // fontWeight: 'bold',
+        // backgroundColor: 'rgba(247,247,247,1.0)',
+        // justifyContent: 'center', 
+        // alignSelf: 'center'
+        paddingVertical: 2,
         fontSize: 20,
         fontWeight: 'bold',
-        backgroundColor: 'rgba(247,247,247,1.0)',
-        justifyContent: 'center', 
-        alignSelf: 'center'
+        textAlign: 'left',
+        marginBottom: 5,
+        height: 'auto'
     },
-    showModalButton: {
+    // showModalButton: {
+    //     alignItems: 'center',
+    //     borderWidth: 1,
+    //     borderRadius: 10,
+    //     marginTop: -40,
+    //     marginBottom: 20,
+    //     padding: 10,
+    //     width: 150,
+    //     justifyContent: 'center',
+    //     alignSelf: 'center',
+    // },
+    showModalButtonLeft: {
         alignItems: 'center',
         borderWidth: 1,
-        borderRadius: 10,
-        marginTop: -40,
-        marginBottom: 20,
-        padding: 10,
-        width: 150,
-        justifyContent: 'center',
+        borderTopLeftRadius: 10,
+        borderBottomLeftRadius: 10,
+        padding: 5,
+        width: 100,
+        justifyContent: 'right',
         alignSelf: 'center',
+        backgroundColor: '#756382',   
+    },
+    showModalButtonRight: {
+        alignItems: 'center',
+        borderWidth: 1,
+        borderTopRightRadius: 10,
+        borderBottomRightRadius: 10, 
+        padding: 5,
+        width: 100,
+        justifyContent: 'right',
+        alignSelf: 'center',
+        backgroundColor: '#756382',        
     },
     showModalButtonsContainer: {
         flexDirection: 'row', 
-        justifyContent: 'space-around'
+        // justifyContent: 'space-around',
+        justifyContent: 'center',
+        position: 'absolute',
+        bottom: 20,
+        zIndex: 2,
+        alignSelf: 'center',
+        width: '60%',
     },
     textStyle: {
-        fontSize: 20,
+        fontSize: 15,
+        color: 'white',
         justifyContent: 'center'
     }
 });
