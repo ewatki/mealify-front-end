@@ -20,46 +20,49 @@ const recipeData = [
 ]
 
 const Item = ({title, id}) => (
-  <View style={{width: 180, paddingTop: 5}}>
-    <Text style={{fontFamily: 'Avenir-Roman'}}>{title}</Text>
+  <View key={id} style={{width: 180, paddingTop: 5}}>
+    <Text>{title}</Text>
   </View>
 );
 
 const Home = ({route}) => {
   return (
     <SafeAreaView style={{flex:1}}>
-      <ScrollView nestedScrollEnabled={true} style={{flex:1, flexDirection: 'column', backgroundColor: '#E2C274'}}>
+
+      <ScrollView nestedScrollEnabled={true} horizontal={false} style={{flex:1, width: '100%', height: '100%', flexDirection: 'column', backgroundColor: '#E2C274'}}>
+
         <View style={styles.blob}>
           <Text style={styles.header}>Hello, {route.params.user.username}!</Text>
           <View style={{flexDirection: 'row'}}>
-            <Text style={{fontSize: 52, fontFamily: 'Avenir-Roman', fontWeight: 'bold', paddingHorizontal: 20, width: 315}}>What are you in the mood for?</Text>
+
+            <Text style={{fontSize: 52, fontWeight: 'bold', paddingHorizontal: 20, width: 315}}>What are you in the mood for?</Text>
+
             <TouchableOpacity style={{padding: 10, borderRadius: 10, height: 40, right: 190, top: 110, textAlign: 'center', backgroundColor: '#756382'}}>
-              <Text style={{fontSize: 16, color: 'white',              fontFamily: 'Avenir-Roman'}}>Get a Recipe </Text>
+              <Text style={{fontSize: 16, color: 'white'}}>Get a Recipe</Text>
             </TouchableOpacity>
           </View>
         </View>
 
         <View style={{top: 0, backgroundColor: '#E2C274', paddingHorizontal: 30}}>
-          <ScrollView horizontal={true} style={{flex: 1, height: 200, paddingVertical: 15, bottom: 35, zIndex: 2}}>
-
-          {
-            recipeImages.map((each) => {
-              return (
-              <View>
-                <Image
-                style={{width: 150, height: 170, borderRadius: 20, marginLeft: 10, marginRight: 10}}
-                source={{uri: `${each}`}}
-                resizeMode={'cover'}
-                />
-              </View>
-              )
-            })
-          }
+          <ScrollView nestedScrollEnabled={true} horizontal={true} style={{flex: 1, width: '100%', height: 200, paddingVertical: 15, bottom: 35, zIndex: 2}}>
+            {
+              recipeImages.map((each, index) => {
+                return (
+                  <View key={index}>
+                    <Image
+                    style={{width: 150, height: 170, borderRadius: 20, marginLeft: 10, marginRight: 10}}
+                    source={{uri: `${each}`}}
+                    resizeMode={'cover'}
+                    />
+                  </View>
+                )
+              })
+            }
           </ScrollView>
         </View>
         <View style={{bottom: 20, height: 300, flex: 1, justifyContent: 'top', gap: 10, paddingVertical: 20}}>
 
-            <Text style={{fontSize:20, fontWeight: 'medium', fontFamily: 'Avenir-Roman', paddingHorizontal: 30}}>Search for a Recipe : </Text>
+            <Text style={{fontSize:20, fontWeight: 'medium', paddingHorizontal: 30}}>Search for a Recipe :</Text>
 
             <KeyboardAvoidingView
               behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -69,17 +72,18 @@ const Home = ({route}) => {
 
 
             <TouchableOpacity onPress={() => {console.log("calling")}} style={{padding: 10, borderRadius: 10, height: 40, width: 100, backgroundColor: '#756382', alignSelf: 'center'}}>
-              <Text style={{fontSize: 16, fontFamily: 'Avenir-Roman', color: 'white', textAlign: 'center'}}>Submit</Text>
+              <Text style={{fontSize: 16, color: 'white', textAlign: 'center'}}>Submit</Text>
             </TouchableOpacity>
 
             <View style={{flex:1, width: 350, height: '600', alignSelf: 'center', color: 'black', bottom: 0}}>
-              <Text style={{fontSize: 20, fontFamily: 'Avenir-Roman', fontWeight: 'bold'}}>Ingredients</Text>
+              <Text style={{fontSize: 20, fontWeight: 'bold'}}>Ingredients</Text>
               <FlatList
                 numColumns={2}
                 horizontal={false}
                 data={recipeData}
                 renderItem={({item}) => <Item title={item.title} id={item.id}/>}
                 keyExtractor={item => item.id}
+                scrollEnabled={false}
               />
             </View>
               
@@ -102,7 +106,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     color: 'black',
     textAlign: 'right',
-    fontFamily: 'Avenir-Roman',
     fontWeight: 'medium'
   }
 })

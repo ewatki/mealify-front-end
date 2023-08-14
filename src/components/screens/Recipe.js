@@ -12,9 +12,6 @@ const Recipe = ({route, navigation}) => {
     const [recipe,setRecipe] = React.useState(route.params.recipe)
     // console.log(recipe)
     
-    
-    
-   
     const handleSave = () => {
         // console.log(recipe)
         
@@ -51,7 +48,7 @@ const Recipe = ({route, navigation}) => {
     })
 }
     
-     const handleDislikeRecipe = () => {
+    const handleDislikeRecipe = () => {
         console.log(recipe.id)
         axios.patch(`https://mealify-zclw.onrender.com/recipes/${recipe.id}/unfavorite`)
         .then(response => {
@@ -66,26 +63,26 @@ const Recipe = ({route, navigation}) => {
             
         console.log('response.data:', response.data)
         // console.log(recipe)
-    })
-      };
+        })
+    };
 
     return (
         <SafeAreaView> 
-         <ScrollView>
-            <Image style={styles.tinyLogo} source={{uri: recipe.image}}/>
-            <View style={styles.recipeContainer}>
-                {/* <Header style={styles.recipeHeader}> */}
-                    <Text>{ recipe.title }</Text> 
-                    <Text>Ingredients: {recipe.ingredients}</Text>
-                    <Text>Nutritional Data Score: {recipe.nutritional_data}</Text>
-                    <Text>{recipe.url}</Text> 
-                
-            </View>
-            {/* <Button title="likeRecipe" onPress={() => { handleLikeRecipe }}/> */}
-            <Button title="Save for later" onPress={() => { handleSave({}) }} />
-            <Button title="Like" onPress={() => { handleLikeRecipe({}) }} />
-            <Button title="Dislike" onPress={() => { handleDislikeRecipe({}) }} />
-         </ScrollView>
+            <ScrollView>
+                <Image style={styles.tinyLogo} source={{uri: recipe.image}}/>
+                <View style={styles.recipeContainer}>
+                        {/* <Header style={styles.recipeHeader}> */}
+                        <Text>{recipe.title}</Text> 
+                        <Text>Ingredients: {recipe.ingredients}</Text>
+                        <Text>Nutritional Data Score: {recipe.nutritional_data}</Text>
+                        <Text>{recipe.url}</Text> 
+                    
+                </View>
+                {/* <Button title="likeRecipe" onPress={() => { handleLikeRecipe }}/> */}
+                <Button title="Save for later" onPress={() => { handleSave({}) }} />
+                <Button title="Like" onPress={() => { handleLikeRecipe({}) }} />
+                <Button title="Dislike" onPress={() => { handleDislikeRecipe({}) }} />
+            </ScrollView>
         </SafeAreaView>
         );
     };
@@ -110,4 +107,4 @@ const Recipe = ({route, navigation}) => {
 
 
 
-  export default Recipe;
+export default Recipe;
