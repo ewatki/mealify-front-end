@@ -12,9 +12,6 @@ const Recipe = ({route, navigation}) => {
     const [recipe,setRecipe] = React.useState(route.params.recipe)
     // console.log(recipe)
     
-    
-    
-   
     const handleSave = () => {
         // console.log(recipe)
         
@@ -51,7 +48,7 @@ const Recipe = ({route, navigation}) => {
     })
 }
     
-     const handleDislikeRecipe = () => {
+    const handleDislikeRecipe = () => {
         console.log(recipe.id)
         axios.patch(`https://mealify-zclw.onrender.com/recipes/${recipe.id}/unfavorite`)
         .then(response => {
@@ -66,8 +63,8 @@ const Recipe = ({route, navigation}) => {
             
         console.log('response.data:', response.data)
         // console.log(recipe)
-    })
-      };
+        })
+    };
 
     return (
         <SafeAreaView style={{flex:1}}> 
@@ -113,4 +110,4 @@ const Recipe = ({route, navigation}) => {
 
 
 
-  export default Recipe;
+export default Recipe;

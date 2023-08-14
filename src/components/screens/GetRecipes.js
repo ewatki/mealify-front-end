@@ -1,8 +1,9 @@
 import React from 'react';
-import { Pressable, View, Text, TouchableOpacity, StyleSheet, ActivityIndicator, TextInput, Modal } from 'react-native';
-import Recipe from './Recipe';
+import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import axios from 'axios';
-import GetRecipesConstraintsForm from './GetRecipesConstraintsForm';
+import GetMealifyRecipes from '../GetMealifyRecipes';
+import GetRandomSpoonRecipes from '../GetRandomSpoonRecipes'
+import GetNewPantryRecipes from '../GetNewPantryRecipes';
 
 const GetRecipes = ({ route, navigation }) => {
   // console.log('USER: ', route.params.user)
@@ -16,32 +17,10 @@ const GetRecipes = ({ route, navigation }) => {
   });
   const [modalVisible, setModalVisible] = React.useState(false);
   const apiKey = '5d5b6e0bcc9c4205b3cba5dc026a03ba'
-
-  const handleHideModal = () => {
-    setModalVisible(!modalVisible)
+  
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
   }
-
-  const handleGetMealifyRecipes = (params) => {
-    setLoading('true')
-    axios.get(`https://mealify-zclw.onrender.com/users/${user.id}/recipes`)
-    .then(response => {
-        setLoading('false')
-        setErrorMessage('')
-        if (Object.keys(response.data).length === 0) {
-          setErrorMessage('Ooops, you dont have any recipes! Try searching for a new one!')
-        }
-        else {
-          navigation.navigate('RecipeList', {user: route.params.user})
-        }
-    })
-    .catch(error => {
-        setLoading('false')
-        console.log('error: ', error.response)
-        setErrorMessage(error.response.data)
-    });
-    
-  };
-
   const getRecipeDetails = (data) => {
     setLoading('true')
     if (data.length === 0) {
@@ -113,134 +92,90 @@ const GetRecipes = ({ route, navigation }) => {
     if (user.pantry.length === 0) {
       return 'Nothing in pantry, Re-route to pantry to fill out (maybe throw up an alert...'
     } else {
-      ingredients = Object.keys(user.pantry[0].food_dict)
-      console.log(ingredients)
-      axios.get('https://api.spoonacular.com/recipes/findByIngredients', {
+      const recipeIndex = getRandomInt(data.length)
+      const spoonId = data[recipeIndex].id
+      const title = data[recipeIndex].title
+      const image = data[recipeIndex].image
+      const url = `https://api.spoonacular.com/recipes/${spoonId}/information`
+      params = {
         params: {
           apiKey: apiKey,
-          tags: tags.toString(),  
+          includeNutrition: 'True'
         }
-      })
+      }
+  
+      // Call details of recipe to gather more needed data
+      axios.get(url, params)
       .then(response => {
-        // Gather new data in variables
-        
-        const data = response.data.recipes 
-        // getRecipeDetails(data)
+        setErrorMessage('')
+        const instructions = response.data.instructions
+        const ingredients = []
+        for (ingredient of response.data.extendedIngredients) {
+          ingredients.push(ingredient.name)
+        }
+        const nutritionScore = Math.floor(response.data.nutrition.properties[2].amount)
+        const sourceUrl = response.data.sourceUrl
+  
+        // Build dict to post to mealify_api
+        const newRecipeData = {
+          title: title, 
+          ingredients: ingredients, 
+          instructions: instructions, 
+          nutritional_data: nutritionScore, 
+          url: sourceUrl, 
+          image: image,
+          user_state: 0,
+          user_id: user.id
+        }
+        console.log('NewRecipeData: ', newRecipeData.title)
+        // console.log('NewRecipeData: ', newRecipeData.ingredients)
+        // navigation.navigate('Recipe', {recipe: newRecipeData})
+  
+  
+        // // Add newRecipe Data to a Recipe.js component adn if they click 'like', 'unlike' then send post to the backend with the data!
+        // Call mealify_api to save recipe for future use
+        // axios.post(`https://mealify-zclw.onrender.com/users/${user.id}/recipes`, newRecipeData)
+        // .then(response => {
+        //   setLoading('false')
+        // })
+        // .catch(error => {
+        //   console.log(error)
+        // })
+        setLoading('false')
       })
       .catch(error => {
-        console.log(error);
+        setLoading('false')
+        setErrorMessage(error)
       });
     };
   };
 
-  const handleGetNewRecipes = () => {
-    // Set up axios parameters for random and not
-    setLoading('true')
-    const includeIngredients = Object.keys(user.ingredient_preferences)
-    includeIngredients.push(formFields.ingredients)
-    const diet = Object.keys(user.diet_restrictions)
-    diet.push(formFields.diet)
-    let tags = Object.keys(user.intolerances)
-    tags.push(diet.toString())
-    tags.push(formFields.cuisine)
-    // Make random call if it doesnt include ingredients
-    if (includeIngredients.toString() === "") {
-      console.log('in random')
-      if (tags.toString() == ',') {
-        tags = ''
-      }
-      axios.get('https://api.spoonacular.com/recipes/random', {
-        params: {
-          apiKey: 'a10d8b0165074f6a807217fe8ea8bd20',
-          tags: tags.toString(),  
-        }
-      })
-      .then(response => {
-        // Gather new data in variables
-        const data = response.data.recipes 
-        getRecipeDetails(data)
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    } else {
-      // Call initial recipe search
-      console.log('in NOT random')
-      axios.get('https://api.spoonacular.com/recipes/complexSearch', {
-        params: {
-          apiKey: '5d5b6e0bcc9c4205b3cba5dc026a03ba',
-          intolerances: Object.keys(user.intolerances).toString(),
-          includeIngredients: includeIngredients.toString(),
-          diet: diet.toString(),
-          cuisine: formFields.cuisine,
-        }
-      })
-      .then(response => {
-        // Gather new data in variables
-        const data = response.data.results
-        getRecipeDetails(data)
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    };
-  };
 
   return (
     <View style={styles.container}>
       <ActivityIndicator animating={loading} size='small' />
-      <View style={styles.quickLinksContainer}>
-        <Text>
-          Quick links
-        </Text>
-        <TouchableOpacity 
-          style={styles.getRecipesButton}
-          onPress={ () => { handleGetMealifyRecipes({})} }
-        > 
-          <Text style={{ color: '#007AFF', fontSize: 25 }} >All my Recipes</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          style={styles.getRecipesButton}
-          onPress={ () => { handleGetMealifyRecipes({'pantry': 'true'})} }
-        > 
-          <Text style={{ color: '#007AFF', fontSize: 25 }} >Pantry Recipes</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          style={styles.getRecipesButton}
-          onPress={ () => { handleGetMealifyRecipes({'ingredients': []})} }
-        > 
-          <Text style={{ color: '#007AFF', fontSize: 25 }} >Ingredient Recipes</Text>
-        </TouchableOpacity>
-      </View>
+      <GetMealifyRecipes user={user} setLoading={setLoading} setErrorMessage={setErrorMessage}/>
       <View style={styles.newRecipeContainer}>
         <Text>Find A New Recipe</Text>
         <View>
-          <TouchableOpacity 
-            style={styles.getRecipesButton}
-            onPress={ () => { handleGetNewRecipes()} }
-          > 
-            <Text style={{ color: '#007AFF', fontSize: 25 }} >Random Recipe</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity 
-            style={styles.getRecipesButton}
-            onPress={ () => { handleGetNewPantryRecipes()} }
-            > 
-            <Text style={{ color: '#007AFF', fontSize: 25 }} >New Pantry Recipe</Text>
-          </TouchableOpacity>
+          <GetNewPantryRecipes 
+            user={user} 
+            setLoading={setLoading} 
+            getRecipeDetails={getRecipeDetails} 
+          />
+          <View>
+            <GetRandomSpoonRecipes 
+              user={user}
+              setLoading={setLoading}
+              formFields={formFields}
+              setFormFields={setFormFields}
+              modalVisible={modalVisible}
+              setModalVisible={setModalVisible}
+              getRecipeDetails={getRecipeDetails}
+              setErrorMessage={setErrorMessage}
+            />
+          </View>
         </View>
-        <GetRecipesConstraintsForm 
-          formFields={formFields} 
-          setFormFields={setFormFields}
-          handleHideModal={handleHideModal}
-          modalVisible={modalVisible}
-          setModalVisible={setModalVisible}
-        />
-        <Pressable
-          style={[styles.showModalButton]}
-          onPress={() => setModalVisible(true)}>
-          <Text style={styles.textStyle}>Get Specific</Text>
-        </Pressable>
       </View>
       <View style={styles.errorContainer}>
           <Text style={styles.errorMessage}>{errorMessage}</Text>
@@ -260,39 +195,7 @@ const styles = StyleSheet.create({
   errorContainer: {
     flex: 1,
   },
-  getRecipesButton: {
-    borderWidth: 1,
-    borderRadius: 10,
-    padding: 5,
-    alignItems: 'center',
-    margin: 3,
-  },
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    borderRadius: 10,
-    width: 300,
-  },
-  modalView: {
-    flex: 3,
-    alignItems: 'center'
-  },
   newRecipeContainer: {
     flex: 3,
   },
-  placeholderView: {
-    flex: 4
-  },
-  quickLinksContainer: {
-    // marginTop: 50,
-    flex: 2, 
-    // alignItems: 'center', 
-    // justifyContent: 'center'
-  },
-  showModalButton: {
-    alignItems: 'center'
-  }
-
 })

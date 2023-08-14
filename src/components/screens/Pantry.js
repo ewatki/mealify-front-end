@@ -22,6 +22,7 @@ const Pantry = ({ route, navigation }) => {
     const labels = Object.keys(data)
 
     console.log('user.pantry:  ', user.pantry)
+
     // Use this if we want to enable disabled v not disabled
     // React.useEffect(() => {
     //     // Update the disabled v not disabled based on the 
@@ -182,17 +183,21 @@ const Pantry = ({ route, navigation }) => {
     };
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{backgroundColor: 'white'}}>
             <View style={styles.showModalButtonsContainer}>
                 <Pressable
                     style={[styles.showModalButton]}
-                    onPress={() => handleOpenAddModal()}>
-                    <Text style={styles.textStyle}>Add Items</Text>
+                    onPress={() => handleOpenAddModal()}
+                    >
+                    <Text style={styles.textStyle}>Add </Text>
+                    {/* <Text style={styles.textStyle}>+</Text> */}
+
                 </Pressable>
                 <Pressable
                     style={[styles.showModalButton]}
                     onPress={() => handleOpenRemoveModal()}>
-                    <Text style={styles.textStyle}>Remove Items</Text>
+                    <Text style={styles.textStyle}>Remove </Text>
+                    {/* <Text style={styles.textStyle}>-</Text> */}
                 </Pressable>
             </View>
             {/* Display Pantry */}
@@ -219,7 +224,7 @@ const Pantry = ({ route, navigation }) => {
                     style={styles.placeholderPressable}
                     onPress={() => submitAddPantryUpdate()}>
                 </Pressable>
-                <View style={styles.modalView}>
+                <View backdropOpacity={0.2} style={styles.modalView}>
                     <ScrollView>
                         <View style={{flex:1, paddingHorizontal:20, paddingTop: 20}}>
 
@@ -236,7 +241,7 @@ const Pantry = ({ route, navigation }) => {
                                             save="value"
                                             notFoundText="Sorry, we don't have that yet"
                                             // labelStyles={{color: "pink"}}
-                                            // badgeStyles={{backgroundColor: "red"}}
+                                            badgeStyles={{backgroundColor: "#756382"}}
                                         />
                                     </View>
                                 )
@@ -244,13 +249,14 @@ const Pantry = ({ route, navigation }) => {
                         }
                         </View>
                         <View style={styles.saveButtonContainer}>
-                            <Button title="Save" onPress={() => submitAddPantryUpdate()}/>
+                            <Button title="Save" color='#756382' onPress={() => submitAddPantryUpdate()}/>
                         </View>
                     </ScrollView>
                 </View>
             </Modal>
             {/* Remove Items Modal */}
-            <Modal         
+            <Modal   
+                hasBackdrop={true}
                 animationType="slide"
                 transparent={false}
                 visible={removeModalVisible}
@@ -279,7 +285,7 @@ const Pantry = ({ route, navigation }) => {
                                             save="value"
                                             notFoundText="Nothing stored here"
                                             // labelStyles={{color: "pink"}}
-                                            // badgeStyles={{backgroundColor: "red"}}
+                                            badgeStyles={{backgroundColor: "#756382"}}
                                         />
                                     </View>
                                 )
@@ -287,7 +293,7 @@ const Pantry = ({ route, navigation }) => {
                         }
                         </View>
                         <View style={styles.saveButtonContainer}>
-                            <Button title="Save" onPress={() => submitRemovePantryUpdate()}/>
+                            <Button title="Save" color='#756382' onPress={() => submitRemovePantryUpdate()}/>
                         </View>
                     </ScrollView>
                 </View>
@@ -336,12 +342,16 @@ const styles = StyleSheet.create({
         flex: 3,
     },
     pantryView: {
+        top: 50,
+        minHeight: '100%',
         paddingBottom: 50,
+        textAlign: 'left',
+        // backgroundColor: 'purple',
     },
     placeholderPressable: {
         flex: 5,
         backgroundColor: 'grey',
-        opacity: '.8',
+        // opacity: '.8',
     },
     quickLinksContainer: {
       // marginTop: 50,
@@ -350,32 +360,43 @@ const styles = StyleSheet.create({
       // justifyContent: 'center'
     },
     sectionHeader: {
-        paddingTop: 2,
-        paddingLeft: 10,
-        paddingRight: 10,
-        paddingBottom: 2,
-        fontSize: 20,
+        paddingVertical: 2,
+        paddingHorizontal: 25,
+        fontSize: 22,
         fontWeight: 'bold',
-        backgroundColor: 'rgba(247,247,247,1.0)',
-        justifyContent: 'center', 
-        alignSelf: 'center'
+        textAlign: 'left',
+        marginBottom: 5,
+        height: 'auto'
     },
     showModalButton: {
         alignItems: 'center',
         borderWidth: 1,
         borderRadius: 10,
-        marginTop: -40,
-        marginBottom: 20,
-        padding: 10,
-        width: 150,
-        justifyContent: 'center',
+        padding: 5,
+        width: 80,
+        justifyContent: 'right',
         alignSelf: 'center',
+        backgroundColor: '#756382',        
     },
     showModalButtonsContainer: {
         flexDirection: 'row', 
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+        position: 'absolute',
+        right: 0,
+        zIndex: 2,
+        alignSelf: 'center',
+        width: '45%',
     },
     textStyle: {
-        fontSize: 20,
+        fontSize: 15,
+        color: 'white',
+    },
+    saveButtonContainer: {
+        width: '40%',
+        alignSelf: 'center',
+    },
+    saveButton: {
+        borderRadius: 15,
+        backgroundColor: '#756382',
     }
 });

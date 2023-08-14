@@ -1,13 +1,8 @@
 import React from 'react';
-import { Pressable, View, Text, TouchableOpacity, StyleSheet, ActivityIndicator, TextInput, Modal } from 'react-native';
+import { Pressable, View, Text, StyleSheet, TextInput, Modal } from 'react-native';
 
-const GetRecipesConstraintsForm = ({ formFields, setFormFields, handleHideModal, modalVisible, setModalVisible }) => {
-  // const [formFields, setFormFields] = React.useState({
-  //   ingredients: '',
-  //   cuisine: '',
-  //   diet: '',
-  // });
-  // const [modalVisible, setModalVisible] = React.useState(false);
+const GetRecipesConstraintsForm = ({ formFields, setFormFields, handleHideModal, modalVisible, setModalVisible, setErrorMessage }) => {
+  setErrorMessage('')
   const handleChange = (text, field) => {
     if (field === 'diet') {
         setFormFields({
@@ -77,21 +72,6 @@ const GetRecipesConstraintsForm = ({ formFields, setFormFields, handleHideModal,
 export default GetRecipesConstraintsForm;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center', 
-    justifyContent: 'center'
-  },
-  errorContainer: {
-    flex: 1,
-  },
-  getRecipesButton: {
-    borderWidth: 1,
-    borderRadius: 10,
-    padding: 5,
-    alignItems: 'center',
-    margin: 3,
-  },
   input: {
     height: 40,
     margin: 12,
@@ -104,21 +84,9 @@ const styles = StyleSheet.create({
     flex: 3,
     alignItems: 'center'
   },
-  newRecipeContainer: {
-    flex: 3,
-  },
   placeholderPressable: {
     flex: 5,
     backgroundColor: 'grey',
     opacity: '.8',
   },
-  quickLinksContainer: {
-    // marginTop: 50,
-    flex: 2, 
-    // alignItems: 'center', 
-    // justifyContent: 'center'
-  },
-  showModalButton: {
-    alignItems: 'center'
-  }
 });
