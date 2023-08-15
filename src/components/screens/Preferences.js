@@ -230,7 +230,8 @@ const Preferences = ({ route, navigation }) => {
                 />
             </View>
             {/* Add Items Modal */}
-            <Modal         
+            <Modal
+                style={styles.modalContainer}         
                 animationType="slide"
                 transparent={false}
                 visible={addModalVisible}
@@ -273,7 +274,7 @@ const Preferences = ({ route, navigation }) => {
                 </View>
             </Modal>
             {/* Remove Items Modal */}
-            <Modal         
+            <Modal
                 animationType="slide"
                 transparent={false}
                 visible={removeModalVisible}
@@ -350,11 +351,10 @@ const styles = StyleSheet.create({
         fontSize: 15,
         height: 35,
         marginBottom: 5,
-        backgroundColor: '#dee2e7'
+        backgroundColor: '#E2C274'
     },
     modalView: {
         paddingBottom: 50,
-
     },
     newRecipeContainer: {
         flex: 3,
@@ -391,6 +391,7 @@ const styles = StyleSheet.create({
         paddingVertical: 2,
         fontSize: 20,
         fontWeight: 'bold',
+        fontFamily: 'Avenir-Roman',
         textAlign: 'left',
         marginBottom: 5,
         height: 'auto'
@@ -440,6 +441,7 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         fontSize: 15,
+        fontFamily: 'Avenir-Roman',
         color: 'white',
         justifyContent: 'center'
     }

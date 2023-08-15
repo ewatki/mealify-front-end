@@ -2,13 +2,6 @@ import React from 'react'
 import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image, TouchableOpacity, TextInput, FlatList, KeyboardAvoidingView, Platform, Alert } from 'react-native';
 import axios from 'axios';
 
-const Item = ({title, id}) => (
-  <View key={id} style={{width: 180, paddingTop: 5}}>
-    <Text>{title}</Text>
-  </View>
-);
-
-
 
 const Home = ({route, navigation}) => {
   const [loading, setLoading] = React.useState('false');
