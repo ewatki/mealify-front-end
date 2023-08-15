@@ -2,12 +2,13 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import axios from 'axios';
 
+
 const GetMealifyRecipes = ({ user, setLoading, setErrorMessage }) => {
-  // console.log('USER: ', user)
+  console.log('USER: ', user)
 
   const handleGetMealifyRecipes = (params) => {
     setLoading('true')
-    axios.get(`https://mealify-zclw.onrender.com/users/${user.id}/recipes`)
+    axios.get(`https://mealify-zclw.onrender.com/users/6/recipes`)
     .then(response => {
         setLoading('false')
         setErrorMessage('')

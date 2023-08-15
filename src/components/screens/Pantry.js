@@ -5,6 +5,7 @@ import data from '../../data/pantryitems.json';
 import axios from 'axios';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FlatList } from 'react-native-gesture-handler';
+import { StatusBar } from 'expo-status-bar';
 // import { panGestureHandlerCustomNativeProps } from 'react-native-gesture-handler/lib/typescript/handlers/PanGestureHandler';
 
 // IMPORT MULTISELECT ----> npm i react-native-dropdown-select-list
@@ -21,7 +22,7 @@ const Pantry = ({ route, navigation }) => {
     const [addModalVisible, setAddModalVisible] = React.useState(false);
     const labels = Object.keys(data)
 
-    console.log('user.pantry:  ', user.pantry)
+    // console.log('user.pantry:  ', user.pantry)
 
     // Use this if we want to enable disabled v not disabled
     // React.useEffect(() => {
@@ -186,7 +187,7 @@ const Pantry = ({ route, navigation }) => {
         <SafeAreaView style={{backgroundColor: 'white'}}>
             <View style={styles.showModalButtonsContainer}>
                 <Pressable
-                    style={[styles.showModalButton]}
+                    style={[styles.showModalButtonLeft]}
                     onPress={() => handleOpenAddModal()}
                     >
                     <Text style={styles.textStyle}>Add </Text>
@@ -194,7 +195,7 @@ const Pantry = ({ route, navigation }) => {
 
                 </Pressable>
                 <Pressable
-                    style={[styles.showModalButton]}
+                    style={[styles.showModalButtonRight]}
                     onPress={() => handleOpenRemoveModal()}>
                     <Text style={styles.textStyle}>Remove </Text>
                     {/* <Text style={styles.textStyle}>-</Text> */}
@@ -298,7 +299,6 @@ const Pantry = ({ route, navigation }) => {
                     </ScrollView>
                 </View>
             </Modal>
-
         </SafeAreaView>
     )
 }
@@ -331,8 +331,10 @@ const styles = StyleSheet.create({
     },
     item: {
         padding: 10,
-        fontSize: 18,
-        height: 44,
+        fontSize: 15,
+        height: 35,
+        marginBottom: 5,
+        backgroundColor: '#dee2e7'
     },
     modalView: {
         paddingBottom: 50,
@@ -342,10 +344,11 @@ const styles = StyleSheet.create({
         flex: 3,
     },
     pantryView: {
-        top: 50,
+        top: 10,
         minHeight: '100%',
         paddingBottom: 50,
         textAlign: 'left',
+        paddingHorizontal: 25,
         // backgroundColor: 'purple',
     },
     placeholderPressable: {
@@ -361,31 +364,43 @@ const styles = StyleSheet.create({
     },
     sectionHeader: {
         paddingVertical: 2,
-        paddingHorizontal: 25,
-        fontSize: 22,
+        fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'left',
         marginBottom: 5,
         height: 'auto'
     },
-    showModalButton: {
+    showModalButtonLeft: {
         alignItems: 'center',
         borderWidth: 1,
-        borderRadius: 10,
+        borderTopLeftRadius: 10,
+        borderBottomLeftRadius: 10,
         padding: 5,
-        width: 80,
+        width: 100,
+        justifyContent: 'right',
+        alignSelf: 'center',
+        backgroundColor: '#756382',        
+    },
+    showModalButtonRight: {
+        alignItems: 'center',
+        borderWidth: 1,
+        borderTopRightRadius: 10,
+        borderBottomRightRadius: 10, 
+        padding: 5,
+        width: 100,
         justifyContent: 'right',
         alignSelf: 'center',
         backgroundColor: '#756382',        
     },
     showModalButtonsContainer: {
         flexDirection: 'row', 
-        justifyContent: 'space-around',
+        // justifyContent: 'space-around',
+        justifyContent: 'center',
         position: 'absolute',
-        right: 0,
+        bottom: 20,
         zIndex: 2,
         alignSelf: 'center',
-        width: '45%',
+        width: '60%',
     },
     textStyle: {
         fontSize: 15,
@@ -398,5 +413,6 @@ const styles = StyleSheet.create({
     saveButton: {
         borderRadius: 15,
         backgroundColor: '#756382',
+        justifyContent: 'center'
     }
 });
