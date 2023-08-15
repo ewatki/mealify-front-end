@@ -30,7 +30,24 @@ const Recipe = ({route, navigation}) => {
             // })
             // console.log('response.data:', response.data)
             console.log('saved successfully')
-            console.log(ingredientList)
+            
+        })
+        
+    }
+    const handleDelete = () => {
+        axios.delete(`https://mealify-zclw.onrender.com/recipes/${recipe.id}`, recipe)
+        .then(response => {
+            // setRecipe(recipe => {
+            //     return {
+            //         ...recipe,
+            //         id: response.data.id,
+            //         user_state: response.data.user_state
+            //     };
+                
+            // })
+            // console.log('response.data:', response.data)
+            console.log('deleted successfully')
+            
         })
         
     }
@@ -71,7 +88,7 @@ const Recipe = ({route, navigation}) => {
     };
 
     return (
-        <SafeAreaView style={styles.container}> 
+        <SafeAreaView style={styles.container} horizontal={false}> 
             <ScrollView style={styles.scrollContainer}>
                 <Text style={styles.recipeTitleText}>{ recipe.title }</Text> 
                 <Image style={styles.recipeImg} source={{uri: recipe.image}} resizeMode={'cover'}/>
@@ -86,9 +103,33 @@ const Recipe = ({route, navigation}) => {
                             }}>Click for Full Recipe</Text> 
                     
                 </View>
-                <Button title="Save for later" onPress={() => { handleSave({}) }} />
-                <Button title="Like" onPress={() => { handleLikeRecipe({}) }} />
-                <Button title="Dislike" onPress={() => { handleDislikeRecipe({}) }} />
+                <TouchableOpacity 
+                    style={styles.getRecipesButton}
+                    onPress={ () => { handleSave({})} }
+                    > 
+                    <Text style={styles.buttonText} >Save for Later</Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                    style={styles.getRecipesButton}
+                    onPress={ () => { handleDelete({})} }
+                    > 
+                    <Text style={styles.buttonText} >Unsave</Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                    style={styles.getRecipesButton}
+                    onPress={ () => { handleLikeRecipe({})} }
+                    > 
+                    <Text style={styles.buttonText} >Like</Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                    style={styles.getRecipesButton}
+                    onPress={ () => { handleDisikeRecipe({})} }
+                    > 
+                    <Text style={styles.buttonText} >Dislike</Text>
+                </TouchableOpacity>
+                {/* <Button title="Save for later" onPress={() => { handleSave({}) }} /> */}
+                {/* <Button title="Like" onPress={() => { handleLikeRecipe({}) }} /> */}
+                {/* <Button title="Dislike" onPress={() => { handleDislikeRecipe({}) }} /> */}
             </ScrollView>
         </SafeAreaView>
         );
@@ -165,5 +206,13 @@ const styles = StyleSheet.create({
         fontSize: 16, 
         color: 'white',
         fontFamily: 'Avenir-Roman'
+      },
+      getRecipesButton: {
+        padding: 5, 
+        borderRadius: 5,
+        textAlign: 'center', 
+        backgroundColor: '#756382',
+        alignItems: 'center',
+        margin: 3,
       },
  });
