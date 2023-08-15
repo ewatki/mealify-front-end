@@ -1,6 +1,7 @@
 import React from 'react'
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image, TouchableOpacity, TextInput, FlatList, KeyboardAvoidingView, Platform } from 'react-native';
-
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image, TouchableOpacity, TextInput, FlatList, KeyboardAvoidingView, Platform, Alert } from 'react-native';
+import axios from 'axios';
+import Recipe from './Recipe';
 // TESTING
 const recipeImages = ["https://spoonacular.com/recipeImages/782585-312x231.jpg", "https://spoonacular.com/recipeImages/716429-556x370.jpg", "https://www.allrecipes.com/thmb/qk2ga3zSmgDmzlwDkukcHr9AUjw=/800x533/filters:no_upscale():max_bytes(150000):strip_icc():focal(399x0:401x2):format(webp)/8382626_ZucchiniandGroundBeefSkillet4x3photobyfabeveryday-f36b3dd65e65448097aa967c7f23c880.jpg", "https://www.allrecipes.com/thmb/nYSZduxspJJeYExxpVB7miP9jXM=/364x242/filters:no_upscale():max_bytes(150000):strip_icc():focal(999x0:1001x2):format(webp)/242342-fiesta-slow-cooker-shredded-chicken-tacos-ddmfs-3X2-0902-775cf5010b5b46cdbdf2ca50993628a9.jpg", "https://www.allrecipes.com/thmb/57nQ0DwByvRw-CYcZbZsGkzN8OA=/771x514/filters:no_upscale():max_bytes(150000):strip_icc():focal(929x470:931x472):format(webp)/ChefJohnsTacoStuffedZucchiniBoats4x3-6b9f773827f747d092f438faf9da0ed5.jpg"]
 
@@ -29,6 +30,12 @@ const Item = ({title, id}) => (
 
 const Home = ({route}) => {
   const [loading, setLoading] = React.useState('false');
+  const user = route.params.user
+  const apiKey = '5d5b6e0bcc9c4205b3cba5dc026a03ba'  
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
 
   const createAlert = (errorMessage) =>
     Alert.alert('Error', errorMessage, [
@@ -38,58 +45,31 @@ const Home = ({route}) => {
   const handleGetNewRecipes = () => {
     // Set up axios parameters for random and not
     setLoading('true')
-    const includeIngredients = formFields.ingredients
     const intolerances = Object.keys(user.intolerances).toString()
     const dietBuilder = Object.keys(user.diet_restrictions)
-    dietBuilder.push(formFields.diet)
     let diet = dietBuilder.toString()
-    const cuisine = formFields.cuisine
 
     // Make random call if it doesnt include ingredients
-    if (includeIngredients === "") {
-      axios.get('https://api.spoonacular.com/recipes/random', {
-        params: {
-          apiKey: apiKey,
-          number: 10,
-          intolerances: intolerances,
-          diet: diet,
-          cuisine: cuisine,
-        }
-      })
-      .then(response => {
-        // Gather new data in variables
-        const data = response.data.recipes 
-        getRecipeDetails(data)
-      })
-      .catch(error => {
-        console.log(error);
-        setLoading('false')
-      });
-    } else {
-      // Call initial recipe search
-      console.log('in NOT random')      
-      axios.get('https://api.spoonacular.com/recipes/complexSearch', {
-        params: {
-          apiKey: apiKey,
-          intolerances: intolerances,
-          includeIngredients: includeIngredients,
-          diet: diet,
-          cuisine: cuisine,
-          number: 10,
-        }
-      })
-      .then(response => {
-        // Gather new data in variables
-        const data = response.data.results
-        getRecipeDetails(data)
-      })
-      .catch(error => {
-        console.log('Error: ', error);
-      });
-    };
+    axios.get('https://api.spoonacular.com/recipes/random', {
+      params: {
+        apiKey: apiKey,
+        number: 10,
+        intolerances: intolerances,
+        diet: diet,
+      }
+    })
+    .then(response => {
+      // Gather new data in variables
+      const data = response.data.recipes 
+      getRecipeDetails(data)
+    })
+    .catch(error => {
+      console.log(error);
+      setLoading('false')
+    });
   };
 
-    const getRecipeDetails = (data) => {
+  const getRecipeDetails = (data) => {
     setLoading('true')
     if (data.length === 0) {
       createAlert('Ooops, we cannot find any recipes matching the current requirements! Try going to your recipes page and adding some different requirements.!')
@@ -123,7 +103,6 @@ const Home = ({route}) => {
       }
       const nutritionScore = Math.floor(response.data.nutrition.properties[2].amount)
       const sourceUrl = response.data.sourceUrl
-
       // Build dict to post to mealify_api
       const newRecipeData = {
         title: title, 
@@ -138,9 +117,8 @@ const Home = ({route}) => {
       // setDisplayedRecipes(newRecipeData)
       // console.log('NewRecipeData: ', newRecipeData.title)
       // console.log('NewRecipeData: ', newRecipeData.ingredients)
-      // navigation.navigate(TempRecipe, )
-      // navigation.navigate('Recipe', {recipe: newRecipeData})
-      navigation.navigate('TempRecipe', {recipe: newRecipeData})
+
+      // navigation.navigate('RecipeDetails', {recipe: newRecipeData})
       setLoading('false')
     })
     .catch(error => {

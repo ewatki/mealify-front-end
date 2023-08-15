@@ -124,7 +124,7 @@ const Main = ({ route, navigation }) => {
             initialParams={{user: route.params.user}}
             />
 
-            <Drawer.Screen
+            {/* <Drawer.Screen
             name="TempRecipe" 
             component={Recipe} 
             initialParams={{user: user}}
@@ -135,7 +135,7 @@ const Main = ({ route, navigation }) => {
                 },
                 headerTintColor: '#756382',
             }}
-            />
+            /> */}
         </Drawer.Navigator>
     )
 }

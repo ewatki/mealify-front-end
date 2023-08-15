@@ -132,8 +132,13 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 10,
         width: 300,
-        backgroundColor: '#756382',
-        color: '#fffdd0',
+        backgroundColor: 'white',
+        // backgroundColor: '#756382',
+        borderWidth: 1,
+        borderColor: '#756382',
+        color: '#756382',
+        fontFamily: 'Avenir-Roman'
+        // color: '#fffdd0',
     },
     inputContainer: {
         flex: 5, 
@@ -153,6 +158,7 @@ const styles = StyleSheet.create({
     },
     loginButtonText: {
         color: '#fffdd0',
+        fontFamily: 'Avenir-Roman'
     },
     loginContainer: {
         flex: 1,
@@ -161,7 +167,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     loginTitle: {
-        color: '#756382'
+        color: '#756382',
+        fontFamily: 'Avenir-Roman'
     },
     logo: {
         alignContent: 'stretch',
@@ -178,17 +185,8 @@ const styles = StyleSheet.create({
     registerButtonText: {
         fontSize: 24,
         color: '#756382',
+        fontFamily: 'Avenir-Roman'
     },
-    textbox: {
-        borderRadius: 5,
-        borderBottomWidth: 1.5,
-        borderColor: 'gray',
-        marginTop: 10,
-        marginBottom: 30,
-    }
-
-
-    
 });
 
 

@@ -43,8 +43,17 @@ const Navigator = () => {
                 }}
             />
 
-            <Stack.Screen name="RecipeList" component={RecipeList}  />
-            <Stack.Screen name="RecipeDetails" component={Recipe}  />
+            {/* <Stack.Screen name="RecipeList" component={RecipeList}  /> */}
+            <Stack.Screen 
+                name="RecipeDetails" 
+                component={Recipe}  
+                options={{
+                    headerStyle: {
+                        backgroundColor: '#E2C274',
+                    },
+                    headerTintColor: '#756382',
+                }}
+            />
 
             <Stack.Screen 
                 name="Main" 

@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Avenir-Roman',
         fontSize: 15, 
         color: 'grey',
-        fontWeight: '500',
+        fontWeight: '700',
+        // fontWeight
     },
 })

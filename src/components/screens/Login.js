@@ -146,8 +146,12 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 10,
         width: 300,
-        backgroundColor: '#756382',
-        color: '#fffdd0',
+        // backgroundColor: '#756382',
+        backgroundColor: 'white',
+        borderWidth: 1,
+        borderColor: '#756382',
+        fontFamily: 'Avenir-Roman',
+        color: '#756382',
         
     },
     inputContainer: {
@@ -160,6 +164,7 @@ const styles = StyleSheet.create({
     loginButtonText: {
         fontSize: 24,
         color: '#756382',
+        fontFamily: 'Avenir-Roman'
     },
     registerButton: {
         marginTop: 3,
@@ -169,6 +174,7 @@ const styles = StyleSheet.create({
     },
     registerButtonText: {
         color: '#fffdd0',
+        fontFamily: 'Avenir-Roman'
     },
     registerContainer: {
         flex: 1,
@@ -177,6 +183,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     registerTitle: {
-        color: '#756382'
+        color: '#756382',
+        fontFamily: 'Avenir-Roman'
     },
 });
