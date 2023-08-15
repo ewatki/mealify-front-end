@@ -81,14 +81,14 @@ const Main = ({ route, navigation }) => {
                     backgroundColor: 'white',
                 },
             }}
-            initialParams={{user: user}}
-            // initialParams={{user: route.params.user}}
+            // initialParams={{user: user}}
+            initialParams={{user: route.params.user}}
             />
             <Drawer.Screen 
             name="Pantry" 
             component={Pantry} 
-            initialParams={{user: user}}
-            // initialParams={{user: route.params.user}}
+            // initialParams={{user: user}}
+            initialParams={{user: route.params.user}}
             />
 
             <Drawer.Screen
@@ -115,13 +115,13 @@ const Main = ({ route, navigation }) => {
             <Drawer.Screen
             name="Preferences" 
             component={Preferences} 
-            initialParams={{user: user}}
+            // initialParams={{user: user}}
             // options={{
             //     headerStyle: {
             //         opacity: 0
             //     }
             // }}
-            // initialParams={{user: route.params.user}}
+            initialParams={{user: route.params.user}}
             />
 
             <Drawer.Screen

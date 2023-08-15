@@ -8,6 +8,14 @@ import axios from 'axios';
 
 const Recipe = ({route, navigation}) => {
     const recipe = route.params.recipe
+   
+    const ingredientList = []
+        for (ingredient of recipe.ingredients) {
+            ingredientList.push(ingredient)
+            ingredientList.push(', ')
+
+    }
+    
     
     const handleSave = () => {
         axios.post(`https://mealify-zclw.onrender.com/users/${recipe.user_id}/recipes`, recipe)
@@ -22,6 +30,7 @@ const Recipe = ({route, navigation}) => {
             // })
             // console.log('response.data:', response.data)
             console.log('saved successfully')
+            console.log(ingredientList)
         })
         
     }
@@ -62,43 +71,43 @@ const Recipe = ({route, navigation}) => {
     };
 
     return (
-        <SafeAreaView style={{flex:1}}> 
-         <ScrollView>
-            <Text style={{fontSize: 40, fontFamily: 'Avenir-Roman', fontWeight: 'bold', paddingHorizontal: 20, width: 400, textAlign:'center'}}>{ recipe.title }</Text> 
-            <Image style={{width: 300, height: 300, borderRadius: 20, marginLeft: 10, marginRight: 10, }} source={{uri: recipe.image}} resizeMode={'cover'}/>
-            <View style={styles.recipeContainer}>
-                {/* <Header style={styles.recipeHeader}> */}
+        <SafeAreaView style={styles.container}> 
+            <ScrollView style={styles.scrollContainer}>
+                <Text style={styles.recipeTitleText}>{ recipe.title }</Text> 
+                <Image style={styles.recipeImg} source={{uri: recipe.image}} resizeMode={'cover'}/>
+                <View style={styles.recipeContainer}>
+                    {/* <Header style={styles.recipeHeader}> */}
+                        <Text style={styles.recipeDetailTitles}>Ingredients</Text>
+                        
+                        <Text style={{fontSize: 15, fontFamily: 'Avenir-Roman', fontWeight: 'bold', textAlign:'center'}}>{ingredientList}</Text>
+                        <Text style={styles.recipeDetailTitles}>Nutritional Data Score: {recipe.nutritional_data}</Text>
+                        <Text style={styles.recipeDetailTitles}onPress={() => {
+                            Linking.openURL(recipe.url);
+                            }}>Click for Full Recipe</Text> 
                     
-                    <Text style={{fontSize: 20, fontFamily: 'Avenir-Roman', fontWeight: 'bold'}}>Ingredients: {recipe.ingredients}</Text>
-                    <Text style={{fontSize: 20, fontFamily: 'Avenir-Roman', fontWeight: 'bold'}}>Nutritional Data Score: {recipe.nutritional_data}</Text>
-                    <Text style={{color:'blue', fontSize: 20, fontFamily: 'Avenir-Roman', fontWeight: 'bold'}}onPress={() => {
-              Linking.openURL(recipe.url);
-            }}>Click for Full Recipe</Text> 
-                
-            </View>
-            {/* <Button title="likeRecipe" onPress={() => { handleLikeRecipe }}/> */}
-            <Button title="Save for later" onPress={() => { handleSave({}) }} />
-            <Button title="Like" onPress={() => { handleLikeRecipe({}) }} />
-            <Button title="Dislike" onPress={() => { handleDislikeRecipe({}) }} />
-         </ScrollView>
+                </View>
+                <Button title="Save for later" onPress={() => { handleSave({}) }} />
+                <Button title="Like" onPress={() => { handleLikeRecipe({}) }} />
+                <Button title="Dislike" onPress={() => { handleDislikeRecipe({}) }} />
+            </ScrollView>
         </SafeAreaView>
         );
     };
         
-    const styles = StyleSheet.create({
-        recipeContainer: {
-        width: '100%',
-        padding: 10,
-        },
-        recipeHeader: {
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
-    tinyLogo: {
-        width: 100,
-        height: 100,
-        },
-        });
+    // const styles = StyleSheet.create({
+    //     recipeContainer: {
+    //     width: '100%',
+    //     padding: 10,
+    //     },
+    //     recipeHeader: {
+    //     fontSize: 20,
+    //     fontWeight: 'bold',
+    // },
+    // tinyLogo: {
+    //     width: 100,
+    //     height: 100,
+    //     },
+    //     });
         
         
 
@@ -106,3 +115,55 @@ const Recipe = ({route, navigation}) => {
 
 
 export default Recipe;
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center', 
+        justifyContent: 'center',
+        backgroundColor: '#E2C274',
+    },
+    scrollContainer: {
+        flex:1,
+        paddingHorizontal: 10, 
+    },
+    recipeContainer: {
+        paddingLeft: 10,
+        paddingRight: 10,
+    },
+    recipeTitleContainer: {
+        width:175, 
+        flexGrow: 1,
+        flex: 1,
+    },
+    recipeTitleText: {
+        fontFamily: 'Avenir-Roman',
+        fontWeight: 'bold',
+        fontSize: 40,
+        flexShrink: 1,
+        width: 400, 
+        textAlign:'center',
+        color: '#756382'
+
+    },
+    recipeImg: {
+        width:275,
+        height: 295,
+        borderRadius: 10,
+        alignSelf:'center'
+    },
+    recipeDetailTitles:{
+        fontSize: 20, 
+        fontFamily: 'Avenir-Roman', 
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: '#756382',
+        padding: 10
+
+    },
+    buttonText: {
+        fontSize: 16, 
+        color: 'white',
+        fontFamily: 'Avenir-Roman'
+      },
+ });

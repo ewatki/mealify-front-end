@@ -3,11 +3,13 @@ import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Button, Li
 // import newRecipeData from './GetRecipes';
 // import handleGetNewRecipes from './GetRecipes'
 // import GetRecipes from './GetRecipes';
+import getRecipeDetails from './GetRecipes'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import axios from 'axios';
+import Recipe from './Recipe'
 // import handleGetMealifyRecipes from './GetRecipes'
 
-const RecipeList = ({ recipes }) => {
+const RecipeList = ({ recipes, route, navigation }) => {
     return (
         <SafeAreaView style={styles.container}>           
             <ScrollView 
@@ -26,9 +28,11 @@ const RecipeList = ({ recipes }) => {
                                 </TouchableOpacity>
                             </View>
                             <View>
+                                {/* <TouchableOpacity onPress={ () => {navigation.navigate(Recipe, {recipe: recipe})}}> */}
                                 <Image style={styles.recipeImg}
                                 source={{uri: recipe.image}}
                                 />
+                                {/* </TouchableOpacity> */}
                             </View>
                         </View>
                     );
