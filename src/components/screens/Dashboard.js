@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image, TouchableOpacity, TextInput, FlatList, KeyboardAvoidingView, Platform, Alert } from 'react-native';
 import axios from 'axios';
 import Recipe from './Recipe';
-// TESTING
+
 const recipeImages = ["https://spoonacular.com/recipeImages/782585-312x231.jpg", "https://spoonacular.com/recipeImages/716429-556x370.jpg", "https://www.allrecipes.com/thmb/qk2ga3zSmgDmzlwDkukcHr9AUjw=/800x533/filters:no_upscale():max_bytes(150000):strip_icc():focal(399x0:401x2):format(webp)/8382626_ZucchiniandGroundBeefSkillet4x3photobyfabeveryday-f36b3dd65e65448097aa967c7f23c880.jpg", "https://www.allrecipes.com/thmb/nYSZduxspJJeYExxpVB7miP9jXM=/364x242/filters:no_upscale():max_bytes(150000):strip_icc():focal(999x0:1001x2):format(webp)/242342-fiesta-slow-cooker-shredded-chicken-tacos-ddmfs-3X2-0902-775cf5010b5b46cdbdf2ca50993628a9.jpg", "https://www.allrecipes.com/thmb/57nQ0DwByvRw-CYcZbZsGkzN8OA=/771x514/filters:no_upscale():max_bytes(150000):strip_icc():focal(929x470:931x472):format(webp)/ChefJohnsTacoStuffedZucchiniBoats4x3-6b9f773827f747d092f438faf9da0ed5.jpg"]
 
 // TESTING 

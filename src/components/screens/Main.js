@@ -1,5 +1,6 @@
 import React from 'react';
 import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
+import { Image } from 'react-native';
 import CustomDrawer from '../CustomDrawer';
 import Dashboard from './Dashboard'
 import Pantry from './Pantry'
@@ -69,7 +70,7 @@ const Main = ({ route, navigation }) => {
             drawerActiveTintColor: 'black',
             drawerInactiveTintColor: 'gray',
             drawerLabelStyle: {
-                // fontFamily: 'Avenir-Roman',
+                fontFamily: 'Avenir-Roman',
                 fontSize: 15,
             }
         }}>
@@ -89,6 +90,14 @@ const Main = ({ route, navigation }) => {
             component={Pantry} 
             // initialParams={{user: user}}
             initialParams={{user: route.params.user}}
+            options={{
+                headerBackground: () => 
+                <Image 
+                source={require('../../../assets/images/pantryshelves.png')}
+                resizeMode="repeat"
+                style={{marginBottom: 0, height: 60, overflow: 'hidden',}}
+                />
+            }}
             />
 
             <Drawer.Screen
@@ -116,12 +125,21 @@ const Main = ({ route, navigation }) => {
             name="Preferences" 
             component={Preferences} 
             // initialParams={{user: user}}
+            initialParams={{user: route.params.user}}
+            options={{
+                headerBackground: () => 
+                <Image 
+                source={require('../../../assets/images/allergens.png')}
+                resizeMode="repeat"
+                style={{marginBottom: 0, height: 60, overflow: 'hidden',}}
+                />
+            }}
+
             // options={{
             //     headerStyle: {
             //         opacity: 0
             //     }
             // }}
-            initialParams={{user: route.params.user}}
             />
 
             {/* <Drawer.Screen

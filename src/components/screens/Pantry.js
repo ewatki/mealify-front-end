@@ -1,5 +1,5 @@
 import React from 'react'
-import { SectionList, View, ScrollView, Button, Text, Pressable, Modal, StyleSheet} from 'react-native';
+import { SectionList, View, ScrollView, Button, Text, Image, Pressable, Modal, StyleSheet} from 'react-native';
 import {MultipleSelectList} from 'react-native-dropdown-select-list'
 import data from '../../data/pantryitems.json';
 import axios from 'axios';
@@ -7,12 +7,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { FlatList } from 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 // import { panGestureHandlerCustomNativeProps } from 'react-native-gesture-handler/lib/typescript/handlers/PanGestureHandler';
-
-// IMPORT MULTISELECT ----> npm i react-native-dropdown-select-list
-
-// GET a user's pantry - /users/user_id/pantry/
-// PATCH update a user's pantry (add new item) - /users/user_id/pantry/
-// DELETE remove an item from a user's pantry = /users/user_id/pantry/
 
 const Pantry = ({ route, navigation }) => {
     const [user, setUser] = React.useState(route.params.user)
@@ -191,23 +185,24 @@ const Pantry = ({ route, navigation }) => {
                     onPress={() => handleOpenAddModal()}
                     >
                     <Text style={styles.textStyle}>Add </Text>
-                    {/* <Text style={styles.textStyle}>+</Text> */}
-
                 </Pressable>
                 <Pressable
                     style={[styles.showModalButtonRight]}
                     onPress={() => handleOpenRemoveModal()}>
                     <Text style={styles.textStyle}>Remove </Text>
-                    {/* <Text style={styles.textStyle}>-</Text> */}
                 </Pressable>
             </View>
             {/* Display Pantry */}
             <View style={styles.pantryView}>
                 <SectionList
                     sections={currentPantryData}
-                    renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
+                    renderItem={({item}) => <Text style={styles.item}>{item}</Text>                    
+                    }
                     renderSectionHeader={({section}) => (
-                    <Text style={styles.sectionHeader}>{section.title}</Text>
+                        <View>                        
+                            <Text style={styles.sectionHeader}>{section.title}</Text>
+                            <Image style={{height: 5}} resizeMode="stretch" source={require('../../../assets/images/shelf.png')} />
+                        </View>
                     )}
                     keyExtractor={item => `basicListEntry-${item}`}
                 />
@@ -334,7 +329,8 @@ const styles = StyleSheet.create({
         fontSize: 15,
         height: 35,
         marginBottom: 5,
-        backgroundColor: '#dee2e7'
+        backgroundColor: '#E2C274',
+        fontFamily: 'Avenir-Roman'
     },
     modalView: {
         paddingBottom: 50,
@@ -366,6 +362,7 @@ const styles = StyleSheet.create({
         paddingVertical: 2,
         fontSize: 20,
         fontWeight: 'bold',
+        fontFamily: 'Avenir-Roman',
         textAlign: 'left',
         marginBottom: 5,
         height: 'auto'
@@ -404,6 +401,7 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         fontSize: 15,
+        fontFamily: 'Avenir-Roman',
         color: 'white',
     },
     saveButtonContainer: {

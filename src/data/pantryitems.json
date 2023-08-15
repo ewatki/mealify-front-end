@@ -1,7 +1,7 @@
 {
     "Oil & Vinegar" : [
         {"key": 1, "value": "extra-virgin olive oil", "disabled": false},
-        {"key": 2, "value": "cooking oil (e.g. canola or grapeseed)", "disabled": false},
+        {"key": 2, "value": "cooking oil", "disabled": false},
         {"key": 3, "value": "red-wine vinegar"}
     ],
 
