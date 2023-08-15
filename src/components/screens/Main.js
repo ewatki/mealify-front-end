@@ -129,6 +129,12 @@ const Main = ({ route, navigation }) => {
             component={Recipe} 
             initialParams={{user: user}}
             // initialParams={{user: route.params.user}}
+            options={{
+                headerStyle: {
+                    backgroundColor: '#E2C274',
+                },
+                headerTintColor: '#756382',
+            }}
             />
         </Drawer.Navigator>
     )

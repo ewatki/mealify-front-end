@@ -25,11 +25,136 @@ const Item = ({title, id}) => (
   </View>
 );
 
+
+
 const Home = ({route}) => {
+  const [loading, setLoading] = React.useState('false');
+
+  const createAlert = (errorMessage) =>
+    Alert.alert('Error', errorMessage, [
+      {text: 'OK', onPress: () => console.log('OK Pressed')},
+  ]);
+
+  const handleGetNewRecipes = () => {
+    // Set up axios parameters for random and not
+    setLoading('true')
+    const includeIngredients = formFields.ingredients
+    const intolerances = Object.keys(user.intolerances).toString()
+    const dietBuilder = Object.keys(user.diet_restrictions)
+    dietBuilder.push(formFields.diet)
+    let diet = dietBuilder.toString()
+    const cuisine = formFields.cuisine
+
+    // Make random call if it doesnt include ingredients
+    if (includeIngredients === "") {
+      axios.get('https://api.spoonacular.com/recipes/random', {
+        params: {
+          apiKey: apiKey,
+          number: 10,
+          intolerances: intolerances,
+          diet: diet,
+          cuisine: cuisine,
+        }
+      })
+      .then(response => {
+        // Gather new data in variables
+        const data = response.data.recipes 
+        getRecipeDetails(data)
+      })
+      .catch(error => {
+        console.log(error);
+        setLoading('false')
+      });
+    } else {
+      // Call initial recipe search
+      console.log('in NOT random')      
+      axios.get('https://api.spoonacular.com/recipes/complexSearch', {
+        params: {
+          apiKey: apiKey,
+          intolerances: intolerances,
+          includeIngredients: includeIngredients,
+          diet: diet,
+          cuisine: cuisine,
+          number: 10,
+        }
+      })
+      .then(response => {
+        // Gather new data in variables
+        const data = response.data.results
+        getRecipeDetails(data)
+      })
+      .catch(error => {
+        console.log('Error: ', error);
+      });
+    };
+  };
+
+    const getRecipeDetails = (data) => {
+    setLoading('true')
+    if (data.length === 0) {
+      createAlert('Ooops, we cannot find any recipes matching the current requirements! Try going to your recipes page and adding some different requirements.!')
+      setLoading('false')
+
+      return 
+    }    
+
+    console.log(data.length)
+    const randomIndex = getRandomInt(data.length)
+    console.log('randomIndex: ', randomIndex)
+    const spoonId = data[randomIndex].id
+    const title = data[randomIndex].title
+    const image = data[randomIndex].image
+
+    const url = `https://api.spoonacular.com/recipes/${spoonId}/information`
+    params = {
+      params: {
+        apiKey: apiKey,
+        includeNutrition: 'True'
+      }
+    }
+
+    // Call details of recipe to gather more needed data
+    axios.get(url, params)
+    .then(response => {
+      const instructions = response.data.instructions
+      const ingredients = []
+      for (ingredient of response.data.extendedIngredients) {
+        ingredients.push(ingredient.name)
+      }
+      const nutritionScore = Math.floor(response.data.nutrition.properties[2].amount)
+      const sourceUrl = response.data.sourceUrl
+
+      // Build dict to post to mealify_api
+      const newRecipeData = {
+        title: title, 
+        ingredients: ingredients, 
+        instructions: instructions, 
+        nutritional_data: nutritionScore, 
+        url: sourceUrl, 
+        image: image,
+        user_state: 0,
+        user_id: user.id
+      }
+      // setDisplayedRecipes(newRecipeData)
+      // console.log('NewRecipeData: ', newRecipeData.title)
+      // console.log('NewRecipeData: ', newRecipeData.ingredients)
+      // navigation.navigate(TempRecipe, )
+      // navigation.navigate('Recipe', {recipe: newRecipeData})
+      navigation.navigate('TempRecipe', {recipe: newRecipeData})
+      setLoading('false')
+    })
+    .catch(error => {
+      setLoading('false')
+      createAlert(error)
+    });
+  };
+
+
   return (
     <SafeAreaView style={{flex:1}}>
 
       <ScrollView nestedScrollEnabled={true} horizontal={false} style={{flex:1, width: '100%', height: '100%', flexDirection: 'column', backgroundColor: '#E2C274'}}>
+      {/* <ActivityIndicator style={styles.activityIndicator} animating={loading} size='small' /> */}
 
         <View style={styles.blob}>
           <Text style={styles.header}>Hello, {route.params.user.username}!</Text>
@@ -37,7 +162,9 @@ const Home = ({route}) => {
 
             <Text style={{fontSize: 52, fontWeight: 'bold', paddingHorizontal: 20, width: 315}}>What are you in the mood for?</Text>
 
-            <TouchableOpacity style={{padding: 10, borderRadius: 10, height: 40, right: 190, top: 110, textAlign: 'center', backgroundColor: '#756382'}}>
+            <TouchableOpacity 
+              style={{padding: 10, borderRadius: 10, height: 40, right: 190, top: 110, textAlign: 'center', backgroundColor: '#756382'}}
+              onPress={ () => { handleGetNewRecipes()} }>
               <Text style={{fontSize: 16, color: 'white'}}>Get a Recipe</Text>
             </TouchableOpacity>
           </View>
