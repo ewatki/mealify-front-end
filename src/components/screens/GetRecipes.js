@@ -114,7 +114,7 @@ const GetRecipes = ({ route, navigation }) => {
       // console.log('NewRecipeData: ', newRecipeData.ingredients)
       // navigation.navigate(TempRecipe, )
       // navigation.navigate('Recipe', {recipe: newRecipeData})
-      navigation.navigate('TempRecipe', {recipe: newRecipeData})
+      navigation.navigate('RecipeDetails', {recipe: newRecipeData})
       setLoading('false')
     })
     .catch(error => {
@@ -128,7 +128,7 @@ const GetRecipes = ({ route, navigation }) => {
     <View style={styles.container}>
       <ActivityIndicator style={styles.activityIndicator} animating={loading} size='small' />
       <View style={styles.recipeListContainer}>
-        <RecipeList recipes={displayedRecipes}/>
+        <RecipeList recipes={displayedRecipes} navigation={navigation}/>
       </View>
       <View style={styles.yourSavedRecipesContainer}>
         <Text style={styles.header}>Your Saved Recipes</Text>

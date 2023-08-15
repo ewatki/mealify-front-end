@@ -5,6 +5,7 @@ import Register from '../screens/Register';
 import Login from '../screens/Login';
 import Main from '../screens/Main';
 import RecipeList from '../screens/RecipeList';
+import Recipe from '../screens/Recipe';
 
 const Stack = createStackNavigator();
 const Navigator = () => {
@@ -41,7 +42,9 @@ const Navigator = () => {
                     headerTintColor: '#756382',
                 }}
             />
+
             <Stack.Screen name="RecipeList" component={RecipeList}  />
+            <Stack.Screen name="RecipeDetails" component={Recipe}  />
 
             <Stack.Screen 
                 name="Main" 

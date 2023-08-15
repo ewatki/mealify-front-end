@@ -7,14 +7,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import axios from 'axios';
 
 const Recipe = ({route, navigation}) => {
-    const recipe = route.params.recipe
+    const recipe = route.params.recipe;
+    console.log('recipe: ', recipe.ingredients)
    
-    const ingredientList = []
-        for (ingredient of recipe.ingredients) {
-            ingredientList.push(ingredient)
-            ingredientList.push(', ')
-
-    }
+    const ingredientList = [];
+    for (ingredient of Object.keys(recipe.ingredients)) {
+        ingredientList.push(ingredient);
+        ingredientList.push(', ');
+    };
     
     
     const handleSave = () => {

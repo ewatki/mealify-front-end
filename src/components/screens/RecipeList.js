@@ -9,7 +9,7 @@ import axios from 'axios';
 import Recipe from './Recipe'
 // import handleGetMealifyRecipes from './GetRecipes'
 
-const RecipeList = ({ recipes, route, navigation }) => {
+const RecipeList = ({ recipes, navigation }) => {
     return (
         <SafeAreaView style={styles.container}>           
             <ScrollView 
@@ -28,11 +28,12 @@ const RecipeList = ({ recipes, route, navigation }) => {
                                 </TouchableOpacity>
                             </View>
                             <View>
-                                {/* <TouchableOpacity onPress={ () => {navigation.navigate(Recipe, {recipe: recipe})}}> */}
-                                <Image style={styles.recipeImg}
-                                source={{uri: recipe.image}}
-                                />
-                                {/* </TouchableOpacity> */}
+                                <TouchableOpacity 
+                                    onPress={ () => {navigation.navigate('RecipeDetails', {recipe: recipe})}}>
+                                    <Image style={styles.recipeImg}
+                                    source={{uri: recipe.image}}
+                                    />
+                                </TouchableOpacity>
                             </View>
                         </View>
                     );
