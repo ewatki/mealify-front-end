@@ -5,9 +5,6 @@ import Recipe from './Recipe';
 // TESTING
 const recipeImages = ["https://spoonacular.com/recipeImages/782585-312x231.jpg", "https://spoonacular.com/recipeImages/716429-556x370.jpg", "https://www.allrecipes.com/thmb/qk2ga3zSmgDmzlwDkukcHr9AUjw=/800x533/filters:no_upscale():max_bytes(150000):strip_icc():focal(399x0:401x2):format(webp)/8382626_ZucchiniandGroundBeefSkillet4x3photobyfabeveryday-f36b3dd65e65448097aa967c7f23c880.jpg", "https://www.allrecipes.com/thmb/nYSZduxspJJeYExxpVB7miP9jXM=/364x242/filters:no_upscale():max_bytes(150000):strip_icc():focal(999x0:1001x2):format(webp)/242342-fiesta-slow-cooker-shredded-chicken-tacos-ddmfs-3X2-0902-775cf5010b5b46cdbdf2ca50993628a9.jpg", "https://www.allrecipes.com/thmb/57nQ0DwByvRw-CYcZbZsGkzN8OA=/771x514/filters:no_upscale():max_bytes(150000):strip_icc():focal(929x470:931x472):format(webp)/ChefJohnsTacoStuffedZucchiniBoats4x3-6b9f773827f747d092f438faf9da0ed5.jpg"]
 
-// ACTUAL
-// const recipeImages = route.params.user.recipes
-
 // TESTING 
 const recipeData = [
   {"id": 1, "title": "1 cup red quinoa"},
@@ -28,7 +25,7 @@ const Item = ({title, id}) => (
 
 
 
-const Home = ({route}) => {
+const Home = ({route, navigation}) => {
   const [loading, setLoading] = React.useState('false');
   const user = route.params.user
   const apiKey = '5d5b6e0bcc9c4205b3cba5dc026a03ba'  
@@ -114,11 +111,7 @@ const Home = ({route}) => {
         user_state: 0,
         user_id: user.id
       }
-      // setDisplayedRecipes(newRecipeData)
-      // console.log('NewRecipeData: ', newRecipeData.title)
-      // console.log('NewRecipeData: ', newRecipeData.ingredients)
-
-      // navigation.navigate('RecipeDetails', {recipe: newRecipeData})
+      navigation.navigate('RecipeDetails', {recipe: newRecipeData})
       setLoading('false')
     })
     .catch(error => {
@@ -132,8 +125,6 @@ const Home = ({route}) => {
     <SafeAreaView style={{flex:1}}>
 
       <ScrollView nestedScrollEnabled={true} horizontal={false} style={{flex:1, width: '100%', height: '100%', flexDirection: 'column', backgroundColor: '#E2C274'}}>
-      {/* <ActivityIndicator style={styles.activityIndicator} animating={loading} size='small' /> */}
-
         <View style={styles.blob}>
           <Text style={styles.header}>Hello, {route.params.user.username}!</Text>
           <View style={{flexDirection: 'row'}}>
