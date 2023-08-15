@@ -88,8 +88,8 @@ const Recipe = ({route, navigation}) => {
     };
 
     return (
-        <SafeAreaView style={styles.container} horizontal={false}> 
-            <ScrollView style={styles.scrollContainer}>
+        <SafeAreaView style={styles.container} > 
+            <ScrollView style={styles.scrollContainer} horizontal={false}>
                 <Text style={styles.recipeTitleText}>{ recipe.title }</Text> 
                 <Image style={styles.recipeImg} source={{uri: recipe.image}} resizeMode={'cover'}/>
                 <View style={styles.recipeContainer}>
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
         paddingRight: 10,
     },
     recipeTitleContainer: {
-        width:175, 
+        width:'100%', 
         flexGrow: 1,
         flex: 1,
     },
@@ -182,14 +182,13 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 40,
         flexShrink: 1,
-        width: 400, 
         textAlign:'center',
         color: '#756382'
 
     },
     recipeImg: {
-        width:275,
-        height: 295,
+        width:'100%',
+        height: 195,
         borderRadius: 10,
         alignSelf:'center'
     },
