@@ -4,8 +4,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Register from '../screens/Register';
 import Login from '../screens/Login';
 import Main from '../screens/Main';
-import RecipeList from '../screens/RecipeList';
 import Recipe from '../screens/Recipe';
+import Pantry from '../screens/Pantry';
+import Preferences from '../screens/Preferences';
+import GetRecipes from '../screens/GetRecipes';
 
 const Stack = createStackNavigator();
 const Navigator = () => {

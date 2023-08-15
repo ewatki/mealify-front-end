@@ -1,5 +1,6 @@
 import React from 'react';
 import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
+import { Text } from 'react-native';
 import CustomDrawer from '../CustomDrawer';
 import Dashboard from './Dashboard'
 import Pantry from './Pantry'
@@ -77,8 +78,25 @@ const Main = ({ route, navigation }) => {
             name="Home"
             component={Dashboard} 
             options={{
+                headerRight: () => (
+                    <Text style={{
+                        color: '#756382',
+                        fontSize: 26, 
+                        fontFamily: 'Avenir-Roman',   
+                    }}>Hello, {route.params.user.username}</Text>
+                ),
+                headerTintColor: '#756382',
+                headerTitleStyle: {
+                    fontWeight: 'normal',
+                    flexDirection: 'row',
+                    alignItems: 'flex-end',
+                    justifyContent: 'flex-end'             
+                },
                 headerStyle: {
                     backgroundColor: 'white',
+                    flexDirection: 'row',
+                    alignItems: 'flex-end',
+                    justifyContent: 'flex-end'
                 },
             }}
             // initialParams={{user: user}}
