@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput, Image, StyleSheet, ActivityIndicator } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import axios from 'axios';
 
@@ -12,159 +12,171 @@ const Login = ({ route, navigation }) => {
         email: '',
         password: '',
     });
-    const [errorMessage, setErrorMessage] = React.useState('')
-    const [loading, setLoading] = React.useState('false')
+    const [errorMessage, setErrorMessage] = React.useState('');
+    const [showErrorMessage, setShowErrorMessage] = React.useState(false);
+    const [loading, setLoading] = React.useState(false);
 
     const handleChange = (text, field) => {
         if (field === 'email') {
             setFormFields({
                 ...formFields,
                 email: text
-            })
+            });
         } else if (field === 'password') {
             setFormFields({
                 ...formFields,
                 password: text
-            })
-        }
-    }
+            });
+        };
+    };
 
     const handleUserLogin = () => {
         setLoading('true')
         axios.post('https://mealify-zclw.onrender.com/users/login', formFields)
         .then(response => {
-            setLoading('false')
-            console.log('response.data:', response.data)
-            const user = response.data
-            setErrorMessage('')
-            console.log('Successful login!')                
-            navigation.navigate('Main', {user: user})
+            setLoading(false);
+            const user = response.data;
+            setShowErrorMessage(false);
+            setErrorMessage('');
+            console.log('Successful login!');    
+            navigation.navigate('Main', {user: user});
         })
         .catch(error => {
-            setLoading('false')
+            setLoading('false');
             if (error.response.data === 'Invalid password' || error.response.data === 'That email is invalid') {
-                setErrorMessage(error.response.data)
-                console.log(error.response.data)
+                setErrorMessage(error.response.data);
+                setShowErrorMessage(true);
+                console.log(error.response.data);
             } else {
-                console.log('error: ', error)
-                setErrorMessage('An error has occured.  Please try again or try another user email and password\nAlso, if at first you dont succeed, try, try again')
-            }
-        })
-    }
+                console.log('error: ', error);
+                setErrorMessage('An error has occured.  Please try again or try another user email and password\nAlso, if at first you dont succeed, try, try again');
+                setShowErrorMessage(true);
+            };
+        });
+    };
 
     return (
-        <View style={styles.container}>
-            <View style={styles.centeredView}>
-                <Text style={styles.header}>Login</Text>
-                <ActivityIndicator animating={loading} size='small' />
-                <View style={styles.inputContainer}>
-                    <TextInput 
-                        value={formFields.email} 
-                        onChangeText={text => handleChange(text, 'email')} 
-                        // textContentType="email" 
-                        autoCompleteType="email" 
-                        autoCapitalize='none'
-                        placeholder='Email'
-                        style={styles.input}
-                    />   
-                    <TextInput 
-                        value={formFields.password} 
-                        onChangeText={text => handleChange(text, 'password')} 
-                        // textContentType="password"
-                        autoCapitalize='none'
-                        placeholder='Password'
-                        style={styles.input}
-                    /> 
-                    <TouchableOpacity 
-                        style={styles.loginButton} 
-                        onPress={ handleUserLogin }
-                        // hitSlop={{ bottom: 30, left: 30, right: 30 }}
-                    > 
-                        <Text style={{ color: '#007AFF', fontSize: 25 }} >Login</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.errorContainer}>
-                    <Text style={styles.errorMessage}>{errorMessage}</Text>
-                </View>
-                <View style={styles.registerContainer}>
-                    <Text>Don't have an account? </Text>
-                    <TouchableOpacity onPress={ () => navigation.navigate(Register) }> 
-                        <Text style={styles.registerButton}>Register</Text>
-                    </TouchableOpacity>
-                </View>
+        <View style={[styles.container, styles.center]}>
+            <Image 
+                style={styles.header}
+                source={require('../../../assets/images/Mealify-logo.png')} />
+            <View style={styles.activityIndicator}>
+                <ActivityIndicator animating={loading} size='large' color='#756382' />
+            </View>
+            <View style={styles.inputContainer}>
+                <TextInput 
+                    value={formFields.email} 
+                    onChangeText={text => handleChange(text, 'email')} 
+                    // textContentType="email" 
+                    autoCompleteType="email" 
+                    autoCapitalize='none'
+                    placeholder='Email'
+                    placeholderTextColor="lightgrey" 
+                    style={styles.input}
+                />   
+                <TextInput 
+                    value={formFields.password} 
+                    onChangeText={text => handleChange(text, 'password')} 
+                    // textContentType="password"
+                    autoCapitalize='none'
+                    placeholder='Password'
+                    placeholderTextColor="lightgrey" 
+                    style={styles.input}
+                /> 
+                <TouchableOpacity 
+                    style={styles.loginButton} 
+                    onPress={ handleUserLogin }
+                    // hitSlop={{ bottom: 30, left: 30, right: 30 }}
+                > 
+                    <Text style={styles.loginButtonText} >Login</Text>
+                </TouchableOpacity>
+                { showErrorMessage && 
+                    <View style={styles.errorContainer}>
+                        <Text style={[styles.errorMessage, styles.center]}>{errorMessage}</Text>
+                    </View>
+                }
+            </View>
+            <View style={styles.registerContainer}>
+                <Text style={styles.registerTitle}>Don't have an account? </Text>
+                <TouchableOpacity 
+                    onPress={ () => navigation.navigate(Register)}
+                    style={styles.registerButton}    
+                > 
+                    <Text style={styles.registerButtonText}>Register</Text>
+                </TouchableOpacity>
             </View>
         </View>
     );
-}
+};
 
 export default Login;
 
 const styles = StyleSheet.create({
-    container: {
-        marginTop: 50,
-        flex: 1, 
-        // alignItems: 'center', 
-        // justifyContent: 'center'
-    },
-    centeredView: {
+    activityIndicator: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
+        paddingTop: 20,
+        marginBottom: -30,
+    },
+    center: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    container: {
+        flex: 1, 
+        backgroundColor: '#E2C274',
     },
     errorContainer: {
-        flex: 1, 
         alignItems: 'center',
-        padding: 20,
+        borderRadius: 5,
+        backgroundColor: 'lightsalmon',
+        alignSelf: 'center',
+        padding: 4,
     },
     errorMessage: {
-        color: 'red',
-        justifyContent: 'center'
+        color: '#8B0000',
     },
     header:{
-        flex: 1, 
-        justifyContent: 'flex-start',
-        fontSize: 40,
-        fontWeight: 'bold'
+        flex: 3, 
+        justifyContent: 'center',
+        marginBottom: -50,
     },
     input: {
-        // flex: 1,
         height: 40,
-        margin: 12,
-        borderWidth: 1,
+        margin: 7,
         padding: 10,
         borderRadius: 10,
-        // width: '100%',
         width: 300,
-        // justifyContent: 'center',
-        // alignItems: 'center'
+        backgroundColor: '#756382',
+        color: '#fffdd0',
+        
     },
     inputContainer: {
-        flex:2,
+        flex: 5,
     },
     loginButton: {
-        // backgroundColor: 'blue',
-        // justifyContent: 'center',
-        // alignItems: 'center',
-        // flex:1, 
         alignSelf: 'center',
-        // borderWidth: 1,
-        marginTop: 3,
-        marginBottom: 5,
-        padding: 5,
-        paddingLeft: 7,
         borderRadius: 10,
     },
+    loginButtonText: {
+        fontSize: 24,
+        color: '#756382',
+    },
     registerButton: {
-        borderWidth: 1,
         marginTop: 3,
-        padding: 5,
-        paddingLeft: 7,
+        padding: 7,
         borderRadius: 10,
+        backgroundColor: '#756382',
+    },
+    registerButtonText: {
+        color: '#fffdd0',
     },
     registerContainer: {
         flex: 1,
         paddingBottom: 100,
         justifyContent: 'flex-end',
-        alignItems: 'center'
-    }
+        alignItems: 'center',
+    },
+    registerTitle: {
+        color: '#756382'
+    },
 });

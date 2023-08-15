@@ -1,8 +1,5 @@
-import React, { useState } from 'react';
-import { Image, Text, Button, View } from 'react-native';
+import React from 'react';
 import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-
 import CustomDrawer from '../CustomDrawer';
 import Dashboard from './Dashboard'
 import Pantry from './Pantry'
@@ -13,6 +10,7 @@ import Recipe from './Recipe';
 const Drawer = createDrawerNavigator();
 
 const Main = ({ route, navigation }) => {
+    // const user = useContext(UserContext)
     const user = route.params.user
 
     // const user = {
@@ -98,7 +96,20 @@ const Main = ({ route, navigation }) => {
             component={GetRecipes} 
             // initialParams={{user: user}}
             initialParams={{user: route.params.user}}
-
+            title={'Recipes'}
+            options={{
+                headerTitle: 'Recipes',
+                headerStyle: {
+                    backgroundColor: '#E2C274',
+                },
+                headerTintColor: '#756382',
+                headerTitleStyle: {
+                    fontWeight: 'normal',
+                    color: '#756382',
+                    fontSize: 26, 
+                    fontFamily: 'Avenir-Roman',                
+                },
+            }}
             />
 
             <Drawer.Screen

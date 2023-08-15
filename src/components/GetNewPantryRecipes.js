@@ -40,7 +40,8 @@ const GetNewPantryRecipes = ({ user, setLoading, getRecipeDetails }) => {
         style={styles.getRecipesButton}
         onPress={ () => { handleGetNewPantryRecipes()} }
         > 
-        <Text style={{ color: '#007AFF', fontSize: 25 }} >New Pantry Recipe</Text>
+        <Text style={styles.buttonText} >New Pantry Recipe</Text>
+        <Text style={styles.buttonDescription}>Get a new recipe with ingredients from your pantry</Text>
       </TouchableOpacity>
     </View>
 
@@ -50,10 +51,21 @@ const GetNewPantryRecipes = ({ user, setLoading, getRecipeDetails }) => {
 export default GetNewPantryRecipes;
 
 const styles = StyleSheet.create({
+  buttonDescription: {
+    fontSize: 12, 
+    color: 'white',
+    fontFamily: 'Avenir-Roman'
+  },
+  buttonText: {
+    fontSize: 16, 
+    color: 'white',
+    fontFamily: 'Avenir-Roman'
+  },
   getRecipesButton: {
-    borderWidth: 1,
-    borderRadius: 10,
-    padding: 5,
+    padding: 5, 
+    borderRadius: 5,
+    textAlign: 'center', 
+    backgroundColor: '#756382',
     alignItems: 'center',
     margin: 3,
   },

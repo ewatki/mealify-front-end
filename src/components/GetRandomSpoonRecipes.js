@@ -4,15 +4,19 @@ import axios from 'axios';
 import Recipe from './screens/Recipe';
 import GetRecipesConstraintsForm from './GetRecipesConstraintsForm';
 
-const GetRandomSpoonRecipes = ({ user, setLoading, formFields, setFormFields, modalVisible, setModalVisible, getRecipeDetails, setErrorMessage }) => {
+const GetRandomSpoonRecipes = ({ user, setLoading, modalVisible, setModalVisible, getRecipeDetails }) => {
+  // const GetRandomSpoonRecipes = ({ user, setLoading, formFields, setFormFields, modalVisible, setModalVisible, getRecipeDetails }) => {
+    const [formFields, setFormFields] = React.useState({
+    ingredients: '',
+    cuisine: '',
+    diet: '',
+  });
   const apiKey = '5d5b6e0bcc9c4205b3cba5dc026a03ba'
   // const apiKey = 'a10d8b0165074f6a807217fe8ea8bd20'
 
   const handleHideModal = () => {
     setModalVisible(!modalVisible)
   };
-
-
 
   const handleGetNewRecipes = () => {
     // Set up axios parameters for random and not
@@ -74,7 +78,8 @@ const GetRandomSpoonRecipes = ({ user, setLoading, formFields, setFormFields, mo
         style={styles.getRecipesButton}
         onPress={ () => { handleGetNewRecipes()} }
       > 
-        <Text style={{ color: '#007AFF', fontSize: 25 }} >Random Recipe</Text>
+        <Text style={styles.buttonText} >Random Recipe</Text>
+        <Text style={styles.buttonDescription} >Get a new recipe and add some specifics</Text>
       </TouchableOpacity>
       <GetRecipesConstraintsForm 
           formFields={formFields} 
@@ -82,7 +87,7 @@ const GetRandomSpoonRecipes = ({ user, setLoading, formFields, setFormFields, mo
           handleHideModal={handleHideModal}
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
-          setErrorMessage={setErrorMessage}
+          handleGetNewRecipes={handleGetNewRecipes}
         />
       <Pressable
         style={[styles.showModalButton]}
@@ -98,15 +103,34 @@ const GetRandomSpoonRecipes = ({ user, setLoading, formFields, setFormFields, mo
 export default GetRandomSpoonRecipes;
 
 const styles = StyleSheet.create({
+  buttonDescription: {
+    fontSize: 12, 
+    color: 'white',
+    fontFamily: 'Avenir-Roman'
+  },
+  buttonText: {
+    fontSize: 16, 
+    color: 'white',
+    fontFamily: 'Avenir-Roman'
+  },
   getRecipesButton: {
-    borderWidth: 1,
-    borderRadius: 10,
-    padding: 5,
+    borderRadius: 5,
+    textAlign: 'center', 
+    backgroundColor: '#756382',
     alignItems: 'center',
-    margin: 3,
+    marginTop: 3,
+    marginBottom: 3,
   },
   showModalButton: {
-    alignItems: 'center'
-  }
-
+    alignItems: 'center',
+    borderRadius: 5,
+    justifyContent: 'center', 
+    backgroundColor: '#756382',
+    padding: 2,
+    marginTop: 2,
+  },
+  textStyle: {
+    color: 'white',
+    fontFamily: 'Avenir-Roman'
+  },
 })
