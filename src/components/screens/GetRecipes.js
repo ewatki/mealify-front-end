@@ -91,9 +91,9 @@ const GetRecipes = ({ route, navigation }) => {
     axios.get(url, params)
     .then(response => {
       const instructions = response.data.instructions
-      const ingredients = []
+      const ingredients = {}
       for (ingredient of response.data.extendedIngredients) {
-        ingredients.push(ingredient.name)
+        ingredients[ingredient.name] = 1
       }
       const nutritionScore = Math.floor(response.data.nutrition.properties[2].amount)
       const sourceUrl = response.data.sourceUrl

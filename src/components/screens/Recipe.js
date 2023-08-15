@@ -9,13 +9,12 @@ import axios from 'axios';
 const Recipe = ({route, navigation}) => {
     const recipe = route.params.recipe;
     console.log('recipe: ', recipe.ingredients)
-   
+    
     const ingredientList = [];
     for (ingredient of Object.keys(recipe.ingredients)) {
         ingredientList.push(ingredient);
         ingredientList.push(', ');
-    };
-    
+    };    
     
     const handleSave = () => {
         axios.post(`https://mealify-zclw.onrender.com/users/${recipe.user_id}/recipes`, recipe)
