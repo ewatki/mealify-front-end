@@ -119,12 +119,13 @@ const Home = ({route, navigation}) => {
           <View style={styles.blobContentContainer}>
 
             <Text style={styles.blobQuestionText}>What are you in the mood for?</Text>
-
-            <TouchableOpacity 
-              style={styles.getRecipeButton}
-              onPress={ () => { handleGetNewRecipes()} }>
-              <Text style={{fontSize: 16, color: 'white'}}>Get a Recipe</Text>
-            </TouchableOpacity>
+            <View style={styles.getRecipeButtonContainer}>
+              <TouchableOpacity 
+                style={styles.getRecipeButton}
+                onPress={ () => { handleGetNewRecipes()} }>
+                <Text style={{fontSize: 16, color: 'white'}}>Get a Recipe</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
 
@@ -147,28 +148,30 @@ const Home = ({route, navigation}) => {
         </View>
         <View style={styles.quickLinksContainer}>
             <Text style={styles.quickLinksHeader}>Quick Links</Text>
-            <TouchableOpacity 
-              style={styles.quickLinksButton}
-              onPress={ () => {
-                navigation.navigate('Pantry', {user: user})
-              }}>
-              <Text style={styles.buttonText}>Pantry</Text>
-            </TouchableOpacity>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity 
+                style={styles.quickLinksButton}
+                onPress={ () => {
+                  navigation.navigate('Pantry', {user: user})
+                }}>
+                <Text style={styles.buttonText}>Pantry</Text>
+              </TouchableOpacity>
 
-            <TouchableOpacity 
-              style={styles.quickLinksButton}
-              onPress={ () => {
-                navigation.navigate('Preferences', {user: user})
-              }}>
-              <Text style={styles.buttonText}>Preferences</Text>
-            </TouchableOpacity>
-            <TouchableOpacity 
-              style={styles.quickLinksButton}
-              onPress={ () => {
-                navigation.navigate('Recipes', {user: user})
-              }}>
-              <Text style={styles.buttonText}>Recipes</Text>
-            </TouchableOpacity>
+              <TouchableOpacity 
+                style={styles.quickLinksButton}
+                onPress={ () => {
+                  navigation.navigate('Preferences', {user: user})
+                }}>
+                <Text style={styles.buttonText}>Preferences</Text>
+              </TouchableOpacity>
+              <TouchableOpacity 
+                style={styles.quickLinksButton}
+                onPress={ () => {
+                  navigation.navigate('Recipes', {user: user})
+                }}>
+                <Text style={styles.buttonText}>Recipes</Text>
+              </TouchableOpacity>
+            </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -181,17 +184,29 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
     backgroundColor: 'white',
-    flex: 1,
-    borderWidth: 1,
+    flex: 2,
+    alignItems: 'center',
+    paddingTop: 20,
+    // justifyContent: 'center'
+
   },
   blobContentContainer: {
-    // flexDirection: 'row'
+
   },
   blobQuestionText: {
     fontSize: 48, 
     fontWeight: 'bold', 
-    paddingHorizontal: 20, 
-    // width: 315
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 10,
+    // paddingHorizontal: 20, 
+    // marginRight: 70,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    flexWrap: 'wrap',
+    gap: 10,
   },
   buttonText: {
     fontSize: 16, 
@@ -205,67 +220,51 @@ const styles = StyleSheet.create({
     padding: 10, 
     borderRadius: 10, 
     height: 40, 
-    // right: 190, 
-    // top: 110, 
-    // textAlign: 'center', 
+    width: 150,
     justifyContent: 'center',
     backgroundColor: '#756382',
-    alignContent: 'center',
+    alignItems: 'center',
+    // borderWidth: 1,
+  },
+  getRecipeButtonContainer: {
+    // justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 10,
   },
   image: {
-    width: 150, 
-    height: 170, 
+    width: 175, 
+    height: 195, 
     borderRadius: 20, 
     marginLeft: 10, 
     marginRight: 10
   },
   imagesContainer: {
-    flex: 1,
-    // top: 0, 
-    // paddingHorizontal: 30,
-    borderWidth: 1,
+    flex: 2,
   },
   imagesScrollView: {
-    flex: 1,
-    width: '100%', 
-    height: 200, 
-    paddingVertical: 15, 
-    bottom: 35, 
-    zIndex: 2
+    bottom: 25, 
   },
   quickLinksButton: {
-    // flex: 1,
-    // padding: 10, 
     borderRadius: 10, 
     height: 40, 
-    // right: 190, 
-    // top: 110, 
-    // textAlign: 'center', 
+    width: 150,
     backgroundColor: '#756382',
     justifyContent: 'center',
     alignItems: 'center',
   },
   quickLinksContainer: {
-    // bottom: 20, 
-    height: 300, 
-    // flex: 1, 
     justifyContent: 'top', 
-    // gap: 10, 
-    // paddingVertical: 20,
-    borderWidth: 1,
+    gap: 10, 
+    justifyContent: 'space-around',
     flex: 1,
   },
   quickLinksHeader: {
     fontSize:20, 
     fontWeight: 'medium', 
-    paddingHorizontal: 30
+    paddingHorizontal: 30,
+    color: '#756382',
   },
   scrollViewContainer: {
-    flex:1, 
-    // width: '100%', 
-    // height: '100%', 
-    // flexDirection: 'column', 
-    // backgroundColor: '#E2C274'
   }
 })
 
