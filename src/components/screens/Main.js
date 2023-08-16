@@ -87,16 +87,10 @@ const Main = ({ route, navigation }) => {
                 ),
                 headerTintColor: '#756382',
                 headerTitleStyle: {
-                    fontWeight: 'normal',
-                    flexDirection: 'row',
-                    alignItems: 'flex-end',
-                    justifyContent: 'flex-end'             
+                    fontWeight: 'normal'          
                 },
                 headerStyle: {
-                    backgroundColor: 'white',
-                    flexDirection: 'row',
-                    alignItems: 'flex-end',
-                    justifyContent: 'flex-end'
+                    backgroundColor: 'white'
                 },
             }}
             // initialParams={{user: user}}
