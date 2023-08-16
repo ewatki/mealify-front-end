@@ -222,6 +222,12 @@ const Pantry = ({ route, navigation }) => {
                 <Pressable
                     style={styles.placeholderPressable}
                     onPress={() => submitAddPantryUpdate()}>
+                    <Image 
+                        source={require('../../../assets/images/pantryshelves.png')}
+                        resizeMode="repeat"
+                        style={{marginBottom: 0, height: '100%', overflow: 'hidden',}}
+                        />
+
                 </Pressable>
                 <View backdropOpacity={0.2} style={styles.modalView}>
                     <ScrollView>
@@ -247,11 +253,14 @@ const Pantry = ({ route, navigation }) => {
                             })
                         }
                         </View>
-                        <View style={styles.saveButtonContainer}>
-                            <Button title="Save" color='#756382' onPress={() => submitAddPantryUpdate()}/>
-                        </View>
                     </ScrollView>
                 </View>
+                <Pressable
+                    style={[styles.saveUpdateButton]}
+                    onPress={() => submitAddPantryUpdate()}>
+                    <Text style={styles.textStyle}>Save</Text>
+                </Pressable>
+
             </Modal>
             {/* Remove Items Modal */}
             <Modal   
@@ -266,6 +275,12 @@ const Pantry = ({ route, navigation }) => {
                 <Pressable
                     style={styles.placeholderPressable}
                     onPress={() => submitRemovePantryUpdate()}>
+                    <Image 
+                        source={require('../../../assets/images/pantryshelves.png')}
+                        resizeMode="repeat"
+                        style={{marginBottom: 0, height: '100%', overflow: 'hidden',}}
+                        />
+
                 </Pressable>
                 <View style={styles.modalView}>
                     <ScrollView>
@@ -291,11 +306,13 @@ const Pantry = ({ route, navigation }) => {
                             })
                         }
                         </View>
-                        <View style={styles.saveButtonContainer}>
-                            <Button title="Save" color='#756382' onPress={() => submitRemovePantryUpdate()}/>
-                        </View>
                     </ScrollView>
                 </View>
+                <Pressable
+                    style={[styles.saveUpdateButton]}
+                    onPress={() => submitRemovePantryUpdate()}>
+                    <Text style={styles.textStyle}>Save</Text>
+                </Pressable>
             </Modal>
         </SafeAreaView>
     )
@@ -422,13 +439,15 @@ const styles = StyleSheet.create({
         fontFamily: 'Avenir-Roman',
         color: 'white',
     },
-    saveButtonContainer: {
-        width: '40%',
+    saveUpdateButton: {
+        alignItems: 'center',
+        borderRadius: 10,
+        padding: 5,
+        width: 100,
+        justifyContent: 'right',
         alignSelf: 'center',
-    },
-    saveButton: {
-        borderRadius: 15,
-        backgroundColor: '#756382',
-        justifyContent: 'center'
+        backgroundColor: '#756382',  
+        position: 'absolute',
+        bottom: 50,      
     }
 });

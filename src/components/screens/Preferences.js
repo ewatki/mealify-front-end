@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, View, ScrollView, Button, Text, StyleSheet, Pressable, SectionList} from 'react-native';
+import { Modal, View, ScrollView, Button, Text, StyleSheet, Pressable, Image, SectionList} from 'react-native';
 import {MultipleSelectList} from 'react-native-dropdown-select-list'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import axios from 'axios';
@@ -219,6 +219,9 @@ const Preferences = ({ route, navigation }) => {
                 </Pressable>
             </View>
             {/* Display Preferences */}
+            <View style={styles.header}>
+                <Text style={styles.headerText}>Preferences</Text>
+            </View>
             <View style={styles.prefView}>
                 <SectionList
                     sections={currentPrefData}
@@ -242,6 +245,12 @@ const Preferences = ({ route, navigation }) => {
                 <Pressable
                     style={styles.placeholderPressable}
                     onPress={() => submitAddPrefUpdate()}>
+                    <Image 
+                        source={require('../../../assets/images/allergens.png')}
+                        resizeMode="repeat"
+                        style={{marginBottom: 0, height: '100%', overflow: 'hidden',}}
+                        />
+
                 </Pressable>
                 <View style={styles.modalView}>
                     <ScrollView>
@@ -267,11 +276,17 @@ const Preferences = ({ route, navigation }) => {
                             })
                         }
                         </View>
-                        <View style={styles.saveButtonContainer}>
+
+                        {/* <View style={styles.saveButtonContainer}>
                             <Button title="Save" onPress={() => submitAddPrefUpdate()}/>
-                        </View>
+                        </View> */}
                     </ScrollView>
                 </View>
+                <Pressable
+                    style={[styles.saveUpdateButton]}
+                    onPress={() => submitAddPrefUpdate()}>
+                    <Text style={styles.textStyle}>Save</Text>
+                </Pressable>
             </Modal>
             {/* Remove Items Modal */}
             <Modal
@@ -284,7 +299,14 @@ const Preferences = ({ route, navigation }) => {
                 }}>
                 <Pressable
                     style={styles.placeholderPressable}
-                    onPress={() => submitRemovePrefUpdate()}>
+                    onPress={() => submitRemovePrefUpdate()}
+                    >
+                    <Image 
+                        source={require('../../../assets/images/allergens.png')}
+                        resizeMode="repeat"
+                        style={{marginBottom: 0, height: '100%', overflow: 'hidden',}}
+                        />
+
                 </Pressable>
                 <View style={styles.modalView}>
                     <ScrollView>
@@ -310,11 +332,13 @@ const Preferences = ({ route, navigation }) => {
                             })
                         }
                         </View>
-                        <View style={styles.saveButtonContainer}>
-                            <Button title="Save" onPress={() => submitRemovePrefUpdate()}/>
-                        </View>
                     </ScrollView>
                 </View>
+                <Pressable
+                    style={[styles.saveUpdateButton]}
+                    onPress={() => submitRemovePrefUpdate()}>
+                    <Text style={styles.textStyle}>Save</Text>
+                </Pressable>
             </Modal>
         </SafeAreaView>
     )
@@ -337,6 +361,16 @@ const styles = StyleSheet.create({
         padding: 5,
         alignItems: 'center',
         margin: 3,
+    },
+    header: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: -40
+    },
+    headerText: {
+        fontSize: 30,
+        color: '#756382',
+        fontWeight: '500',
     },
     input: {
         height: 40,
@@ -373,21 +407,20 @@ const styles = StyleSheet.create({
         opacity: '.8',
     },
     quickLinksContainer: {
-    // marginTop: 50,
         flex: 2, 
-    // alignItems: 'center', 
-    // justifyContent: 'center'
+    },
+    saveUpdateButton: {
+        alignItems: 'center',
+        borderRadius: 10,
+        padding: 5,
+        width: 100,
+        justifyContent: 'right',
+        alignSelf: 'center',
+        backgroundColor: '#756382',    
+        marginTop: 10,        
+        marginBottom: 60,
     },
     sectionHeader: {
-        // paddingTop: 2,
-        // paddingLeft: 10,
-        // paddingRight: 10,
-        // paddingBottom: 2,
-        // fontSize: 20,
-        // fontWeight: 'bold',
-        // backgroundColor: 'rgba(247,247,247,1.0)',
-        // justifyContent: 'center', 
-        // alignSelf: 'center'
         paddingVertical: 2,
         fontSize: 20,
         fontWeight: 'bold',
@@ -396,31 +429,20 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         height: 'auto'
     },
-    // showModalButton: {
-    //     alignItems: 'center',
-    //     borderWidth: 1,
-    //     borderRadius: 10,
-    //     marginTop: -40,
-    //     marginBottom: 20,
-    //     padding: 10,
-    //     width: 150,
-    //     justifyContent: 'center',
-    //     alignSelf: 'center',
-    // },
     showModalButtonLeft: {
         alignItems: 'center',
-        borderWidth: 1,
         borderTopLeftRadius: 10,
         borderBottomLeftRadius: 10,
         padding: 5,
         width: 100,
         justifyContent: 'right',
         alignSelf: 'center',
-        backgroundColor: '#756382',   
+        backgroundColor: '#756382',        
     },
     showModalButtonRight: {
         alignItems: 'center',
-        borderWidth: 1,
+        borderLeftWidth: 1,
+        borderColor: 'white',
         borderTopRightRadius: 10,
         borderBottomRightRadius: 10, 
         padding: 5,
@@ -431,10 +453,9 @@ const styles = StyleSheet.create({
     },
     showModalButtonsContainer: {
         flexDirection: 'row', 
-        // justifyContent: 'space-around',
         justifyContent: 'center',
         position: 'absolute',
-        bottom: 20,
+        bottom: 40,
         zIndex: 2,
         alignSelf: 'center',
         width: '60%',
