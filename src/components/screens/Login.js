@@ -7,7 +7,6 @@ import Main from './Main';
 import Register from './Register';
 
 const Login = ({ route, navigation }) => {
-
     const [formFields, setFormFields ] = React.useState({
         email: '',
         password: '',
@@ -67,7 +66,6 @@ const Login = ({ route, navigation }) => {
                 <TextInput 
                     value={formFields.email} 
                     onChangeText={text => handleChange(text, 'email')} 
-                    // textContentType="email" 
                     autoCompleteType="email" 
                     autoCapitalize='none'
                     placeholder='Email'
@@ -77,7 +75,6 @@ const Login = ({ route, navigation }) => {
                 <TextInput 
                     value={formFields.password} 
                     onChangeText={text => handleChange(text, 'password')} 
-                    // textContentType="password"
                     autoCapitalize='none'
                     placeholder='Password'
                     placeholderTextColor="lightgrey" 
@@ -86,7 +83,6 @@ const Login = ({ route, navigation }) => {
                 <TouchableOpacity 
                     style={styles.loginButton} 
                     onPress={ handleUserLogin }
-                    // hitSlop={{ bottom: 30, left: 30, right: 30 }}
                 > 
                     <Text style={styles.loginButtonText} >Login</Text>
                 </TouchableOpacity>
@@ -146,7 +142,6 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 10,
         width: 300,
-        // backgroundColor: '#756382',
         backgroundColor: 'white',
         borderWidth: 1,
         borderColor: '#756382',

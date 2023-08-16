@@ -38,6 +38,5 @@ const styles = StyleSheet.create({
         fontSize: 15, 
         color: 'grey',
         fontWeight: '700',
-        // fontWeight
     },
 })

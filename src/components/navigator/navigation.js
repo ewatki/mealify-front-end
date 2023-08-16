@@ -5,15 +5,11 @@ import Register from '../screens/Register';
 import Login from '../screens/Login';
 import Main from '../screens/Main';
 import Recipe from '../screens/Recipe';
-import Pantry from '../screens/Pantry';
-import Preferences from '../screens/Preferences';
-import GetRecipes from '../screens/GetRecipes';
 
 const Stack = createStackNavigator();
 const Navigator = () => {
     return (
         <Stack.Navigator initialRouteName="Login" screenOptions={
-        // <Stack.Navigator initialRouteName="Main" screenOptions={
         { 
             headerTitle: '', 
             headerStyle: { 
@@ -45,7 +41,6 @@ const Navigator = () => {
                 }}
             />
 
-            {/* <Stack.Screen name="RecipeList" component={RecipeList}  /> */}
             <Stack.Screen 
                 name="RecipeDetails" 
                 component={Recipe}  

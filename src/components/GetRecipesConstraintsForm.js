@@ -1,8 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, Modal, TouchableOpacity, Pressable } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Modal, TouchableOpacity } from 'react-native';
 
 const GetRecipesConstraintsForm = ({ formFields, setFormFields, handleHideModal, modalVisible, setModalVisible, handleGetNewRecipes }) => {
-// const GetRecipesConstraintsForm = ({ handleHideModal, modalVisible, setModalVisible, handleGetNewRecipes }) => {
 
   const handleChange = (text, field) => {
     if (field === 'diet') {
@@ -133,10 +132,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     height: 350,
     backgroundColor: '#756382',
-  },
-  placeholderPressable: {
-    backgroundColor: '#E2C274',
-    opacity: '.8',
   },
   topTitle: {
     marginTop: 10,

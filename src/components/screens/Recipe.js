@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Button, Linking } from 'react-native';
-import newRecipeData from './GetRecipes';
-import handleGetNewRecipes from './GetRecipes'
-import GetRecipes from './GetRecipes';
+import React from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Linking } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import axios from 'axios';
 
-const Recipe = ({route, navigation}) => {
+const Recipe = ({route}) => {
     const recipe = route.params.recipe;
     console.log('recipe: ', recipe.ingredients)
     
@@ -18,70 +15,28 @@ const Recipe = ({route, navigation}) => {
     
     const handleSave = () => {
         axios.post(`https://mealify-zclw.onrender.com/users/${recipe.user_id}/recipes`, recipe)
-        .then(response => {
-            // setRecipe(recipe => {
-            //     return {
-            //         ...recipe,
-            //         id: response.data.id,
-            //         user_state: response.data.user_state
-            //     };
-                
-            // })
-            // console.log('response.data:', response.data)
+        .then(() => {
             console.log('saved successfully')
-            
         })
-        
     }
     const handleDelete = () => {
         axios.delete(`https://mealify-zclw.onrender.com/recipes/${recipe.id}`, recipe)
-        .then(response => {
-            // setRecipe(recipe => {
-            //     return {
-            //         ...recipe,
-            //         id: response.data.id,
-            //         user_state: response.data.user_state
-            //     };
-                
-            // })
-            // console.log('response.data:', response.data)
+        .then(() => {
             console.log('deleted successfully')
-            
         })
-        
     }
     const handleLikeRecipe = () => {
         console.log(recipe.id)
         axios.patch(`https://mealify-zclw.onrender.com/recipes/${recipe.id}/favorite`)
-        .then(response => {
-        //     setRecipe(recipe => {
-        //         return {
-        //             ...recipe,
-        //             id: response.data.id,
-        //             user_state: response.data.user_state
-        //         };
-                
-        //     })
-            
-        // console.log('response.data:', response.data)
-        console.log('Successful Like')
-    })
-}
+        .then(() => {
+            console.log('Successful Like')
+        })
+    }
     
     const handleDislikeRecipe = () => {
         console.log(recipe.id)
         axios.patch(`https://mealify-zclw.onrender.com/recipes/${recipe.id}/unfavorite`)
-        .then(response => {
-            setRecipe(recipe => {
-                return {
-                    ...recipe,
-                    id: response.data.id,
-                    user_state: response.data.user_state
-                };
-                
-            })
-            
-        // console.log('response.data:', response.data)
+        .then(response => {            
         console.log('Successful dislike')
         })
     };
@@ -122,37 +77,14 @@ const Recipe = ({route, navigation}) => {
                 </TouchableOpacity>
                 <TouchableOpacity 
                     style={styles.getRecipesButton}
-                    onPress={ () => { handleDisikeRecipe({})} }
+                    onPress={ () => { handleDislikeRecipe({})} }
                     > 
                     <Text style={styles.buttonText} >Dislike</Text>
                 </TouchableOpacity>
-                {/* <Button title="Save for later" onPress={() => { handleSave({}) }} /> */}
-                {/* <Button title="Like" onPress={() => { handleLikeRecipe({}) }} /> */}
-                {/* <Button title="Dislike" onPress={() => { handleDislikeRecipe({}) }} /> */}
             </ScrollView>
         </SafeAreaView>
         );
     };
-        
-    // const styles = StyleSheet.create({
-    //     recipeContainer: {
-    //     width: '100%',
-    //     padding: 10,
-    //     },
-    //     recipeHeader: {
-    //     fontSize: 20,
-    //     fontWeight: 'bold',
-    // },
-    // tinyLogo: {
-    //     width: 100,
-    //     height: 100,
-    //     },
-    //     });
-        
-        
-
-
-
 
 export default Recipe;
 
@@ -171,11 +103,6 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 10,
     },
-    recipeTitleContainer: {
-        width:'100%', 
-        flexGrow: 1,
-        flex: 1,
-    },
     recipeTitleText: {
         fontFamily: 'Avenir-Roman',
         fontWeight: 'bold',
@@ -183,7 +110,6 @@ const styles = StyleSheet.create({
         flexShrink: 1,
         textAlign:'center',
         color: '#756382'
-
     },
     recipeImg: {
         width:'100%',
@@ -198,14 +124,13 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#756382',
         padding: 10
-
     },
     buttonText: {
         fontSize: 16, 
         color: 'white',
         fontFamily: 'Avenir-Roman'
-      },
-      getRecipesButton: {
+    },
+    getRecipesButton: {
         padding: 5, 
         borderRadius: 5,
         textAlign: 'center', 

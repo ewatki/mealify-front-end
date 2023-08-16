@@ -1,13 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Button, Linking } from 'react-native';
-// import newRecipeData from './GetRecipes';
-// import handleGetNewRecipes from './GetRecipes'
-// import GetRecipes from './GetRecipes';
-import getRecipeDetails from './GetRecipes'
+import React from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView, Linking } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import axios from 'axios';
-import Recipe from './Recipe'
-// import handleGetMealifyRecipes from './GetRecipes'
 
 const RecipeList = ({ recipes, navigation }) => {
     return (
@@ -52,10 +45,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 10,
         paddingBottom: -22,
-    },
-    scrollContainer: {
-        flex:1,
-        paddingHorizontal: 10, 
     },
     recipeContainer: {
         paddingLeft: 10,

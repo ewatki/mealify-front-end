@@ -1,12 +1,9 @@
 import React from 'react'
-import { SectionList, View, ScrollView, Button, Text, Image, Pressable, Modal, StyleSheet} from 'react-native';
+import { SectionList, View, ScrollView, Text, Image, Pressable, Modal, StyleSheet} from 'react-native';
 import {MultipleSelectList} from 'react-native-dropdown-select-list'
 import data from '../../data/pantryitems.json';
 import axios from 'axios';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { FlatList } from 'react-native-gesture-handler';
-import { StatusBar } from 'expo-status-bar';
-// import { panGestureHandlerCustomNativeProps } from 'react-native-gesture-handler/lib/typescript/handlers/PanGestureHandler';
 
 const Pantry = ({ route, navigation }) => {
     const [user, setUser] = React.useState(route.params.user)
@@ -15,25 +12,6 @@ const Pantry = ({ route, navigation }) => {
     const [removeModalVisible, setRemoveModalVisible] = React.useState(false);
     const [addModalVisible, setAddModalVisible] = React.useState(false);
     const labels = Object.keys(data)
-
-    // console.log('user.pantry:  ', user.pantry)
-
-    // Use this if we want to enable disabled v not disabled
-    // React.useEffect(() => {
-    //     // Update the disabled v not disabled based on the 
-    //     // user.pantry.food_dict items
-    //     for (i in data) {
-    //         let item = data[i];
-    //         for (j in item) {
-    //             let value = item[j]['value']
-    //             if (value in user.pantry.food_dict) {
-    //                 item[j]["disabled"] = true
-    //             } else {
-    //                 item[j]["disabled"] = false
-    //             };
-    //         };
-    //     };
-    // }, []);
 
     // Functions for hiding respective modals
     const handleHideAddModal = () => {
@@ -342,16 +320,6 @@ const styles = StyleSheet.create({
         alignItems: 'center', 
         justifyContent: 'center'
     },
-    errorContainer: {
-        flex: 1,
-    },
-    getRecipesButton: {
-        borderWidth: 1,
-        borderRadius: 10,
-        padding: 5,
-        alignItems: 'center',
-        margin: 3,
-    },
     header: {
         alignItems: 'center',
         justifyContent: 'center',
@@ -382,30 +350,15 @@ const styles = StyleSheet.create({
         paddingBottom: 50,
         marginBottom: 50
     },
-    newRecipeContainer: {
-        flex: 3,
-    },
     pantryView: {
         top: 10,
-        // minHeight: '100%',
         paddingBottom: 60,
         textAlign: 'left',
         paddingHorizontal: 25,
-        // borderWidth: 1
-
-        // marginBottom:
-        // backgroundColor: 'purple',
     },
     placeholderPressable: {
         flex: 5,
         backgroundColor: 'grey',
-        // opacity: '.8',
-    },
-    quickLinksContainer: {
-      // marginTop: 50,
-        flex: 2, 
-      // alignItems: 'center', 
-      // justifyContent: 'center'
     },
     sectionHeader: {
         paddingVertical: 2,
@@ -418,7 +371,6 @@ const styles = StyleSheet.create({
     },
     showModalButtonLeft: {
         alignItems: 'center',
-        // borderWidth: 1,
         borderTopLeftRadius: 10,
         borderBottomLeftRadius: 10,
         padding: 5,
@@ -429,7 +381,6 @@ const styles = StyleSheet.create({
     },
     showModalButtonRight: {
         alignItems: 'center',
-        // borderWidth: 1,
         borderLeftWidth: 1,
         borderColor: 'white',
         borderTopRightRadius: 10,
@@ -442,7 +393,6 @@ const styles = StyleSheet.create({
     },
     showModalButtonsContainer: {
         flexDirection: 'row', 
-        // justifyContent: 'space-around',
         justifyContent: 'center',
         position: 'absolute',
         bottom: 40,

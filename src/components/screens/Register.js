@@ -1,7 +1,6 @@
-import React, {useContext, createContext } from 'react';
+import React from 'react';
 import { StyleSheet, View, Text, Image, TextInput, ActivityIndicator } from 'react-native';
 import axios from 'axios';
-
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
@@ -169,14 +168,6 @@ const styles = StyleSheet.create({
     loginTitle: {
         color: '#756382',
         fontFamily: 'Avenir-Roman'
-    },
-    logo: {
-        alignContent: 'stretch',
-        justifyContent: 'top',
-        width: 350,
-        height: 250,
-        borderRadius: 5,
-        borderWidth: 2,
     },
     registerButton: {
         alignSelf: 'center',

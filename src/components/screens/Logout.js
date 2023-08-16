@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, ActivityIndicator, Text, Button, TouchableOpacity, StyleSheet } from 'react-native';
-// import Login from './Login';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 
 const Logout = ({ route, navigation }) => {
@@ -13,7 +12,6 @@ const Logout = ({ route, navigation }) => {
       <TouchableOpacity 
         style={styles.logoutButton} 
         onPress={ handleLogout }
-        // hitSlop={{ bottom: 30, left: 30, right: 30 }}
       > 
         <Text style={{ color: '#007AFF', fontSize: 25 }} >Logout</Text>
       </TouchableOpacity>

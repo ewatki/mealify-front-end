@@ -4,7 +4,6 @@ import axios from 'axios';
 
 
 const Home = ({route, navigation}) => {
-  const [loading, setLoading] = React.useState('false');
   const user = route.params.user
   const apiKey = '5d5b6e0bcc9c4205b3cba5dc026a03ba'  
 
@@ -28,7 +27,6 @@ const Home = ({route, navigation}) => {
 
   const handleGetNewRecipes = () => {
     // Set up axios parameters for random and not
-    setLoading('true')
     const intolerances = Object.keys(user.intolerances).toString()
     const dietBuilder = Object.keys(user.diet_restrictions)
     let diet = dietBuilder.toString()
@@ -49,16 +47,12 @@ const Home = ({route, navigation}) => {
     })
     .catch(error => {
       console.log(error);
-      setLoading('false')
     });
   };
 
   const getRecipeDetails = (data) => {
-    setLoading('true')
     if (data.length === 0) {
       createAlert('Ooops, we cannot find any recipes matching the current requirements! Try going to your recipes page and adding some different requirements.!')
-      setLoading('false')
-
       return 
     }    
 
@@ -99,10 +93,8 @@ const Home = ({route, navigation}) => {
         user_id: user.id
       }
       navigation.navigate('RecipeDetails', {recipe: newRecipeData})
-      setLoading('false')
     })
     .catch(error => {
-      setLoading('false')
       createAlert(error)
     });
   };

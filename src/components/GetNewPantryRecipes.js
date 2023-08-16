@@ -44,7 +44,6 @@ const GetNewPantryRecipes = ({ user, setLoading, getRecipeDetails }) => {
         <Text style={styles.buttonDescription}>Get a new recipe with ingredients from your pantry</Text>
       </TouchableOpacity>
     </View>
-
   )
 }
 

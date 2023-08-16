@@ -12,16 +12,15 @@ const GetRecipes = ({ route, navigation }) => {
   const user = route.params.user
   const [loading, setLoading] = React.useState('false');
   const [displayedRecipes, setDisplayedRecipes] = React.useState(user.recipes)
-  // const [formFields, setFormFields] = React.useState({
-  //   ingredients: '',
-  //   cuisine: '',
-  //   diet: '',
-  // });
+  const [modalVisible, setModalVisible] = React.useState(false);
+  const apiKey = '5d5b6e0bcc9c4205b3cba5dc026a03ba'  
+
   const createAlert = (errorMessage) =>
     Alert.alert('Error', errorMessage, [
       {text: 'OK', onPress: () => console.log('OK Pressed')},
   ]);
 
+  // Get the new user info.
   React.useEffect(() => {
     const reload = navigation.addListener('focus', () => {
       axios.get(`https://mealify-zclw.onrender.com/users/${user.id}`)
@@ -34,10 +33,12 @@ const GetRecipes = ({ route, navigation }) => {
     });
   }, [navigation]);
 
-  const [modalVisible, setModalVisible] = React.useState(false);
-  const apiKey = '5d5b6e0bcc9c4205b3cba5dc026a03ba'  
-  
+  // Helper function
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
 
+  // Deal with internal api calls
   const handleGetMealifyRecipes = (params) => {
     setLoading('true')
     axios.get(`https://mealify-zclw.onrender.com/users/${user.id}/recipes`, {
@@ -59,10 +60,7 @@ const GetRecipes = ({ route, navigation }) => {
     
   };
 
-  function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-  }
-
+  // Api call to spoonacular to get the details of recipe and build 'newRecipeData'
   const getRecipeDetails = (data) => {
     setLoading('true')
     if (data.length === 0) {
@@ -72,9 +70,7 @@ const GetRecipes = ({ route, navigation }) => {
       return 
     }    
 
-    console.log(data.length)
     const randomIndex = getRandomInt(data.length)
-    console.log('randomIndex: ', randomIndex)
     const spoonId = data[randomIndex].id
     const title = data[randomIndex].title
     const image = data[randomIndex].image
@@ -109,11 +105,6 @@ const GetRecipes = ({ route, navigation }) => {
         user_state: 0,
         user_id: user.id
       }
-      // setDisplayedRecipes(newRecipeData)
-      // console.log('NewRecipeData: ', newRecipeData.title)
-      // console.log('NewRecipeData: ', newRecipeData.ingredients)
-      // navigation.navigate(TempRecipe, )
-      // navigation.navigate('Recipe', {recipe: newRecipeData})
       navigation.navigate('RecipeDetails', {recipe: newRecipeData})
       setLoading('false')
     })
@@ -149,8 +140,6 @@ const GetRecipes = ({ route, navigation }) => {
             <GetRandomSpoonRecipes 
               user={user}
               setLoading={setLoading}
-              // formFields={formFields}
-              // setFormFields={setFormFields}
               modalVisible={modalVisible}
               setModalVisible={setModalVisible}
               getRecipeDetails={getRecipeDetails}
@@ -167,20 +156,15 @@ export default GetRecipes;
 const styles = StyleSheet.create({
   activityIndicator: {
     flex: 1,
-    // marginTop: -20,
-    // marginBottom: -20,
-    // borderWidth: 1,
   },
   container: {
     flex: 1,
     alignItems: 'center', 
     justifyContent: 'center',
     backgroundColor: '#E2C274',
-    // marginBottom: 40,
   },
   yourSavedRecipesContainer: {
     flex: 3,
-    // borderWidth: 1,
   },
   header: {
     fontSize: 26, 
@@ -192,12 +176,8 @@ const styles = StyleSheet.create({
     flex: 3,
     marginBottom: 130,
     marginTop: 20,
-    // borderWidth: 1,
-    
   },
   recipeListContainer: {
     flex: 6,
-    // borderWidth: 1,
-    // borderBlockColor: 'black',
   }
 })

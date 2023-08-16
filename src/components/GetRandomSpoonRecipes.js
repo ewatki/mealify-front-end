@@ -1,11 +1,9 @@
 import React from 'react';
 import { Pressable, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import axios from 'axios';
-import Recipe from './screens/Recipe';
 import GetRecipesConstraintsForm from './GetRecipesConstraintsForm';
 
 const GetRandomSpoonRecipes = ({ user, setLoading, modalVisible, setModalVisible, getRecipeDetails }) => {
-  // const GetRandomSpoonRecipes = ({ user, setLoading, formFields, setFormFields, modalVisible, setModalVisible, getRecipeDetails }) => {
     const [formFields, setFormFields] = React.useState({
     ingredients: '',
     cuisine: '',

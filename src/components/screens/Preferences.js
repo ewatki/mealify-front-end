@@ -1,11 +1,10 @@
 import React from 'react'
-import { Modal, View, ScrollView, Button, Text, StyleSheet, Pressable, Image, SectionList} from 'react-native';
+import { Modal, View, ScrollView, Text, StyleSheet, Pressable, Image, SectionList} from 'react-native';
 import {MultipleSelectList} from 'react-native-dropdown-select-list'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import axios from 'axios';
-import { interpolate } from 'react-native-reanimated';
 
-const Preferences = ({ route, navigation }) => {
+const Preferences = ({ route }) => {
     const [user, setUser] = React.useState(route.params.user)
     const [removeSelected, setRemoveSelected] = React.useState([]);
     const [addSelected, setAddSelected] = React.useState([]);
@@ -284,10 +283,6 @@ const Preferences = ({ route, navigation }) => {
                             })
                         }
                         </View>
-
-                        {/* <View style={styles.saveButtonContainer}>
-                            <Button title="Save" onPress={() => submitAddPrefUpdate()}/>
-                        </View> */}
                     </ScrollView>
                 </View>
                 <Pressable
@@ -368,16 +363,6 @@ const styles = StyleSheet.create({
         alignItems: 'center', 
         justifyContent: 'center'
     },
-    errorContainer: {
-        flex: 1,
-    },
-    getRecipesButton: {
-        borderWidth: 1,
-        borderRadius: 10,
-        padding: 5,
-        alignItems: 'center',
-        margin: 3,
-    },
     header: {
         alignItems: 'center',
         justifyContent: 'center',
@@ -407,9 +392,6 @@ const styles = StyleSheet.create({
         marginBottom: 50,
         // backgroundColor: '#E2C274'
     },
-    newRecipeContainer: {
-        flex: 3,
-    },
     prefView: {
         paddingBottom: 50,
         top: 10,
@@ -422,9 +404,6 @@ const styles = StyleSheet.create({
         flex: 5,
         backgroundColor: 'grey',
         opacity: '.8',
-    },
-    quickLinksContainer: {
-        flex: 2, 
     },
     saveUpdateButton: {
         alignItems: 'center',

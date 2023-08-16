@@ -1,10 +1,7 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import axios from 'axios';
-// import { BottomSheetSlideInSpec } from '@react-navigation/stack/lib/typescript/src/TransitionConfigs/TransitionSpecs';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const GetMealifyRecipes = ({ user, handleGetMealifyRecipes }) => {
-  // console.log('USER: ', user)
   const ingredient_preferences = Object.keys(user.ingredient_preferences).toString()
 
   return (
@@ -57,13 +54,4 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     margin: 3,
   },
-  getYourRecipesHeader: {
-    backgroundColor: '#E2C274',
-    fontSize: 20, 
-    // color: 'white',
-    fontFamily: 'Avenir-Roman',
-    // fontWeight: 'bold',
-    padding: 8,
-    alignSelf: 'center',
-  }, 
 })
