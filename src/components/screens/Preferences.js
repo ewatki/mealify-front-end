@@ -268,7 +268,15 @@ const Preferences = ({ route, navigation }) => {
                                             label={each}
                                             save="value"
                                             notFoundText="Sorry, we don't have that yet"
-                                            // labelStyles={{color: "pink"}}
+                                            inputStyles={{ fontFamily:"Avenir-Roman" }}
+                                            dropdownTextStyles={{ fontFamily:"Avenir-Roman" }}
+                                            boxStyles={{
+                                                backgroundColor: '#E2C274',
+                                                marginVertical: 10,
+                                                borderWidth: 0,
+                                                fontFamily:"Avenir-Roman",
+                                            }}
+                                            dropdownStyles={{backgroundColor: '#E2C274', borderWidth: 0}}
                                             badgeStyles={{backgroundColor: "#756382"}}
                                         />
                                     </View>
@@ -324,7 +332,15 @@ const Preferences = ({ route, navigation }) => {
                                             label={each}
                                             save="value"
                                             notFoundText="Nothing stored here"
-                                            // labelStyles={{color: "pink"}}
+                                            inputStyles={{ fontFamily:"Avenir-Roman" }}
+                                            dropdownTextStyles={{ fontFamily:"Avenir-Roman" }}
+                                            boxStyles={{
+                                                backgroundColor: '#E2C274',
+                                                marginVertical: 10,
+                                                borderWidth: 0,
+                                                fontFamily:"Avenir-Roman",
+                                            }}
+                                            dropdownStyles={{backgroundColor: '#E2C274', borderWidth: 0}}
                                             badgeStyles={{backgroundColor: "#756382"}}
                                         />
                                     </View>
@@ -388,7 +404,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#E2C274'
     },
     modalView: {
-        paddingBottom: 50,
+        marginBottom: 50,
+        // backgroundColor: '#E2C274'
     },
     newRecipeContainer: {
         flex: 3,
