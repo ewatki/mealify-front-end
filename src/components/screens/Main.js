@@ -108,15 +108,30 @@ const Main = ({ route, navigation }) => {
             // initialParams={{user: user}}
             initialParams={{user: route.params.user}}
             options={{
+                headerTintColor: '#756382',
                 headerBackground: () => 
                 <Image 
                 source={require('../../../assets/images/pantryshelves.png')}
                 resizeMode="repeat"
-                style={{marginBottom: 0, height: 60, overflow: 'hidden',}}
+                style={{marginBottom: 0, height: 90, overflow: 'hidden',}}
+                />
+            }}
+            />  
+            <Drawer.Screen
+            name="Preferences" 
+            component={Preferences} 
+            // initialParams={{user: user}}
+            initialParams={{user: route.params.user}}
+            options={{
+                headerTintColor: '#756382',
+                headerBackground: () => 
+                <Image 
+                source={require('../../../assets/images/allergens.png')}
+                resizeMode="repeat"
+                style={{marginBottom: 0, height: 90, overflow: 'hidden',}}
                 />
             }}
             />
-
             <Drawer.Screen
             name="Recipes" 
             component={GetRecipes} 
@@ -137,40 +152,6 @@ const Main = ({ route, navigation }) => {
                 },
             }}
             />
-
-            <Drawer.Screen
-            name="Preferences" 
-            component={Preferences} 
-            // initialParams={{user: user}}
-            initialParams={{user: route.params.user}}
-            options={{
-                headerBackground: () => 
-                <Image 
-                source={require('../../../assets/images/allergens.png')}
-                resizeMode="repeat"
-                style={{marginBottom: 0, height: 60, overflow: 'hidden',}}
-                />
-            }}
-
-            // options={{
-            //     headerStyle: {
-            //         opacity: 0
-            //     }
-            // }}
-            />
-
-            {/* <Drawer.Screen
-            name="TempRecipe" 
-            component={Recipe} 
-            initialParams={{user: user}}
-            // initialParams={{user: route.params.user}}
-            options={{
-                headerStyle: {
-                    backgroundColor: '#E2C274',
-                },
-                headerTintColor: '#756382',
-            }}
-            /> */}
         </Drawer.Navigator>
     )
 }

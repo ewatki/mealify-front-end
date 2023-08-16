@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image, TouchableOpacity, TextInput, FlatList, KeyboardAvoidingView, Platform, Alert } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image, TouchableOpacity, Alert } from 'react-native';
 import axios from 'axios';
 
 
@@ -187,7 +187,6 @@ const styles = StyleSheet.create({
     flex: 2,
     alignItems: 'center',
     paddingTop: 20,
-    // justifyContent: 'center'
 
   },
   blobContentContainer: {
@@ -199,8 +198,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 10,
-    // paddingHorizontal: 20, 
-    // marginRight: 70,
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -224,10 +221,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#756382',
     alignItems: 'center',
-    // borderWidth: 1,
   },
   getRecipeButtonContainer: {
-    // justifyContent: 'center',
     alignItems: 'center',
     marginRight: 10,
   },

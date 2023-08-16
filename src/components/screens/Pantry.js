@@ -193,6 +193,9 @@ const Pantry = ({ route, navigation }) => {
                 </Pressable>
             </View>
             {/* Display Pantry */}
+            <View style={styles.header}>
+                <Text style={styles.headerText}>Pantry</Text>
+            </View>
             <View style={styles.pantryView}>
                 <SectionList
                     sections={currentPantryData}
@@ -316,6 +319,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         margin: 3,
     },
+    header: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: -40
+    },
+    headerText: {
+        fontSize: 30,
+        color: '#756382',
+        fontWeight: '500',
+    },
     input: {
         height: 40,
         margin: 12,
@@ -334,17 +347,20 @@ const styles = StyleSheet.create({
     },
     modalView: {
         paddingBottom: 50,
-
+        marginBottom: 50
     },
     newRecipeContainer: {
         flex: 3,
     },
     pantryView: {
         top: 10,
-        minHeight: '100%',
-        paddingBottom: 50,
+        // minHeight: '100%',
+        paddingBottom: 60,
         textAlign: 'left',
         paddingHorizontal: 25,
+        // borderWidth: 1
+
+        // marginBottom:
         // backgroundColor: 'purple',
     },
     placeholderPressable: {
@@ -369,7 +385,7 @@ const styles = StyleSheet.create({
     },
     showModalButtonLeft: {
         alignItems: 'center',
-        borderWidth: 1,
+        // borderWidth: 1,
         borderTopLeftRadius: 10,
         borderBottomLeftRadius: 10,
         padding: 5,
@@ -380,7 +396,9 @@ const styles = StyleSheet.create({
     },
     showModalButtonRight: {
         alignItems: 'center',
-        borderWidth: 1,
+        // borderWidth: 1,
+        borderLeftWidth: 1,
+        borderColor: 'white',
         borderTopRightRadius: 10,
         borderBottomRightRadius: 10, 
         padding: 5,
@@ -394,7 +412,7 @@ const styles = StyleSheet.create({
         // justifyContent: 'space-around',
         justifyContent: 'center',
         position: 'absolute',
-        bottom: 20,
+        bottom: 40,
         zIndex: 2,
         alignSelf: 'center',
         width: '60%',
