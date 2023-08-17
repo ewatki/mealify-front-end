@@ -4,8 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import axios from 'axios';
 
 const Recipe = ({route}) => {
-    const recipe = route.params.recipe;
-    console.log('recipe: ', recipe.ingredients)
+    let recipe = route.params.recipe;
+    console.log('recipe: ', recipe.id)
     
     const ingredientList = [];
     for (ingredient of Object.keys(recipe.ingredients)) {
@@ -14,11 +14,16 @@ const Recipe = ({route}) => {
     };    
     
     const handleSave = () => {
-        axios.post(`https://mealify-zclw.onrender.com/users/${recipe.user_id}/recipes`, recipe)
-        .then(() => {
-            console.log('saved successfully')
-        })
-    }
+        if (!recipe.id) {
+            axios.post(`https://mealify-zclw.onrender.com/users/${recipe.user_id}/recipes`, recipe)
+            .then((response) => {
+                console.log('saved successfully')
+                recipe.id = response.data.id
+            })
+        } else {
+            console.log('Recipe was already saved')
+        };
+    };
     const handleDelete = () => {
         if (!recipe.id) {
             console.log('Recipe was never saved')
