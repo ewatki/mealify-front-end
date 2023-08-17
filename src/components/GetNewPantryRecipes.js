@@ -25,6 +25,7 @@ const GetNewPantryRecipes = ({ user, setLoading, getRecipeDetails }) => {
       .then(response => {
         // Gather new data in variable
         const data = response.data
+        console.log('data: ', data)
         getRecipeDetails(data)
       })
       .catch(error => {

@@ -64,7 +64,7 @@ const GetRecipes = ({ route, navigation }) => {
   const getRecipeDetails = (data) => {
     setLoading('true')
     if (data.length === 0) {
-      createAlert('Ooops, we cannot find any recipes matching these requiremenst! Try searching for a new one!')
+      createAlert('Ooops, we cannot find any recipes matching these requirements! Try searching for a new one!')
       setLoading('false')
 
       return 
@@ -117,8 +117,8 @@ const GetRecipes = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ActivityIndicator style={styles.activityIndicator} animating={loading} size='small' />
       <View style={styles.recipeListContainer}>
+        <ActivityIndicator style={styles.activityIndicator} animating={loading} size='small' />
         <RecipeList recipes={displayedRecipes} navigation={navigation}/>
       </View>
       <View style={styles.yourSavedRecipesContainer}>
@@ -155,7 +155,8 @@ export default GetRecipes;
 
 const styles = StyleSheet.create({
   activityIndicator: {
-    flex: 1,
+    // flex: 1,
+    backgroundColor: 'white'
   },
   container: {
     flex: 1,
@@ -164,7 +165,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#E2C274',
   },
   yourSavedRecipesContainer: {
-    flex: 3,
+    flex: 2,
   },
   header: {
     fontSize: 26, 
@@ -176,8 +177,12 @@ const styles = StyleSheet.create({
     flex: 3,
     marginBottom: 130,
     marginTop: 20,
+    // borderR
   },
   recipeListContainer: {
     flex: 6,
+    width: '100%',
+    // alignItems: 'center',
+    // paddingTop: -30,
   }
 })

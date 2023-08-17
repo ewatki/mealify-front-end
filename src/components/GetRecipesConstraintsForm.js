@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, Modal, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Modal, TouchableOpacity, Image, ImageBackground} from 'react-native';
 
 const GetRecipesConstraintsForm = ({ formFields, setFormFields, handleHideModal, modalVisible, setModalVisible, handleGetNewRecipes }) => {
 
@@ -36,8 +36,7 @@ const GetRecipesConstraintsForm = ({ formFields, setFormFields, handleHideModal,
           style={[styles.center, styles.container]}
           onPress={ () => { 
             handleHideModal()} 
-          }
-          >
+          }>
           <Text style={styles.header}>What are your priorites for this meal?</Text>
           <View style={[styles.modalView, styles.center]}>
             <Text style={[styles.inputTitle, styles.topTitle]}>Add Ingredients</Text>

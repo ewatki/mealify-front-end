@@ -20,25 +20,37 @@ const Recipe = ({route}) => {
         })
     }
     const handleDelete = () => {
-        axios.delete(`https://mealify-zclw.onrender.com/recipes/${recipe.id}`, recipe)
-        .then(() => {
-            console.log('deleted successfully')
-        })
+        if (!recipe.id) {
+            console.log('Recipe was never saved')
+        } else {
+            axios.delete(`https://mealify-zclw.onrender.com/recipes/${recipe.id}`, recipe)
+            .then(() => {
+                console.log('deleted successfully')
+            })
+        }
     }
     const handleLikeRecipe = () => {
-        console.log(recipe.id)
-        axios.patch(`https://mealify-zclw.onrender.com/recipes/${recipe.id}/favorite`)
-        .then(() => {
-            console.log('Successful Like')
-        })
-    }
+        if (!recipe.id) {
+            recipe.user_state = 1
+            handleSave()
+        } else {
+            axios.patch(`https://mealify-zclw.onrender.com/recipes/${recipe.id}/favorite`)
+            .then(() => {
+                console.log('Successful Like')
+            })
+        };
+    };
     
     const handleDislikeRecipe = () => {
-        console.log(recipe.id)
-        axios.patch(`https://mealify-zclw.onrender.com/recipes/${recipe.id}/unfavorite`)
-        .then(response => {            
-        console.log('Successful dislike')
-        })
+        if (!recipe.id) {
+            recipe.user_state = -1
+            handleSave()
+        } else {
+            axios.patch(`https://mealify-zclw.onrender.com/recipes/${recipe.id}/unfavorite`)
+            .then(response => {            
+            console.log('Successful dislike')
+            })
+        };
     };
 
     return (
@@ -51,7 +63,7 @@ const Recipe = ({route}) => {
                         <Text style={styles.recipeDetailTitles}>Ingredients</Text>
                         
                         <Text style={{fontSize: 15, fontFamily: 'Avenir-Roman', fontWeight: 'bold', textAlign:'center'}}>{ingredientList}</Text>
-                        <Text style={styles.recipeDetailTitles}>Nutritional Data Score: {recipe.nutritional_data}</Text>
+                        <Text style={styles.recipeDetailTitles}>Nutritional Data Score: {recipe.nutritional_data} %</Text>
                         <Text style={styles.recipeDetailTitles}onPress={() => {
                             Linking.openURL(recipe.url);
                             }}>Click for Full Recipe</Text> 

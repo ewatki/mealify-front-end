@@ -30,19 +30,14 @@ const Main = ({ route, navigation }) => {
             name="Home"
             component={Dashboard} 
             options={{
-                headerRight: () => (
-                    <Text style={{
-                        color: '#756382',
-                        fontSize: 26, 
-                        fontFamily: 'Avenir-Roman',   
-                    }}>Hello, {route.params.user.username}</Text>
-                ),
+                headerTitle: `Hello, ${route.params.user.username}`,
                 headerTintColor: '#756382',
                 headerTitleStyle: {
-                    fontWeight: 'normal'          
+                    fontWeight: 'normal',
+                    fontFamily: 'Avenir-Roman',      
                 },
                 headerStyle: {
-                    backgroundColor: 'white'
+                    backgroundColor: 'white',
                 },
             }}
             initialParams={{user: route.params.user}}
@@ -83,15 +78,24 @@ const Main = ({ route, navigation }) => {
             options={{
                 headerTitle: 'Recipes',
                 headerStyle: {
-                    backgroundColor: '#E2C274',
+                    // backgroundColor: '#E2C274',
+                    backgroundColor: 'white',
                 },
                 headerTintColor: '#756382',
                 headerTitleStyle: {
                     fontWeight: 'normal',
                     color: '#756382',
-                    fontSize: 26, 
+                    fontSize: 30, 
                     fontFamily: 'Avenir-Roman',                
                 },
+                // headerTintColor: '#756382',
+                // headerBackground: () => 
+                // <Image 
+                // source={require('../../../assets/images/allergens.png')}
+                // resizeMode="repeat"
+                // style={{marginBottom: 0, height: 90, overflow: 'hidden',}}
+                // />
+
             }}
             />
         </Drawer.Navigator>

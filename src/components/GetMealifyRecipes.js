@@ -14,13 +14,13 @@ const GetMealifyRecipes = ({ user, handleGetMealifyRecipes }) => {
           <Text style={styles.buttonText} >Pantry Recipes</Text>
           <Text style={styles.buttonDescription}>Your saved recipes with ingredients in your pantry</Text>
         </TouchableOpacity>
-        <TouchableOpacity 
+        {/* <TouchableOpacity 
           style={styles.getRecipesButton}
           onPress={ () => { handleGetMealifyRecipes({'ingredients': ingredient_preferences})} }
         > 
           <Text style={styles.buttonText} >Ingredient Recipes</Text>
           <Text style={styles.buttonDescription}>Your saved recipes with your ingredient preferences</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   )
