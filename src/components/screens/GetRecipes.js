@@ -9,7 +9,7 @@ import Recipe from './Recipe';
 
 
 const GetRecipes = ({ route, navigation }) => {
-  const user = route.params.user
+  const [user, setUser]  = React.useState(route.params.user)
   const [loading, setLoading] = React.useState('false');
   const [displayedRecipes, setDisplayedRecipes] = React.useState(user.recipes)
   const [modalVisible, setModalVisible] = React.useState(false);
@@ -26,6 +26,7 @@ const GetRecipes = ({ route, navigation }) => {
       axios.get(`https://mealify-zclw.onrender.com/users/${user.id}`)
       .then(response => {
         setDisplayedRecipes(response.data.recipes)
+        setUser(response.data)
       })
       .catch(error => {
         createAlert(error.response.data)
@@ -62,6 +63,7 @@ const GetRecipes = ({ route, navigation }) => {
 
   // Api call to spoonacular to get the details of recipe and build 'newRecipeData'
   const getRecipeDetails = (data) => {
+    console.log('In details')
     setLoading('true')
     if (data.length === 0) {
       createAlert('Ooops, we cannot find any recipes matching these requirements! Try searching for a new one!')

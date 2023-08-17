@@ -7,8 +7,10 @@ const GetNewPantryRecipes = ({ user, setLoading, getRecipeDetails }) => {
   // const apiKey = 'a10d8b0165074f6a807217fe8ea8bd20'
 
   const handleGetNewPantryRecipes = () => {
-    setLoading('true')
+    console.log('in new pantry')
+    setLoading('true');
     if (user.pantry.length === 0) {
+      console.log('Nothing in pantry!')
       return 'Nothing in pantry, Re-route to pantry to fill out (maybe throw up an alert...'
     } else {
       let ingredientsBuilder = Object.keys(user.pantry.food_dict)
